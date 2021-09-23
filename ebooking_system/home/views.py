@@ -17,3 +17,5 @@ def login(request):
     return render(request, 'login.html')
 def regisconfirmation(request):
     return render(request, 'regisconfirmation.html')
+def admin(request):
+    return render(request, 'admin.html')
