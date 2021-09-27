@@ -19,3 +19,7 @@ def regisconfirmation(request):
     return render(request, 'regisconfirmation.html')
 def admin(request):
     return render(request, 'admin.html')
+def addpromotion(request):
+    return render(request, 'addpromotion.html')
+def managemovie(request):
+    return render(request, 'managemovie.html')

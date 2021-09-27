@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="registration.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet"/>
+    <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+</head>
+<body>
+   <section class="vh-100 bg-image" style="background-image: url('https://techcrunch.com/wp-content/uploads/2018/09/GettyImages-104187321.jpg?w=1390&crop=1');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Add Promotion</h2>
+
+                <form>
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example1cg">Promotion Title</label>
+                  </div>
+
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example4cg">Promotion Code *</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example4cg">Discount Amount *</label>
+                  </div>
+                  <div class="dropdown">
+                    Apply Promotion to Categories (optional) <br></br>
+                    <button
+                      class="btn btn-primary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Categories
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Suspense</a></li>
+                      <li><a class="dropdown-item" href="#">Horror</a></li>
+                      <li><a class="dropdown-item" href="#">Adventure</a></li>
+                      <li><a class="dropdown-item" href="#">Romance</a></li>
+                      <li><a class="dropdown-item" href="#">Comedy</a></li>
+                      <li><a class="dropdown-item" href="#">Thriller</a></li>
+                      <li><a class="dropdown-item" href="#">Documentary</a></li>
+                    </ul>
+                    <br></br>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Create Promotion</button>
+                  </div>
+
+                  <p class="text-center text-muted mt-5 mb-0">E-Cinema Booking System<a href="#!" class="fw-bold text-body"></a></p>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
