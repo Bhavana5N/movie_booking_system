@@ -33,3 +33,5 @@ def moviedetails(request):
     return render(request, 'moviedetails.html')
 def seats(request):
     return render(request, 'seats.html')
+def fullcalendar(request):
+    return render(request, 'fullcalendar.html')

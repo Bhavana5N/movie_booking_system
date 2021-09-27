@@ -15,4 +15,5 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('moviedetails', views.moviedetails, name='moviedetails'),
     path('seats', views.seats, name='seats'),
+    path('fullcalendar', views.fullcalendar, name='fullcalendar'),
 ]
