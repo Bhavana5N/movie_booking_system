@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+</head>
+<body>
+  <header>
+    
+  </header>
+  <main>
+    <h2> Selected Tickets <h2>
+    <div id="summarylist">
+    The list of items are shown here.
+    </div>
+    <form id="options">
+		  <input type="button" name="cancel" value="Cancel" id="deny">
+      <input type="button" name="proceed" value="Proceed" id="confirm">
+    </form>
+  </main>
+  <footer>
+    
+  </footer>
+<body>
+  
+<html>
