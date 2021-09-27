@@ -23,3 +23,13 @@ def addpromotion(request):
     return render(request, 'addpromotion.html')
 def managemovie(request):
     return render(request, 'managemovie.html')
+def checkout(request):
+    return render(request, 'checkout.html')
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
+def home(request):
+    return render(request, 'home.html')
+def moviedetails(request):
+    return render(request, 'moviedetails.html')
+def seats(request):
+    return render(request, 'seats.html')
