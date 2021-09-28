@@ -16,4 +16,5 @@ urlpatterns = [
     path('moviedetails', views.moviedetails, name='moviedetails'),
     path('seats', views.seats, name='seats'),
     path('fullcalendar', views.fullcalendar, name='fullcalendar'),
+    path('orderSummary', views.orderSummary, name='orderSummary'),
 ]
