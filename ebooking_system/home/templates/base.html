@@ -17,13 +17,33 @@
     </head>
     <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="#!">E-Cinema Booking System</a>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 300px">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="width:200px">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4" style="padding-left:500px">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="width:100px">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ml-auto" style="padding-left:400px" >
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Movie</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">action films</a></li>
+                                <li><a class="dropdown-item" href="#!">comedies</a></li>
+                                <li><a class="dropdown-item" href="#!">romantic</a></li>
+                                <li><a class="dropdown-item" href="#!">rom-coms</a></li>
+                                <li><a class="dropdown-item" href="#!">adventures</a></li>
+                                <li><a class="dropdown-item" href="#!">musical</a></li>
+                                <li><a class="dropdown-item" href="#!">dramas</a></li>
+                                <li><a class="dropdown-item" href="#!">real life films</a></li>
+
+                            </ul>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,6 +53,8 @@
                                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item active"><a class="nav-link" href="#!">login</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="#!">Registration</a></li>
                     </ul>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
