@@ -35,3 +35,5 @@ def seats(request):
     return render(request, 'seats.html')
 def fullcalendar(request):
     return render(request, 'fullcalendar.html')
+def orderSummary(request):
+    return render(request, 'orderSummary.html')
