@@ -1,0 +1,27 @@
+textarea{
+	width: 700px;
+	height: 175px;
+	margin-top: 10px;
+}
+label{
+	margin-right: 10px;
+	width: 5em;
+	height: 1em;
+	float: left;
+	text-align: right;
+	white-space: nowrap;
+	margin-top: 5px;
+}
+.editfield{
+	margin-left: 750px;
+	margin-right: 750px;
+	margin-top: 40px;
+	text-align: center;
+}
+#field{
+	margin-bottom:30px;
+}
+legend{
+	margin-bottom:40px;
+	font-weight: bold;
+}
