@@ -13,7 +13,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+	<link rel="stylesheet" href="Edit_profile.css">
 </head>
 <body>
   <header>
@@ -47,14 +47,20 @@
         </nav>
   </header>
   <main>
-    <form id="info">
+	<div class="editfield">
+    		<form id="info">
 		  <fieldset id="general">
 		  <legend> User Info </legend>
-		  <label for="fullname"> Full Name:&nbsp </label>
-		  <input type="text" name="fullname" id="fullname" required><br>
-		  <label for="email"> E-Mail:&nbsp </label>
-		  <input type="email" name="E-Mail" id="email" required><br>
-    </form>
+			<div id="field">
+		  		<label for="fullname"> Full Name:&nbsp </label>
+		  		<input type="text" name="fullname" id="fullname" required><br>
+			</div>
+			<div id="field">
+		  		<label for="email"> E-Mail:&nbsp </label>
+		  		<input type="email" name="E-Mail" id="email" required><br>
+			</div>
+    			</form>
+	</div>
   </main>
   <footer>
     
