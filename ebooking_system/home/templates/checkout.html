@@ -1,64 +1,133 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-   <meta charset="utf-8" />
+  <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title></title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+        <!-- Bootstrap icons--><!-- Core theme CSS (includes Bootstrap)-->
+  <link rel="stylesheet" href="managemovie.css">
+        <link rel="stylesheet" href="../static/home/css/bootstrap.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
 
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">E-Cinema Booking System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
+<body style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
+      <div class="container h-75">
+        <div class="row ml-auto">
+            <div class="col ml-auto">
+            <div class="card">
+              <div class="card-body p-5">
+                <h3 class="text-uppercase text-center mb-5">Order Summary</h3>
+                  <div class="col ml-auto">
+                      <div class="row ml-auto">
+                          <div class="col ml-auto"><p>Theatre</p></div>
+                          <div class="col ml-auto"><p>AMB Movies</p></div>
+                          <div class="col ml-auto"><p>Movie</p></div>
+                          <div class="col ml-auto"><p>Hawk</p></div>
+                    </div>
+                      <div class="row ml-auto">
+                        <div class="col ml-auto"><p>Show Time</p></div>
+                        <div class="col ml-auto"><p>10/02/2021 7:30 PM</p></div>
+                        <div class="col ml-auto"><p>Seats</p></div>
+                        <div class="col ml-auto"><p>A1,A2,A3</p></div>
+                    </div>
+                    <button class="btn btn-outline-success" type="submit">Cancel Order</button>
+                    <button class="btn btn-outline-success" type="submit">Review Order</button>
                 </div>
+              </div>
             </div>
-        </nav>
-  <main>
-      <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          </div></div>
+          <br><br>
+          <div class = "row ml-auto">
+            <div class="col ml-auto">
+
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-5">Checkout</h2>
-                <h2> Selected Tickets </h2>
-                    <div class="checkout_item_list">
+                <h3 class="text-uppercase text-center mb-5">Checkout</h3>
 
+                    <div class="row ml-auto">
+                        <div class="col ml-auto"><p>No.of Tickets</p></div>
+                        <div class="col ml-auto"><p>3</p></div>
                     </div>
-                    <form id="payment_choice">
-                      <a href="home.html"><input type="button" name="Process payment" id="pay" value="Process payment"></a>
-                      <a href="home.html"><input type="button" name="Cancel" id="cancel" value="Cancel"></a>
-                    </form>
+                    <div class="row ml-auto">
+                        <div class="col ml-auto"><p>Tickets Price</p></div>
+                        <div class="col ml-auto"><p>$50</p></div>
+                    </div>
+                    <div class="row ml-auto">
+                        <div class="col ml-auto"><p>Taxes</p></div>
+                        <div class="col ml-auto"><p>$2.50</p></div>
+                    </div>
+                    <div class="row ml-auto">
+                        <div class="col ml-auto"><p>Total</p></div>
+                        <div class="col ml-auto"><p>$57.50</p></div>
+                    </div>
+                    <div class="form-outline mb-4 row ml-auto">
+                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Promotion Code</label></div>
+                        <div class="col ml-auto"><input type="text" id="form3Example1cg" class="form-control form-control-lg" /> </div>
+                    </div>
+                    <div class="row ml-auto">
+                        <div class="col ml-auto"><p>Discount</p></div>
+                        <div class="col ml-auto"><p>$6.00</p></div>
+                    </div>
+                    <div class="row ml-auto">
+                        <div class="col ml-auto"><p>Payment Amount</p></div>
+                        <div class="col ml-auto"><p>$51.50</p></div>
+                    </div>
+
+                    <button class="btn btn-outline-success" type="submit">Cancel Checkout</button>
+
+              </div>
+            </div>
+          </div>
+            <div class="col ml-auto">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h3 class="text-uppercase text-center mb-5">Payment</h3>
+                  <div class="form-outline mb-4 row ml-auto">
+                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Number</label></div>
+                        <div class="col ml-auto"><input type="text" id="form3Example2cg" class="form-control form-control-lg" /> </div>
+                  </div>
+                  <div class="form-outline mb-4 row ml-auto">
+                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
+                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" /> </div>
+                  </div>
+                  <div class="form-outline mb-4 row ml-auto">
+                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">CVV</label></div>
+                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" /> </div>
+                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
+                        <div class="col ml-auto"><select name='expireMM' id='expireMM'>
+                                    <option value=''>Month</option>
+                                    <option value='01'>01</option>
+                                    <option value='02'>02</option>
+                                    <option value='03'>03</option>
+                                    <option value='04'>04</option>
+                                    <option value='05'>05</option>
+                                    <option value='06'>06</option>
+                                    <option value='07'>07</option>
+                                    <option value='08'>08</option>
+                                    <option value='09'>09</option>
+                                    <option value='10'>10</option>
+                                    <option value='11'>11</option>
+                                    <option value='12'>12</option>
+                                </select></div><div class = "col ml-auto">
+                                <select name='expireYY' id='expireYY'>
+                                    <option value=''>Year</option>
+                                    <option value='20'>2020</option>
+                                    <option value='21'>2021</option>
+                                    <option value='22'>2022</option>
+                                    <option value='23'>2023</option>
+                                    <option value='24'>2024</option>
+                                </select>
+<input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </div>
+                  </div>
+
+                    <button class="btn btn-outline-success" type="submit">Proceed Payment</button>
+                    <button class="btn btn-outline-success" type="submit">Cancel</button>
 
               </div>
             </div>
@@ -66,10 +135,6 @@
         </div>
       </div>
 
-  </main>
-  <footer>
-    
-  </footer>
 <body>
   
 <html>
