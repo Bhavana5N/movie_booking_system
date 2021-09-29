@@ -49,17 +49,32 @@
   <main>
 	<div class="editfield">
     		<form id="info">
-		  <fieldset id="general">
+		   <fieldset id="general">
 		  <legend> User Info </legend>
-			<div id="field">
-		  		<label for="fullname"> Full Name:&nbsp </label>
-		  		<input type="text" name="fullname" id="fullname" required><br>
-			</div>
-			<div id="field">
-		  		<label for="email"> E-Mail:&nbsp </label>
-		  		<input type="email" name="E-Mail" id="email" required><br>
-			</div>
-    			</form>
+		  <div id="field">
+		  <label for="firstname"> First Name:&nbsp </label>
+		  <input type="text" name="firstname" id="firstname" required><br>
+		  </div>
+		  <div id="field">
+		  <label for="middlename"> Middle Name:&nbsp </label>
+		  <input type="text" name="middlename" id="middlename" required><br>
+		  </div>
+		  <div id="field">
+		  <label for="lastname"> Last Name:&nbsp </label>
+		  <input type="text" name="lastname" id="lastname" required><br>
+		  </div>
+		  <div id="field">
+		  <label for="address"> Address:&nbsp </label>
+		  <input type="text" name="address" id="address" required><br>
+		  </div>
+		  <div id="field">
+		  <label for="email"> E-Mail:&nbsp </label>
+		  <span id="email"> abcde@mail.com </span>
+		  </div>
+		  <div id="field">
+		  <input type="button" value="submit" id="submit">
+		  <input type="button" value="cancel" id="cancel">
+		  </div>
 	</div>
   </main>
   <footer>
