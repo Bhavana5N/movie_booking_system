@@ -19,4 +19,5 @@ urlpatterns = [
     path('orderSummary', views.orderSummary, name='orderSummary'),
     path('orderHistory', views.orderHistory, name='orderHistory'),
     path('orderconfirmation', views.orderconfirmation, name='orderconfirmation'),
+path('summary', views.summary, name='summary'),
 ]

@@ -41,3 +41,5 @@ def orderHistory(request):
     return render(request, 'orderHistory.html')
 def orderconfirmation(request):
     return render(request, 'orderconfirmation.html')
+def summary(request):
+    return render(request, 'summary.html')
