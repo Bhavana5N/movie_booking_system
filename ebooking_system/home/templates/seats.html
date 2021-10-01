@@ -1,16 +1,15 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-	
+	    <link rel="stylesheet" href="{% static 'home/css/seats.css' %}">
 </head>
 <body>
   <header>
@@ -43,96 +42,390 @@
             </div>
         </nav>
   </header>
-  <main style="height: 1100px;">
-	<section style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg'); padding-bottom: 200px; padding-top: 50px;">
+  <main>
+  <div>
+	<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container h-100">
+
         <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-9 col-lg-7 col-xl-6" style="width: 1025px;">
+
             <div class="card" style="border-radius: 15px;">
-              <div class="card-body p-5">
-			  <h1 style="margin-left: 330px; "> Select Seat </h1>
-			  <form>
-			  <div class="btn-group" role="group" aria-label="Basic example">
-					<input type="checkbox" class="btn-check" id="btn-check0" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check0"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check1" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check1"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check2"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check3"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check4" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check4"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check5" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check5"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
+                <div class="mask" style="background-color: black;">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Spider-Man: Homecoming</h1>
+        </div>
+      </div>
+    </div>
+              <div class="card-body p-5" style="display: block;
+    margin-left: auto;
+    margin-right: auto;">
+
+                  <div>
+                      <h1 style="text-align:center">Select Seats</h1>
+                      <h2 style="text-align:center">Tickets: <small class="text-muted">2</small></h2>
+                  </div>
+				<div>
+					<table style="display:inline">
+						<tr>
+                            </td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check2" style="500px">Seat</label>
+							</td>
+                            </td>
+                            <td style="width:60px">
+							</td>
+							<td>
+								<input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check3" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check4" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check4" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check5" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check5" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check6" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check6" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check7" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check7" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check8" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check8" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check9" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check9" id="open" style="500px">Seat</label>
+							</td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check10" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check10" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check11" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check11" style="500px">Seat</label>
+							</td>
+						</tr>
+                        <tr>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            </td>
+                            <td style="width:60px">
+							</td>
+							<td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+						</tr>
+                        <tr>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            </td>
+                            <td style="width:60px">
+							</td>
+							<td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+						</tr>
+                        <tr>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            </td>
+                            <td style="width:60px">
+							</td>
+							<td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+						</tr>
+                        <tr>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            </td>
+                            <td style="width:60px">
+							</td>
+							<td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+						</tr>
+                        <tr>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            </td>
+                            <td style="width:60px">
+							</td>
+							<td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td style="width:60px">
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+                            <td>
+								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
+								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<input type="checkbox" class="btn-check" id="btn-check6" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check6"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check7" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check7"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check8" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check8"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check9" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check9"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check10" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check10"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check11" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check11"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
+						<input type="button" class="btn btn-secondary" name="save" value="Reserve Selected Seats">
+							<input type="button" class="btn btn-danger" name="cancel" value="Cancel">
+						</form>
+						</div>
 				</div>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<input type="checkbox" class="btn-check" id="btn-check12" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check12"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check13" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check13"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check14" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check14"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check15" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check15"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check16" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check16"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check17" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check17"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-				</div>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<input type="checkbox" class="btn-check" id="btn-check18" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check18"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check19" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check19"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check20" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check20"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check21" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check21"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check22" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check22"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check23" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check23"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-				</div>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<input type="checkbox" class="btn-check" id="btn-check24" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check24"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check25" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check25"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check26" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check26"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check27" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check27"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check28" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check28"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-					<input type="checkbox" class="btn-check" id="btn-check29" autocomplete="off"></input>
-					<label class="btn btn-secondary" for="btn-check29"><img src="https://www.clipartmax.com/png/middle/235-2359839_computer-icons-cinema-clip-art-cinema-seat-icon.png" width=125 height=125></label>
-				</div>
-		<div style="margin-top: 30px;">
-        <input type="button" name="save" value="Save Spot" class="btn btn-secondary" style="margin-right:40px; margin-left:330px; background-color:grey;">
-        <input type="button" name="cancel" value="Cancel" class="btn btn-secondary" style="background-color:grey;">
+			</div>
 		</div>
-    </form>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
 	</div>
 	</section>
   </main>
@@ -143,7 +436,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

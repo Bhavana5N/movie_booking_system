@@ -43,3 +43,5 @@ def orderconfirmation(request):
     return render(request, 'orderconfirmation.html')
 def summary(request):
     return render(request, 'summary.html')
+def logout(request):
+    return render(request, 'logout.html')
