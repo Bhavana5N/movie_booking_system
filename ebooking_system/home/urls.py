@@ -18,4 +18,5 @@ urlpatterns = [
     path('fullcalendar', views.fullcalendar, name='fullcalendar'),
     path('orderSummary', views.orderSummary, name='orderSummary'),
     path('orderHistory', views.orderHistory, name='orderHistory'),
+    path('orderconfirmation', views.orderconfirmation, name='orderconfirmation'),
 ]
