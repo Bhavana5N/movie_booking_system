@@ -17,4 +17,5 @@ urlpatterns = [
     path('seats', views.seats, name='seats'),
     path('fullcalendar', views.fullcalendar, name='fullcalendar'),
     path('orderSummary', views.orderSummary, name='orderSummary'),
+    path('orderHistory', views.orderHistory, name='orderHistory'),
 ]
