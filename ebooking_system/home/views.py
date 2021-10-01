@@ -37,3 +37,5 @@ def fullcalendar(request):
     return render(request, 'fullcalendar.html')
 def orderSummary(request):
     return render(request, 'orderSummary.html')
+def orderHistory(request):
+    return render(request, 'orderHistory.html')
