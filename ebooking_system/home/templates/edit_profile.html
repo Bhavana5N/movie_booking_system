@@ -1,131 +1,121 @@
-{% extends 'logout.html' %}
 {% load static %}
-{% block content %}
-
-  <div class="container h-75">
-        <div class="row ml-auto">
-            <div class="col ml-auto">
-            <div class="card">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title></title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<!-- Font Awesome -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+		<!-- MDB -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet"/>
+		<!-- MDB -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">E-Cinema Booking System</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+  </header>
+  <main>
+  <div>
+	<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h3 class="text-uppercase text-center mb-5">Edit Profile</h3>
-                  <div class="col ml-auto">
-                <div class="row ml-auto">
-                        <div class="col ml-auto"><p>Email ID:</p></div>
-                        <div class="col ml-auto"><p>example@gmail.com</p></div>
-                    </div>
-                    <div class="row ml-auto">
-                        <div class="col ml-auto"><p>First Name</p></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="John"/> </div>
-                    </div>
-                      <div class="row ml-auto">
-                        <div class="col ml-auto"><p>Last Name</p></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Smith"/> </div>
-                    </div>
-                      <div class="row ml-auto">
-                        <div class="col ml-auto"><p> Address</p></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Address"/> </div>
-                    </div>
-                      </br></br>
-                      <div class="card card-outline-danger"> <span class="close">&times;</span>
-                   <div class="card-body p-2">
-                       <blockquote class="card-blockquote">
-                      <div class="row ml-auto">
-                      <div class="col ml-auto">
-                            <label class="form-label" for="form3Example1cg">Card Number</label>
-                        </div>
-                        <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Card Number *"/>
-                        </div>
-                  </div>
-                  <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
-                  </div>
-                  <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
-                         <div class="col ml-auto"></div><div class="col ml-auto"></div>
-                        <div class="col ml-auto"><select name='expireMM' id='expireMM'>
-                                    <option value=''>Month</option>
-                                    <option value='01'>01</option>
-                                    <option value='02'>02</option>
-                                    <option value='03'>03</option>
-                                    <option value='04'>04</option>
-                                    <option value='05'>05</option>
-                                    <option value='06'>06</option>
-                                    <option value='07'>07</option>
-                                    <option value='08'>08</option>
-                                    <option value='09'>09</option>
-                                    <option value='10'>10</option>
-                                    <option value='11'>11</option>
-                                    <option value='12'>12</option>
-                                </select></div>
-                      <div class = "col ml-auto">
-                                <select name='expireYY' id='expireYY'>
-                                    <option value=''>Year</option>
-                                    <option value='20'>2020</option>
-                                    <option value='21'>2021</option>
-                                    <option value='22'>2022</option>
-                                    <option value='23'>2023</option>
-                                    <option value='24'>2024</option>
-                                </select>
-            <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </div><div class="col ml-auto"></div></div></blockquote></div>
-                  </div>
-                    </br></br>
-                      <div class="card card-outline-danger"> <span class="close">&times;</span>
-                   <div class="card-body p-2">
-                       <blockquote class="card-blockquote">
-                      <div class="row ml-auto">
-                      <div class="col ml-auto">
-                            <label class="form-label" for="form3Example1cg">Card Number</label>
-                        </div>
-                        <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Card Number *"/>
-                        </div>
-                  </div>
-                  <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
-                  </div>
-                  <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
-                         <div class="col ml-auto"></div><div class="col ml-auto"></div>
-                        <div class="col ml-auto"><select name='expireMM' id='expireMM'>
-                                    <option value=''>Month</option>
-                                    <option value='01'>01</option>
-                                    <option value='02'>02</option>
-                                    <option value='03'>03</option>
-                                    <option value='04'>04</option>
-                                    <option value='05'>05</option>
-                                    <option value='06'>06</option>
-                                    <option value='07'>07</option>
-                                    <option value='08'>08</option>
-                                    <option value='09'>09</option>
-                                    <option value='10'>10</option>
-                                    <option value='11'>11</option>
-                                    <option value='12'>12</option>
-                                </select></div>
-                      <div class = "col ml-auto">
-                                <select name='expireYY' id='expireYY'>
-                                    <option value=''>Year</option>
-                                    <option value='20'>2020</option>
-                                    <option value='21'>2021</option>
-                                    <option value='22'>2022</option>
-                                    <option value='23'>2023</option>
-                                    <option value='24'>2024</option>
-                                </select>
-            <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </div><div class="col ml-auto"></div></div>
-                       </blockquote></div>
-                  </div>
-                    </br></br>
-                      <button class="btn btn-outline-success" type="submit">Add a New Card</button>
-                      </br></br>
-                      <div style="text-align: center;">
-                    <button class="btn btn-outline-success" type="submit">Save</button>
-                    <button class="btn btn-outline-success" type="submit">Cancel</button></div>
+  <div class="editfield">
+    <form id="info">
+		  <fieldset id="general">
+		  <legend class="text-uppercase text-center mb-5"> User Info </legend>
+		  <div class="input-group flex-nowrap">
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1" style="width: 130px;">First Name</span>
+				<input type="text" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1">
+			</div>
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Middle Name</span>
+				<input type="text" class="form-control" placeholder="Middle name" aria-label="Middle Name" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Last Name</span>
+				<input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Address</span>
+				<input type="text" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Email</span>
+				<span class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> abcde@mail.com </span>
+			</div>
+		  <div class="d-flex justify-content-center" style="margin-top: 30px;">
+		  <a href="home.html"><input type="button" value="submit" id="submit" class="btn btn-secondary" style="margin-right:40px; background-color:grey;"></a>
+		  <a href="home.html"><input type="button" value="cancel" id="cancel" class="btn btn-secondary" style="background-color:grey;"></a>
 
-            </div>
-            </div>
-            </div></div></div></div>
-  </body>
-</html>
-        {% endblock %}
+		  </div>
+		  </div>
+		  </div>
+		  </div>
+		  </div>
+		  </div>
+		  </div>
+		  </div>
+		  </section>
+		  </div>
+    </form>
+	</div>
+  </main>
+  <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<body>
+  
+<html>
