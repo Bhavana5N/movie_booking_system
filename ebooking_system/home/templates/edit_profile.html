@@ -1,4 +1,4 @@
-{% extends 'logout.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
@@ -8,23 +8,29 @@
             <div class="card">
               <div class="card-body p-5">
                 <h3 class="text-uppercase text-center mb-5">Edit Profile</h3>
+                  {% if user.is_authenticated %}
+
+                         <p>Hi <b>{{first_name}} </b></p>
+                        <form method="post" action="edit_profile">
                   <div class="col ml-auto">
+
                 <div class="row ml-auto">
                         <div class="col ml-auto"><p>Email ID:</p></div>
-                        <div class="col ml-auto"><p>example@gmail.com</p></div>
+                        <div class="col ml-auto"><p>{{user.username}}</p></div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>First Name</p></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="John"/> </div>
+                        <div class="col ml-auto"><input type="text" id="first_name" class="form-control form-control-lg" placeholder={{user.first_name}}> </div>
                     </div>
                       <div class="row ml-auto">
                         <div class="col ml-auto"><p>Last Name</p></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Smith"/> </div>
+                        <div class="col ml-auto"><input type="text"  id="last_name" class="form-control form-control-lg" placeholder={{user.first_name}}> </div>
                     </div>
                       <div class="row ml-auto">
                         <div class="col ml-auto"><p> Address</p></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Address"/> </div>
+                        <div class="col ml-auto"><input type="text" id="address" class="form-control form-control-lg" placeholder={{user.address}}> </div>
                     </div>
+
                       </br></br>
                       <div class="card card-outline-danger"> <span class="close">&times;</span>
                    <div class="card-body p-2">
@@ -34,7 +40,7 @@
                             <label class="form-label" for="form3Example1cg">Card Number</label>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Card Number *"/>
+                            <input type="text" id="cardnumber" class="form-control form-control-lg" placeholder="Card Number *"/>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
@@ -44,7 +50,7 @@
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
                          <div class="col ml-auto"></div><div class="col ml-auto"></div>
-                        <div class="col ml-auto"><select name='expireMM' id='expireMM'>
+                        <div class="col ml-auto"><select name='expireMM' id='expireMM1'>
                                     <option value=''>Month</option>
                                     <option value='01'>01</option>
                                     <option value='02'>02</option>
@@ -60,7 +66,7 @@
                                     <option value='12'>12</option>
                                 </select></div>
                       <div class = "col ml-auto">
-                                <select name='expireYY' id='expireYY'>
+                                <select name='expireYY' id='expireYY1'>
                                     <option value=''>Year</option>
                                     <option value='20'>2020</option>
                                     <option value='21'>2021</option>
@@ -68,7 +74,7 @@
                                     <option value='23'>2023</option>
                                     <option value='24'>2024</option>
                                 </select>
-            <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </div><div class="col ml-auto"></div></div></blockquote></div>
+            <input class="inputCard" type="hidden" name="expiry" id="expiry2" maxlength="4"/> </div><div class="col ml-auto"></div></div></blockquote></div>
                   </div>
                     </br></br>
                       <div class="card card-outline-danger"> <span class="close">&times;</span>
@@ -123,8 +129,12 @@
                     <button class="btn btn-outline-success" type="submit">Save</button>
                     <button class="btn btn-outline-success" type="submit">Cancel</button></div>
 
-            </div>
-            </div>
+            </div></form>
+                  {% else %}
+                <p class="text-center text-muted mt-5 mb-0">User Not Logged IN <a href="login" class="fw-bold text-body"><u>Login here</u></a></p>
+            {% endif %}
+              </div>
+
             </div></div></div></div>
   </body>
 </html>

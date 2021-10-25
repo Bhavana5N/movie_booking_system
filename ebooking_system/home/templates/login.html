@@ -3,39 +3,41 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div id="content-container" class="container p-none">
-        <div class="lgn-container col-lg-8">
-            <form id="login-form" method="post"
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Login</h2>
+                 <form id="login-form" method="post"
                   action="login">
                 {% csrf_token %}
-                <table class="table">
-                    <tr>
-                        <td><label for="id_username">Username</label></td>
-                        <td><input id="id_username" name="username"
-                                   type="text" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_password">Password</label></td>
-                        <td><input id="id_password" name="password"
-                                   type="password" class="form-control"></td>
-                    </tr>
-                </table>
-                {% if form.errors %}
-                    <p class=" label label-danger">
-                        Your username and password didn't match.
-                        Please try again.
-                    </p>
-                {% endif %}
-
+                  <div class="form-outline mb-4">
+                    <input type="text" id="id_username" class="form-control form-control-lg"
+                    name = "username"/>
+                    <label class="form-label" for="id_username">Your Email *</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="id_password" class="form-control form-control-lg" name = "password"/>
+                    <label class="form-label" for="id_password">Password *</label>
+                  </div>
                 <input type="submit" value="Login"
-                       class="btn btn-primary pull-right" />
+                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" />
                 <input type="hidden" name="next" value="{{ next }}" />
-            </form>
-            {% if messages %}
+               </form>
+              {% if messages %}
         {% for message in messages %}
-          <h3>{{message}}</h3>
+          <p>{{message}}</p>
         {% endfor %}
     {% endif %}
+              <p class="text-center text-muted mt-5 mb-0"><a href="forgot-password">Forgot Password</a></p>
+                <p class="text-center text-muted mt-5 mb-0">New User? <a href="registration" class="fw-bold text-body"><u>SingUp here</u></a></p>
+                  <p class="text-center text-muted mt-5 mb-0"><a href="/">E-Cinema Booking System</a></p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 {% endblock content %}

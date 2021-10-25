@@ -1,6 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
+import sqlite3
+from . import settings
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile = models.IntegerField()
+
+from django.contrib.auth.models import AbstractUser
+
+class customuser(AbstractUser):
+    address = models.TextField()
+
