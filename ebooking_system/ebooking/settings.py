@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home'
+    'ebooking',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,13 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = "ebooking.CustomUser"
+LOGOUT_REDIRECT_URL = '/'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_HOST_USER = 'n.bhavana.reddy5@outlook.com'
+EMAIL_HOST_PASSWORD = 'Krishna@126'
+SESSION_COOKIE_AGE = 360
+
+
