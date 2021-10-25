@@ -60,17 +60,20 @@ CREATE TABLE `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `numberOfTickets` int NOT NULL,
-  `show_id` int DEFAULT NULL,
+  `show_id` int NOT NULL,
   `price` int DEFAULT NULL,
   `promotion_code` int DEFAULT NULL,
+  `p_id` int DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id` (`order_id`),
+  KEY `p_id` (`p_id`),
   KEY `promotion_code` (`promotion_code`),
   KEY `show_id` (`show_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`promotion_code`) REFERENCES `promotion` (`promotion_code`),
-  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`show_id`) REFERENCES `shows` (`show_id`),
-  CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `paymentcard` (`p_id`),
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`promotion_code`) REFERENCES `promotion` (`promotion_code`),
+  CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`show_id`) REFERENCES `shows` (`show_id`),
+  CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,10 +94,12 @@ DROP TABLE IF EXISTS `paymentcard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `paymentcard` (
+  `p_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `cardNumber` int NOT NULL,
   `billingAddress` varchar(255) DEFAULT NULL,
   `expirationDate` date DEFAULT NULL,
+  PRIMARY KEY (`p_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `paymentcard_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -145,9 +150,8 @@ DROP TABLE IF EXISTS `seat`;
 CREATE TABLE `seat` (
   `showroom_id` int NOT NULL,
   `seat_id` int NOT NULL,
-  `isTaken` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`seat_id`),
-  KEY `showroom_id` (`showroom_id`),
+  `isTaken` tinyint(1) NOT NULL,
+  UNIQUE KEY `Seat_manage` (`showroom_id`,`seat_id`),
   CONSTRAINT `seat_ibfk_1` FOREIGN KEY (`showroom_id`) REFERENCES `showroom` (`showroom_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -200,13 +204,10 @@ CREATE TABLE `shows` (
   `show_id` int NOT NULL AUTO_INCREMENT,
   `show_date` date DEFAULT NULL,
   `duration` varchar(255) DEFAULT NULL,
-  `showroom_id` int NOT NULL,
   PRIMARY KEY (`show_id`),
   UNIQUE KEY `show_id` (`show_id`),
-  KEY `showroom_id` (`showroom_id`),
   KEY `movie_id` (`movie_id`),
-  CONSTRAINT `shows_ibfk_1` FOREIGN KEY (`showroom_id`) REFERENCES `showroom` (`showroom_id`),
-  CONSTRAINT `shows_ibfk_2` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`)
+  CONSTRAINT `shows_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -254,16 +255,18 @@ CREATE TABLE `ticket` (
   `ticket_id` int NOT NULL AUTO_INCREMENT,
   `seat_id` int DEFAULT NULL,
   `ticket_type` enum('Child','Adult','Senior') NOT NULL,
-  `show_id` int DEFAULT NULL,
+  `show_id` int NOT NULL,
   `order_id` int NOT NULL,
   `showroom_id` int NOT NULL,
   PRIMARY KEY (`ticket_id`),
+  KEY `ticket_type` (`ticket_type`),
   KEY `showroom_id` (`showroom_id`),
   KEY `order_id` (`order_id`),
   KEY `show_id` (`show_id`),
-  CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`showroom_id`) REFERENCES `showroom` (`showroom_id`),
-  CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
-  CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`show_id`) REFERENCES `shows` (`show_id`)
+  CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`ticket_type`) REFERENCES `ticketcategory` (`ticket_type`),
+  CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`showroom_id`) REFERENCES `showroom` (`showroom_id`),
+  CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  CONSTRAINT `ticket_ibfk_4` FOREIGN KEY (`show_id`) REFERENCES `shows` (`show_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -286,9 +289,7 @@ DROP TABLE IF EXISTS `ticketcategory`;
 CREATE TABLE `ticketcategory` (
   `ticket_type` enum('Child','Adult','Senior') NOT NULL,
   `price` int NOT NULL,
-  `show_id` int DEFAULT NULL,
-  KEY `show_id` (`show_id`),
-  CONSTRAINT `ticketcategory_ibfk_1` FOREIGN KEY (`show_id`) REFERENCES `shows` (`show_id`)
+  PRIMARY KEY (`ticket_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -314,7 +315,7 @@ CREATE TABLE `user` (
   `lastName` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `status` enum('active','inactive','suspended') DEFAULT NULL,
+  `status` int NOT NULL,
   `subscribe` tinyint(1) NOT NULL,
   `password` varchar(255) NOT NULL,
   `isAdmin` tinyint(1) NOT NULL,
@@ -341,4 +342,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-18 21:57:56
+-- Dump completed on 2021-10-24 21:57:24
