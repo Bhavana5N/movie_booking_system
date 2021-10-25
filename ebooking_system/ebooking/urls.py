@@ -31,6 +31,8 @@ urlpatterns = [
             template_name='forgot_password.html',
             success_url = '/'),
         name='forgot'),
+    path('registration', views.registration, name="registration"),
+    path('regisconfirmation', views.regisconfirmation, name='regisconfirmation')
 
 
 ]

@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 TEMPLATE_DIRS = (
     'os.path.join(BASE_DIR, "templates"),'
@@ -7,11 +8,6 @@ TEMPLATE_DIRS = (
 
 def index(request):
     return render(request, "index.html")
-
-
-
-def registration(request):
-    return render(request, 'registration.html')
 
 def login(request):
     return render(request, 'login.html')
@@ -26,7 +22,8 @@ def managemovie(request):
 def checkout(request):
     return render(request, 'checkout.html')
 def edit_profile(request):
-    return render(request, 'edit_profile.html')
+    args = {'user': request.user}
+    return render(request, 'edit_profile.html', args)
 def home(request):
     return render(request, 'home.html')
 def moviedetails(request):
