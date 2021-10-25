@@ -19,8 +19,18 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from . import views
+from django.contrib.auth.views import LogoutView, PasswordChangeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('login',  views.login_user, name="login"),
+    path('logout', LogoutView.as_view(), name="logout"),
+    path('forgot-password/', PasswordChangeView.as_view(
+            template_name='forgot_password.html',
+            success_url = '/'),
+        name='forgot'),
+
+
 ]
