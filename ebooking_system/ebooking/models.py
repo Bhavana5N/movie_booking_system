@@ -1,10 +1,13 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile = models.IntegerField()
+#class Profile(models.Model):
+#    user = models.OneToOneField(User, on_delete=models.CASCADE)
+#    mobile = models.IntegerField()
+
+class customUser(AbstractUser):
+    address = models.TextField()
 
 class UserRegisrationForm(models.Model):
     name = models.CharField()
