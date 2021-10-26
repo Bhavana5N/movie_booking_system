@@ -1,15 +1,31 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import  render, redirect
 from .models import customuser
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.forms import SetPasswordForm
 from django.core.mail import send_mail
-from django.db.models.query_utils import Q
-from .settings import EMAIL_HOST
+from .forms import UserRegistrationForm, UserCreationForm
+
+def registration(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        print("is post")
+        if form.is_valid():
+            print("is valid")
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            messages.success(request, f'Account created for {email}!')
+            return render(request, 'regisconfirmation.html')
+        else:
+            print("is not valid")
+            messages.info(request, f'Some detail made the form invalid. Try again!')
+            return render(request, 'registration.html')
+    else:
+        form = UserCreationForm()
+        args = {'form': form}
+        return  render(request, 'registration.html', args)
 
 def login_user(request):
     print(request)
@@ -33,6 +49,9 @@ def login_user(request):
 
 def admin(request):
     return render(request, 'admin.html')
+
+def regisconfirmation(request):
+    pass
 
 def forgot_password_view(request):
     print(request.method)
@@ -94,7 +113,11 @@ def forgot_password_validation(request):
             messages.info(request, "Reset Again")
             return redirect("login")
 
+def edit_card(request):
+    return render(request, "edit_card.html")
+
 def edit_profile(request):
+    print(request.POST)
     return render(request, "edit_profile.html")
 
 
