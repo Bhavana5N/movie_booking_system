@@ -6,7 +6,7 @@ from django.db import models
 #    user = models.OneToOneField(User, on_delete=models.CASCADE)
 #    mobile = models.IntegerField()
 
-class customUser(AbstractUser):
+class customuser(AbstractUser):
     address = models.TextField()
 
 class UserRegisrationForm(models.Model):
