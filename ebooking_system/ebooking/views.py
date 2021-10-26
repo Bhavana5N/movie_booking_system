@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import  render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UserRegistrationForm
 
 def registration(request):
     if request.method == 'POST':
-        form = UserRegisrationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         print("is post")
         if form.is_valid():
             print("is valid")
