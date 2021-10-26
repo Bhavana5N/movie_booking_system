@@ -114,6 +114,11 @@ def edit_card(request):
                           name=request.POST['cname'], expireyear=request.POST['expireyear'],
                           expiredate=request.POST['expiredate'], uid= request.user.id)
         card.save()
+        b = EbookingCard.objects.filter(uid=str(custom_user.id))
+        if b:
+            for i in b:
+                if request.POST.get('delete') and str(i.id) in request.POST.get('delete'):
+                    EbookingCard.objects.filter(id=i.id).delete()
 
     return render(request, "edit_card.html", {'cards': b})
 
