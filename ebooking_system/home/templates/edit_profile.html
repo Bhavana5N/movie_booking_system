@@ -1,116 +1,119 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
 
-  <div class="container h-75">
-        <div class="row ml-auto">
-            <div class="col ml-auto">
-            <div class="card">
+  <div class="container h-70 pt-5">
+        <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
+            <div class="card" style="height:760px;width:1200px">
               <div class="card-body p-5">
-                <h3 class="text-uppercase text-center mb-5">Edit Profile</h3>
+                <h1 class="text-uppercase text-center mb-5">Edit Profile</h1>
                   {% if user.is_authenticated %}
-                  <form method="POST" action="changepassword">
-                      {% csrf_token %}
-                       <div class="col ml-auto">
-                  <div class="row ml-auto">
-                        <div class="col ml-auto"><p> Password</p></div>
 
-                          <div class="col ml-auto"><button type="submit" value="Change Password",
-                                                           class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Change Password</button>
-
-                          </div></div> </div></form>
                   <form method="POST" action="edit_profile">
                       {% csrf_token %}
 
                   <div class="col ml-auto">
 
-                <div class="row ml-auto">
-                        <div class="col ml-auto"><p>Email ID:</p></div>
-                        <div class="col ml-auto"><p>{{user.username}}</p></div>
+                    <div class="row ml-auto py-3">
+                        <div class="col ml-auto">
+                            <input type="text" id="formControlReadonly" class="form-control form-control-lg" placeholder={{user.email}} aria-label={{user.email}} readonly>
+                            <label for="formControlReadonly">E-Mail</label>
+                        </div>
+                        <div class="col ml-auto">
+                            <input type="text" id="phone_number" class="form-control form-control-lg" placeholder={{user.phone_number}}>
+                            <label for="phone_number">Phone Number</label>
+                        </div>
                     </div>
-                    <div class="row ml-auto">
-                        <div class="col ml-auto"><p>First Name</p></div>
-                        <div class="col ml-auto"><input type="text" id="first_name" class="form-control form-control-lg" placeholder={{user.first_name}}> </div>
+                    <div class="row ml-auto py-3">
+                        <div class="col ml-auto">
+                            <input type="text" id="first_name" class="form-control form-control-lg" placeholder={{user.first_name}}>
+                            <label for="first_name">First name</label>
+                        </div>
+                        <div class="col ml-auto">
+                            <input type="text"  id="last_name" class="form-control form-control-lg" placeholder={{user.last_name}}>
+                            <label for="first_name">Last name</label>
+                            </div>
                     </div>
+                      <div class="row ml-2 pt-2">
+                          <div class="col"
+                          <p>Billing Address</p>
+                          </div>
+                        <div class="col"
+                          <p>Home Address</p>
+                          </div>
+                     </div>
                       <div class="row ml-auto">
-                        <div class="col ml-auto"><p>Last Name</p></div>
-                        <div class="col ml-auto"><input type="text"  id="last_name" class="form-control form-control-lg" placeholder={{user.first_name}}> </div>
-                    </div>
-                      <div class="row ml-auto">
-                        <div class="col ml-auto"><p> Address</p></div>
-                        <div class="col ml-auto"><input type="text" id="address" class="form-control form-control-lg" placeholder={{user.address}}> </div>
-                    </div>
-                      <div class="row ml-auto">
-                        <div class="col ml-auto"><p> Phone Number</p></div>
-                        <div class="col ml-auto"><input type="text" id="phone_number" class="form-control form-control-lg" placeholder={{user.address}}> </div>
-                    </div>
-                       <div class="row ml-auto">
-                        <div class="col ml-auto"><p> Billing Address</p></div>
-                        <div class="row mb-4" style="float:left">
-                           <div class="form-outline mb-4" style="float:left;width:150px">
+                        <div class="col ml-auto">
+                            <div class="row mb-4" style="float:left">
+                           <div class="form-outline mb-4 px-2" style="float:left;width:190px">
                             <input type="text" id="saddress" class="form-control"/>
-                            <label class="form-label" for="saddress" style="float:left">Street Address</label>
+                            <label class="form-label" for="saddress">Street Address</label>
                           </div>
-                         <div class="form-outline mb-4" style="float:left;width:80px">
+                         <div class="form-outline mb-4 px-2" style="float:left;width:80px">
                            <input type="text" id="aptnumber" class="form-control" />
-                            <label class="form-label" for="aptnumber" style="float:left">Apt Number</label>
+                            <label class="form-label" for="aptnumber">Apt #</label>
                          </div>
                         </div>
-                        <div class="row mb-4" style="float:left">
-                        <div class="form-outline mb-4" style="float:left;width:150px">
+                        <div class="row mb-4 px-5">
+                        <div class="form-outline mb-4 px-2" style="width:80px">
                            <input type="text" id="bstate" class="form-control" />
-                            <label class="form-label" for="bstate" style="float:left">State</label>
+                            <label class="form-label" for="bstate" >State</label>
                          </div>
-                         <div class="form-outline mb-4" style="float:left;width:100px">
-                           <input type="email" id="bzipcode" class="form-control" />
-                            <label class="form-label" for="bzipcode" style="float:left">Zip Code</label>
-                         </div></div>
-                    </div>
-                      <div class="row ml-auto">
-                        <div class="col ml-auto"><p> Home Address</p></div>
-                        <div class="row mb-4" style="float:left">
-                           <div class="form-outline mb-4" style="float:left;width:150px">
-                            <input type="text" id="aaddress" class="form-control"/>
-                            <label class="form-label" for="aaddress" style="float:left">Street Address</label>
-                          </div>
                          <div class="form-outline mb-4" style="float:left;width:80px">
-                           <input type="text" id="aaptnumber" class="form-control" />
-                            <label class="form-label" for="aaptnumber" style="float:left">Apt Number</label>
+                           <input type="email" id="bzipcode" class="form-control" />
+                            <label class="form-label" for="bzipcode">Zip Code</label>
+                         </div></div>
+                        </div>
+                        <div class="col ml-auto">
+                            <div class="row mb-4" style="float:left">
+                           <div class="form-outline mb-4 px-2" style="float:left;width:190px">
+                            <input type="text" id="saddress" class="form-control"/>
+                            <label class="form-label" for="saddress">Street Address</label>
+                          </div>
+                         <div class="form-outline mb-4 px-2" style="float:left;width:80px">
+                           <input type="text" id="aptnumber" class="form-control" />
+                            <label class="form-label" for="aptnumber">Apt #</label>
                          </div>
                         </div>
-                        <div class="row mb-4" style="float:left">
-                        <div class="form-outline mb-4" style="float:left;width:150px">
-                           <input type="text" id="astate" class="form-control" />
-                            <label class="form-label" for="astate" style="float:left">State</label>
+                        <div class="row mb-4 px-5">
+                        <div class="form-outline mb-4 px-2" style="width:80px">
+                           <input type="text" id="bstate" class="form-control" />
+                            <label class="form-label" for="bstate" >State</label>
                          </div>
-                         <div class="form-outline mb-4" style="float:left;width:100px">
-                           <input type="email" id="azipcode" class="form-control" />
-                            <label class="form-label" for="azipcode" style="float:left">Zip Code</label>
+                         <div class="form-outline mb-4" style="float:left;width:80px">
+                           <input type="email" id="bzipcode" class="form-control" />
+                            <label class="form-label" for="bzipcode">Zip Code</label>
                          </div></div>
+                        </div>
                     </div>
-
-
-
-
-                      </br></br>
 
                       <div style="text-align: center;">
-                    <button class="btn btn-outline-success" type="submit">Save</button>
-                    <button class="btn btn-outline-success" type="submit">Cancel</button></div>
+                    <button class="btn btn-success btn-block btn-lg gradient-custom-3 text-body px-2" type="submit">Update</button>
 
             </div>
-                       </form></br></br></br></br>
-                  <form method="POST" action="edit_card">
-                      {% csrf_token %}
-                      <div class="col ml-auto">
-                  <div class="row ml-auto">
+                       </form></br></br>
+                  <div class="col ml-auto p-3">
+                      <div class="row ml-auto">
+                          <form method="POST" action="changepassword">
+                          {% csrf_token %}
+                              <div class="col ml-auto"><button style="color:red" type="submit" value="Change Password",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Change Password</button>
 
-                          <div class="col ml-auto"><button type="submit" value="Change Card Details",
-                                                           class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Change Card Details</button>
+                              </div> </form>
+                         <form method="POST" action="edit_card">
+                          {% csrf_token %}
 
-                          </div></div> </div>
+                              <div class="col ml-auto"><button type="submit" value="Change Card Details",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Change Card Details</button>
 
-                  </form>
+                              </div>
+
+                        </form>
+                          </div>
+                      </div>
+                  </div>
                   {% else %}
                 <p class="text-center text-muted mt-5 mb-0">User Not Logged IN <a href="login" class="fw-bold text-body"><u>Login here</u></a></p>
                       {% endif %}
