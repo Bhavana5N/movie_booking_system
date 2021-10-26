@@ -1,9 +1,6 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+#from django.contrib.auth.forms import UserCreationForm
 from django.db import models
-import sqlite3
-from . import settings
-
-
 from django.contrib.auth.models import AbstractUser
 
 class customuser(AbstractUser):
@@ -18,3 +15,13 @@ class UserRegisrationForm(models.Model):
     email = models.EmailField()
     password1 = models.TextField()
     password2 = models.TextField()
+    cardNum = models.IntegerField()
+    cardExpDate = models.DateField()
+    streetAddressBilling = models.TextField()
+    aptNumberBilling = models.TextField()
+    stateBilling = models.TextField()
+    zipCodeBilling = models.IntegerField()
+    streetAddressHome = models.TextField()
+    aptNumberHome = models.TextField()
+    stateHome = models.TextField()
+    zipCodeHome = models.IntegerField()
