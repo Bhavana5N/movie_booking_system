@@ -5,12 +5,13 @@ from django.contrib.auth.forms import UserCreationForm
 
 def registration(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisrationForm(request.POST)
         print("is post")
         if form.is_valid():
-            user = form.save()
             print("is valid")
-            form.save()
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
             messages.success(request, f'Account created for {email}!')
             return render(request, 'regisconfirmation.html')
         else:
