@@ -10,6 +10,8 @@ from django.contrib.auth.views import PasswordChangeView
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
 from .settings import EMAIL_HOST
+from django.contrib.auth.forms import UserCreationForm
+from .forms import UserRegistrationForm
 
 def login_user(request):
     print(request)
@@ -97,5 +99,24 @@ def forgot_password_validation(request):
 def edit_profile(request):
     return render(request, "edit_profile.html")
 
+def registration(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        print("is post")
+        if form.is_valid():
+            print("is valid")
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            messages.success(request, f'Account created for {email}!')
+            return render(request, 'regisconfirmation.html')
+        else:
+            print("is not valid")
+            messages.info(request, f'Some detail made the form invalid. Try again!')
+            return render(request, 'registration.html')
+    else:
+        form = UserCreationForm()
+        args = {'form': form}
+        return  render(request, 'registration.html', args)
 
 
