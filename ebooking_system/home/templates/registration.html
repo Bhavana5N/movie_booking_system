@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="registration.css">
+  <link rel="stylesheet" href="{% static 'home/css/registration.css' %}">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
   <!-- Google Fonts -->
@@ -13,6 +13,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
 </head>
 <body>
+{% block content %}
+
    <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container h-100">
@@ -22,29 +24,138 @@
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                <form>
-
+                <form method="POST">
+                    {% csrf_token %}
+                    {{register_form}}
                   <div class="form-outline mb-4">
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example1cg">Your Name *</label>
+                    <input type="text" id="firstName" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">First Name</label>
+                  </div>
+                    <div class="form-outline mb-4">
+                    <input type="text" id="lastName" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Last Name</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example3cg">Your Email *</label>
+                    <input type="email" id="email" class="form-control form-control-lg" />
+                    <label class="form-label" for="email">Your Email *</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example4cg">Password *</label>
+                    <input type="password" id="password" class="form-control form-control-lg" />
+                    <label class="form-label" for="password">Password *</label>
                   </div>
 
                   <div class="form-outline mb-4">
                     <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
                     <label class="form-label" for="form3Example4cdg">Repeat your password *</label>
                   </div>
+                  <div style="text-align:center;padding-bottom:10px">
+                  <div class="btn-group dropend">
+                    <button
+                      type="button"
+                      class="btn btn-primary dropdown-toggle"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false"
+                      style="border-right:100px:padding-bottom:20px"
+                    >
+                      Optional Details
+                    </button>
+                    <div class="dropdown-menu ms-3 p-2" style="width: 360px;background-color:#F4F4F4">
+                      <form class="px-4 py-3">
+                        <div class="btn-group">
+                          <input
+                            type="radio"
+                            class="btn-check"
+                            name="options"
+                            id="option1"
+                            autocomplete="off"
+                            checked
+                          />
+                          <label class="btn btn-secondary" for="option1"><i class="fab fa-cc-paypal fa-3x"></i></label>
 
-                  <div class="form-check d-flex justify-content-center mb-5">
+                          <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
+                          <label class="btn btn-secondary" for="option2"><i class="fab fa-cc-visa fa-3x" ></i></label>
+
+                          <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
+                          <label class="btn btn-secondary" for="option3"><i class="fab fa-cc-mastercard fa-3x"></i></label>
+                          <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" />
+                          <label class="btn btn-secondary" for="option4"><i class="fab fa-cc-amex fa-3x"></i></label>
+                        </div>
+                        <div class="my-2">Card Information</div>
+
+                        <div class="form-outline my-4">
+                          <input type="email" id="form2Example1" class="form-control" />
+                          <label class="form-label" for="form2Example1">Card Number</label>
+                        </div>
+
+                        <div class="form-outline mb-4" style="float:left;width:150px">
+                          <input type="password" id="form2Example2" class="form-control" />
+                          <label class="form-label" for="form2Example2">Expiration Date</label>
+                        </div>
+                        <div class="form-outline mb-4" style="float:left;width:100px">
+                          <input type="password" id="form2Example2" class="form-control" />
+                          <label class="form-label" for="form2Example2">CVC</label>
+                        </div><br></br>
+                        <div style="padding-right:90px">
+                        Billing Address
+                          </div>
+                        <div class="row mb-4" style="float:left">
+                           <div class="form-outline mb-4" style="float:left;width:150px">
+                            <input type="email" id="form2Example1" class="form-control"/>
+                            <label class="form-label" for="form2Example1" style="float:left">Street Address</label>
+                          </div>
+                         <div class="form-outline mb-4" style="float:left;width:80px">
+                           <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1" style="float:left">Apt Number</label>
+                         </div>
+                        </div>
+                        <div class="row mb-4" style="float:left">
+                        <div class="form-outline mb-4" style="float:left;width:150px">
+                           <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1" style="float:left">State</label>
+                         </div>
+                         <div class="form-outline mb-4" style="float:left;width:100px">
+                           <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1" style="float:left">Zip Code</label>
+                         </div>
+                        </div><br><br><br><br><br><br><br><br>
+                        <div style="padding-right:90px">
+                        Home Address
+                          </div>
+                        <div class="row mb-4" style="float:left">
+                           <div class="form-outline mb-4" style="float:left;width:150px">
+                            <input type="email" id="form2Example1" class="form-control"/>
+                            <label class="form-label" for="form2Example1" style="float:left">Street Address</label>
+                          </div>
+                         <div class="form-outline mb-4" style="float:left;width:80px">
+                           <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1" style="float:left">Apt Number</label>
+                         </div>
+                        </div>
+                        <div class="row mb-4" style="float:left">
+                        <div class="form-outline mb-4" style="float:left;width:150px">
+                           <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1" style="float:left">State</label>
+                         </div>
+                         <div class="form-outline mb-4" style="float:left;width:100px">
+                           <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1" style="float:left">Zip Code</label>
+                         </div>
+                        </div>
+                           <div class="row mb-4" style="float:left">
+                          <div class="form-outline mb-4">
+                         <input type="password" id="phoneNumber" class="form-control form-control-lg" />
+                         <label class="form-label" for="phoneNumber">Phone Number</label>
+                         </div>
+                           </div>
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Save Details</button>
+                      </form>
+
+                    </div>
+                  </div>
+                  <div class="form-check d-flex justify-content-center my-3">
                     <input
                       class="form-check-input me-2"
                       type="checkbox"
@@ -57,18 +168,20 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                   </div>
 
                   <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a></p>
 
                 </form>
                   <p class="text-center text-muted mt-5 mb-0"><a href="/">E-Cinema Booking System</a></p>              </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+{% endblock %}
 </body>
 </html>
