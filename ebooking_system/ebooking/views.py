@@ -2,14 +2,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import  render, redirect
-from .models import customuser
+from .models import customuser, EbookingCard
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
 from .settings import EMAIL_HOST
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
-
 
 def login_user(request):
     print(request)
@@ -38,7 +37,6 @@ def regisconfirmation(request):
     pass
 
 def forgot_password_view(request):
-    print(request.method)
     if request.method == "POST":
         if request.POST["username"]:
             current_user = request.POST["username"]
@@ -98,25 +96,45 @@ def forgot_password_validation(request):
             return redirect("login")
 
 def edit_card(request):
-    return render(request, "edit_card.html")
+    custom_user = request.user
+    b=EbookingCard.objects.filter(uid=str(custom_user.id))
+    if b:
+        for i in b:
+            if request.POST.get('delete') and str(i.id) in request.POST.get('delete'):
+                EbookingCard.objects.filter(id=i.id).delete()
+    if request.POST.get('addcard'):
+        if len(b) <=3:
+            return render(request, "edit_card.html", {'cards': b, 'is_new': True})
+        else:
+            messages.info(request, "Only 3 cards are allowed")
+            return render(request, "edit_card.html", {'cards': b})
+
+    if request.POST.get('save') and 'card_number' in request.POST:
+        card=EbookingCard(card_number=request.POST['card_number'],
+                          name=request.POST['cname'], expireyear=request.POST['expireyear'],
+                          expiredate=request.POST['expiredate'], uid= request.user.id)
+        card.save()
+        b = EbookingCard.objects.filter(uid=str(custom_user.id))
+        if b:
+            for i in b:
+                if request.POST.get('delete') and str(i.id) in request.POST.get('delete'):
+                    EbookingCard.objects.filter(id=i.id).delete()
+
+    return render(request, "edit_card.html", {'cards': b})
 
 def edit_profile(request):
-    print(request.POST)
     return render(request, "edit_profile.html")
 
 def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
-        print("is post")
         if form.is_valid():
-            print("is valid")
             user = form.save(commit=False)
             user.is_active = False
             user.save()
             messages.success(request, f'Account created for {email}!')
             return render(request, 'regisconfirmation.html')
         else:
-            print("is not valid")
             messages.info(request, f'Some detail made the form invalid. Try again!')
             return render(request, 'registration.html')
     else:
