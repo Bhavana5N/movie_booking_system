@@ -3,6 +3,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="{% static 'home/css/registration.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
   <!-- Google Fonts -->
@@ -24,7 +25,7 @@
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                <form method="POST">
+                <form method="POST" novalidate>
                     {% csrf_token %}
                     {{register_form}}
 
@@ -39,9 +40,9 @@
 
                   <div class="form-outline mb-4">
 
-                    <input type="email" id="email" class="form-control form-control-lg" />
+                    <input type="email" id="email" class="form-control form-control-lg" required/>
                     <label class="form-label" for="email">Your Email *</label>
-
+                    <div class="invalid-feedback">Please choose a username.</div>
                   </div>
 
                   <div class="form-outline mb-4">
@@ -149,7 +150,7 @@
 
                            <div class="row mb-4" style="float:left">
                           <div class="form-outline mb-4">
-                         <input type="password" id="phoneNumber" class="form-control form-control-lg" />
+                         <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
                          <label class="form-label" for="phoneNumber">Phone Number</label>
                          </div>
                            </div>
@@ -189,6 +190,8 @@
       </div>
     </div>
   </section>
+<script type="text/javascript" href="{% static 'home/js/scripts.js' %}"></script>
 {% endblock %}
 </body>
+
 </html>
