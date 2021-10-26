@@ -36,3 +36,9 @@ def summary(request):
     return render(request, 'summary.html')
 def logout(request):
     return render(request, 'logout.html')
+def registration(request):
+    return render(request, 'registration.html')
+def login(request):
+    return render(request, 'login.html')
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
