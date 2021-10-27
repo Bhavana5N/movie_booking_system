@@ -180,14 +180,10 @@
 
                     <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                   </div>
-                  {% if form.errors %}
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
+                  {% if messages %}
+                      {% for message in messages %}
+                        <p class="text-red">{{message}}</p>
+                      {% endfor %}
                   {% endif %}
 
                   <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a></p>

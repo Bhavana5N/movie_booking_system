@@ -140,7 +140,7 @@ def registration(request):
             print("got here")
             user.save()
             send_mail(
-                subject='Password Reset Link',
+                subject='EBooking Account Created Successfully!',
                 message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
                 from_email="n.bhavana.reddy5@outlook.com",
                 recipient_list=[user.email])
