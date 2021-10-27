@@ -125,6 +125,7 @@ def edit_card(request):
 
 def edit_profile(request):
     edit_values = {}
+    print(request.POST)
     for field in customuser._meta.fields:
         if field.name!='id' and field.name in request.POST and request.POST[field.name]:
             edit_values[field.name] = request.POST[field.name]

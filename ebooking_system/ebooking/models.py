@@ -13,6 +13,7 @@ class customuser(AbstractUser):
     aptNumberHome = models.TextField()
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
+    promotion = models.TextField(default='off')
 
 
 class EbookingCard(models.Model):
