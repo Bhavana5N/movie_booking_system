@@ -135,10 +135,15 @@ def registration(request):
         if form.is_valid():
             print("valid")
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.username = user.email
             print("got here")
             user.save()
+            send_mail(
+                subject='Password Reset Link',
+                message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
+                from_email="n.bhavana.reddy5@outlook.com",
+                recipient_list=[user.email])
             return render(request, 'regisconfirmation.html')
         else:
             print("invalid")
@@ -146,7 +151,7 @@ def registration(request):
                 v = form.errors.get_json_data()[k][0]["message"]
                 messages.error(request, v)
                 print(v)
-            print(form.errors)
+            #print(form.errors)
             messages.info(request, f'Some detail made the form invalid. Try again!')
             return render(request, 'registration.html')
     else:
