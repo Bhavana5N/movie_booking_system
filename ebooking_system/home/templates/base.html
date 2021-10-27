@@ -19,7 +19,7 @@
     <body style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');height:900px">
 <nav class="navbar navbar-expand-lg navbar-light bg-light mask d-flex align-items-center h-10 gradient-custom-6">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#!">E-Cinema Booking System</a>
+                <a class="navbar-brand" href="index">E-Cinema Booking System</a>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 300px">
                     <button class="btn btn-success" type="submit">Search</button>
@@ -34,35 +34,42 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Movie</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">action films</a></li>
-                                <li><a class="dropdown-item" href="#!">comedies</a></li>
-                                <li><a class="dropdown-item" href="#!">romantic</a></li>
-                                <li><a class="dropdown-item" href="#!">rom-coms</a></li>
-                                <li><a class="dropdown-item" href="#!">adventures</a></li>
-                                <li><a class="dropdown-item" href="#!">musical</a></li>
-                                <li><a class="dropdown-item" href="#!">dramas</a></li>
-                                <li><a class="dropdown-item" href="#!">real life films</a></li>
+                                <li><a class="dropdown-item" href="#!">Action films</a></li>
+                                <li><a class="dropdown-item" href="#!">Comedies</a></li>
+                                <li><a class="dropdown-item" href="#!">Romantic</a></li>
+                                <li><a class="dropdown-item" href="#!">Rom-Coms</a></li>
+                                <li><a class="dropdown-item" href="#!">Adventures</a></li>
+                                <li><a class="dropdown-item" href="#!">Musical</a></li>
+                                <li><a class="dropdown-item" href="#!">Dramas</a></li>
+                                <li><a class="dropdown-item" href="#!">Documentary</a></li>
 
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Browse</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><a class="dropdown-item" href="#!">All Movies</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                                <li><a class="dropdown-item" href="#!">Trending Now</a></li>
+                                <li><a class="dropdown-item" href="#!">Newly Added</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item active"><a class="nav-link" href="#!">login</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="#!">Registration</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item active"><a class="nav-link" href="logout">Logout</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="edit_profile">Profile</a></li>
+                        {% else %}
+                        <li class="nav-item active"><a class="nav-link" href="login">Login</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="registration">Registration</a></li>
+                        {% endif %}
                     </ul>
-                    <form class="d-flex">
+                    <form class="d-flex" method="POST" action="orderSummary">
+                        <a href="orderSummary">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
+                            </a>
                     </form>
                 </div>
             </div>

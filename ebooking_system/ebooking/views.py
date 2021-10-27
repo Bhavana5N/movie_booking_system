@@ -134,27 +134,18 @@ def edit_profile(request):
 
 def registration(request):
     if request.user.is_authenticated:
-        print("is auth")
         redirect("/")
     if request.method == 'POST':
-        print("post")
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            print("valid")
             user = form.save(commit=False)
             user.is_active = True
             user.username = user.email
-            print("got here")
-            b = UserRegisrationForm.objects.filter(uid=str(custom_user.username))
-            #if b:
-            #    messages.info(request, f'An account with this username already exists. Try again!')
-            #    return render(request, 'registration.html')
+            b = customuser.objects.filter(username=str(user.username ))
+            if b:
+                messages.info(request, f'An account with this username already exists. Try again!')
+                return render(request, 'registration.html')
             user.save()
-            send_mail(
-                subject='Password Reset Link',
-                message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
-                from_email="n.bhavana.reddy5@outlook.com",
-                recipient_list=[user.email])
             send_mail(
                 subject='EBooking Account Created Successfully!',
                 message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
@@ -162,15 +153,35 @@ def registration(request):
                 recipient_list=[user.email])
             return render(request, 'login.html')
         else:
-            print("invalid")
             for k in form.errors.get_json_data():
                 v = form.errors.get_json_data()[k][0]["message"]
                 messages.error(request, v)
                 print(v)
-            #print(form.errors)
             messages.info(request, f'Some detail made the form invalid. Try again!')
             return render(request, 'registration.html')
     else:
         form = UserRegistrationForm()
         args = {'form': form}
         return  render(request, 'registration.html', args)
+def index(request):
+    return render(request, "index.html")
+def checkout(request):
+    return render(request, 'checkout.html')
+def moviedetails(request):
+    return render(request, 'moviedetails.html')
+def seats(request):
+    return render(request, 'seats.html')
+def fullcalendar(request):
+    return render(request, 'fullcalendar.html')
+def orderSummary(request):
+    return render(request, 'orderSummary.html')
+def orderHistory(request):
+    return render(request, 'orderHistory.html')
+def orderconfirmation(request):
+    return render(request, 'orderconfirmation.html')
+def summary(request):
+    return render(request, 'summary.html')
+def addpromotion(request):
+    return render(request, "addpromotion.html")
+def managemovie(request):
+    return render(request, "managemovie.html")
