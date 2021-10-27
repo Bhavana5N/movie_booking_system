@@ -1,57 +1,61 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-  <div class="container h-75">
+<link rel="stylesheet" href="{% static 'home/css/registration.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+  <div class="container h-75  pt-5">
         <div class="row ml-auto">
             <div class="col ml-auto">
             <div class="card">
               <div class="card-body p-5">
-                <h3 class="text-uppercase text-center mb-5">Edit Payment Card Details</h3>
+                <h1 class="text-uppercase text-center mb-5">Edit Payment Card Details</h1>
                   <form method="POST" action="edit_card">
                     {% csrf_token %}
-                      </br></br>
-
                   {% for i in cards %}
 
 
                       </br></br>
-                      <div class="card card-outline-danger"> <span class="button" >
-                          <button type="submit" value={{i.id}} name="delete"{{i.id}}>Delete</button>
+                      <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px">
+                          <span class="button">
+                          <button type="button" style="margin:20px" class="btn btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
                       </span>
                    <div class="card-body p-2">
                        <blockquote class="card-blockquote">
                       <div class="row ml-auto">
                       <div class="col ml-auto">
-                            <label class="form-label" >Card Number</label>
+                            <h5 class="card-title">Card Number</h5>
                         </div>
                         <div class="col ml-auto">
                             <input type="text" id="cardnumber" class="form-control form-control-lg"
                                    placeholder={{i.card_number}}>
                         </div>
                   </div>
-                  <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label">Card Holder Name</label></div>
+                  <div class="form-outline mb-4 row ml-auto py-4">
+                        <div class="col ml-auto"><h5 class="card-title">Card Holder Name</h5></div>
                         <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder={{i.name}}> </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label">Exp. Date</label></div>
+                      <div class="col ml-auto"><h5 class="card-title">Exp. Date</h5></div>
+                      <div class="col ml-auto"></div>
                       <div class="col ml-auto">
                           <input type="text" id="id_month{{i}}" class="form-control form-control-lg"  placeholder={{i.expiredate}}>
                         <label class="form-label" for=id_month{{i}}>Month</label>
-                  </div>
+                      </div>
                       <div class="col ml-auto">
                           <input type="text" id="id_year{{i}}" class="form-control form-control-lg" placeholder={{i.expireyear}}>
                         <label class="form-label" for=id_year{{i}}>Year</label>
-                  </div>
-                      <div class="col ml-auto"></div></div></blockquote></div>
+                      </div>
+                      </div></blockquote></div>
                   </div>
                   {% endfor %}
                     </br></br>
 
                     </br></br>
                       {% if is_new %}
-                            <div class="card card-outline-danger"> <span class="close">&times;</span>
+                            <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px">
+                                <span class="close">&times;<button type="button" style="margin:20px" class="btn btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
+                      </span>
                    <div class="card-body p-2">
                        <blockquote class="card-blockquote">
                       <div class="row ml-auto">
@@ -62,7 +66,7 @@
                             <input type="text" id="form3Example1cg" class="form-control form-control-lg" name= "card_number" placeholder="Card Number *" required/>
                         </div>
                   </div>
-                  <div class="form-outline mb-4 row ml-auto">
+                  <div class="form-outline mb-4 row ml-auto py-4">
                         <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
                         <div class="col ml-auto"><input type="text"  name= "cname" class="form-control form-control-lg" placeholder="Card Holder Name *" required/> </div>
                   </div>
@@ -97,10 +101,10 @@
                       </div></div>
                     </br></br>
                       <div class="card card-outline-danger"> <span class="close">&times;</span>
-                          <div class="card-body p-2"></div></div></blockquote>{% endif %}
-                      <button class="btn btn-outline-success" type="submit" name="addcard", value="addcard">Add a New Card</button>
-                      <div style="text-align: center;"><button class="btn btn-outline-success" type="submit" value="save" name="save">Save</button>
-                          <button class="btn btn-outline-success" type="submit">Cancel</button></div></div>
+                          <div class="card-body p-2"></div></div></blockquote></div></div></div>{% endif %}
+                      <button class="btn btn-outline-success" type="submit" style="width:200px;margin-left:450px;margin-bottom:20px" name="addcard", value="addcard">Add a New Card</button>
+                      <div style="text-align: center;"><button class="btn btn-success" type="submit" value="save" name="save">Save</button>
+                          <button class="btn btn-danger" type="submit">Cancel</button></div></div>
                             </div> {% if messages %}
         {% for message in messages %}
           <h2>{{message}}</h2>

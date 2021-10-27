@@ -145,7 +145,7 @@ def registration(request):
             user.is_active = True
             user.username = user.email
             print("got here")
-            b = UserRegisrationForm.objects.filter(uid=str(custom_user.username))
+            b = UserRegistrationForm.objects.filter(uid=str(customuser.username))
             #if b:
             #    messages.info(request, f'An account with this username already exists. Try again!')
             #    return render(request, 'registration.html')
@@ -174,3 +174,25 @@ def registration(request):
         form = UserRegistrationForm()
         args = {'form': form}
         return  render(request, 'registration.html', args)
+def index(request):
+    return render(request, "index.html")
+def checkout(request):
+    return render(request, 'checkout.html')
+def moviedetails(request):
+    return render(request, 'moviedetails.html')
+def seats(request):
+    return render(request, 'seats.html')
+def fullcalendar(request):
+    return render(request, 'fullcalendar.html')
+def orderSummary(request):
+    return render(request, 'orderSummary.html')
+def orderHistory(request):
+    return render(request, 'orderHistory.html')
+def orderconfirmation(request):
+    return render(request, 'orderconfirmation.html')
+def summary(request):
+    return render(request, 'summary.html')
+def addpromotion(request):
+    return render(request, "addpromotion.html")
+def managemovie(request):
+    return render(request, "managemovie.html")
