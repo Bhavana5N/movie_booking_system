@@ -48,42 +48,50 @@
                         <div class="col ml-auto">
                             <div class="row mb-4" style="float:left">
                            <div class="form-outline mb-4 px-2" style="float:left;width:190px">
-                            <input name= "streetAddressBilling" type="text" id="saddress" class="form-control"/>
+                            <input name= "streetAddressBilling" type="text" id="saddress" class="form-control"
+                                   placeholder={{user.streetAddressBilling}}>
                             <label class="form-label" for="saddress">Street Address</label>
                           </div>
                          <div class="form-outline mb-4 px-2" style="float:left;width:80px">
-                           <input name="aptNumberBilling" type="text" id="aptnumber" class="form-control" />
+                           <input name="aptNumberBilling" type="text" id="aptnumber" class="form-control"
+                                  placeholder={{user.aptNumberBilling}}>
                             <label class="form-label" for="aptnumber">Apt #</label>
                          </div>
                         </div>
                         <div class="row mb-4 px-5">
-                        <div class="form-outline mb-4 px-2" style="width:80px">
-                           <input name="stateBilling" type="text" id="bstate" class="form-control" />
+                        <div class="form-outline mb-4 px-2" style="width:70px">
+                           <input name="stateBilling" type="text" id="bstate" class="form-control"
+                                  placeholder={{user.stateBilling}}>
                             <label class="form-label" for="bstate" >State</label>
                          </div>
-                         <div class="form-outline mb-4" style="float:left;width:80px">
-                           <input name= "zipCodeBilling" type="number" id="bzipcode" value=0 class="form-control" />
+                         <div class="form-outline mb-4" style="float:left;width:90px">
+                           <input name= "zipCodeBilling" type="number" id="bzipcode" class="form-control"
+                                  placeholder={{user.zipCodeBilling}}>
                             <label class="form-label" for="bzipcode">Zip Code</label>
                          </div></div>
                         </div>
                         <div class="col ml-auto">
                             <div class="row mb-4" style="float:left">
                            <div class="form-outline mb-4 px-2" style="float:left;width:190px">
-                            <input name="streetAddress" type="text" id="haddress" class="form-control"/>
+                            <input name="streetAddress" type="text" id="haddress" class="form-control"
+                                   placeholder={{user.streetAddress}}>
                             <label class="form-label" for="haddress">Street Address</label>
                           </div>
                          <div class="form-outline mb-4 px-2" style="float:left;width:80px">
-                           <input name="aptNumberHome" type="text" id="haptnumber" class="form-control" />
+                           <input name="aptNumberHome" type="text" id="haptnumber" class="form-control"
+                                  placeholder={{user.aptNumberHome}}>
                             <label class="form-label" for="haptnumber">Apt #</label>
                          </div>
                         </div>
                         <div class="row mb-4 px-5">
-                        <div class="form-outline mb-4 px-2" style="width:80px">
-                           <input name="stateHome" type="text" id="hstate" class="form-control" />
+                        <div class="form-outline mb-4 px-2" style="width:70px">
+                           <input name="stateHome" type="text" id="hstate" class="form-control"
+                                  placeholder={{user.stateHome}}>
                             <label class="form-label" for="hstate" >State</label>
                          </div>
-                         <div class="form-outline mb-4" style="float:left;width:80px">
-                           <input name="zipCodeHome" value=0 type="number" id="hzipcode" class="form-control" />
+                         <div class="form-outline mb-4" style="float:left;width:90px">
+                           <input name="zipCodeHome"  type="number" id="hzipcode" class="form-control"
+                                  placeholder={{user.zipCodeHome}}>
                             <label class="form-label" for="hzipcode">Zip Code</label>
                          </div></div>
                         </div>
