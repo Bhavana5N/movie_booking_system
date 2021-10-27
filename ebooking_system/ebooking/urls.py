@@ -25,9 +25,9 @@ from django.contrib.auth.views import LogoutView, PasswordChangeView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('login',  views.login_user, name="login"),
+    path('login/',  views.login_user, name="login"),
     path('logout', LogoutView.as_view(), name="logout"),
-    path('forgot-password', views.forgot_password_view, name='forgot'),
+    path('forgot-password/', views.forgot_password_view, name='forgot'),
     path('reset-password/', views.forgot_password_validation, name='rget'),
     path('admin', views.admin, name='admin'),
     path('edit_profile', views.edit_profile, name='edit'),
