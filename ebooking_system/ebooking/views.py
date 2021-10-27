@@ -124,6 +124,11 @@ def edit_card(request):
     return render(request, "edit_card.html", {'cards': b})
 
 def edit_profile(request):
+    edit_values = {}
+    for field in customuser._meta.fields:
+        if field.name!='id' and field.name in request.POST and request.POST[field.name]:
+            edit_values[field.name] = request.POST[field.name]
+    customuser.objects.filter(username=request.user).update(**edit_values)
     return render(request, "edit_profile.html")
 
 def registration(request):

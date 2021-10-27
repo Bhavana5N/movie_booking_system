@@ -4,8 +4,15 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class customuser(AbstractUser):
-    address = models.TextField()
     phone_number = models.IntegerField()
+    streetAddressBilling = models.TextField()
+    aptNumberBilling = models.TextField()
+    stateBilling = models.TextField()
+    zipCodeBilling = models.IntegerField()
+    streetAddressHome = models.TextField()
+    aptNumberHome = models.TextField()
+    stateHome = models.TextField()
+    zipCodeHome = models.IntegerField()
 
 
 class EbookingCard(models.Model):
