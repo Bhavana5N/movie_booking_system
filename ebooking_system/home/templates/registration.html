@@ -25,6 +25,8 @@
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
+                <form method="post" action="registration">
+                    {% csrf_token %}
                 <form method="POST" novalidate>
                     {% csrf_token %}
                     {{register_form}}
@@ -46,13 +48,13 @@
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="password" class="form-control form-control-lg" />
-                    <label class="form-label" for="password">Password *</label>
+                    <input name="password1" type="password" id="password1" class="form-control form-control-lg" />
+                    <label class="form-label" for="password1">Password *</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example4cdg">Repeat your password *</label>
+                    <input name="password2" type="password" id="password2" class="form-control form-control-lg" />
+                    <label class="form-label" for="password2">Repeat your password *</label>
                   </div>
                   <div style="text-align:center;padding-bottom:10px">
                   <div class="btn-group dropend">

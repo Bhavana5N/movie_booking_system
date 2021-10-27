@@ -59,17 +59,17 @@
                             <label class="form-label" for="form3Example1cg">Card Number</label>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" name= "card_number" placeholder="Card Number *"/>
+                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" name= "card_number" placeholder="Card Number *" required/>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
-                        <div class="col ml-auto"><input type="text"  name= "cname" class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
+                        <div class="col ml-auto"><input type="text"  name= "cname" class="form-control form-control-lg" placeholder="Card Holder Name *" required/> </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
                          <div class="col ml-auto"></div><div class="col ml-auto"></div>
-                        <div class="col ml-auto"><select name='expiredate' id='expiredate'>
+                        <div class="col ml-auto"><select name='expiredate' id='expiredate' required>
                                     <option value=''>Month</option>
                                     <option value='01'>01</option>
                                     <option value='02'>02</option>
@@ -85,7 +85,7 @@
                                     <option value='12'>12</option>
                                 </select></div>
                       <div class = "col ml-auto">
-                                <select name='expireyear'>
+                                <select name='expireyear' required>
                                     <option value=''>Year</option>
                                     <option value='20'>2020</option>
                                     <option value='21'>2021</option>
