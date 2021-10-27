@@ -1,14 +1,26 @@
 from django.contrib.auth.models import User, AbstractUser
 #from django.contrib.auth.forms import UserCreationForm
 from django.db import models
-
-#class Profile(models.Model):
-#    user = models.OneToOneField(User, on_delete=models.CASCADE)
-#    mobile = models.IntegerField()
+from django.contrib.auth.models import AbstractUser
 
 class customuser(AbstractUser):
     address = models.TextField()
     phone_number = models.IntegerField()
+
+
+class EbookingCard(models.Model):
+    card_number = models.IntegerField()
+    expiredate = models.IntegerField()
+    expireyear = models.IntegerField()
+    name = models.TextField()
+    uid = models.IntegerField(blank=True, null=True)
+    billing_address = models.TextField(blank=True, null=True)
+    id=models.AutoField (primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ebooking_card'
+
 
 class UserRegisrationForm(models.Model):
     username = models.TextField()

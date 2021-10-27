@@ -27,12 +27,16 @@ urlpatterns = [
     path('', include('home.urls')),
     path('login',  views.login_user, name="login"),
     path('logout', LogoutView.as_view(), name="logout"),
-    path('forgot-password/', PasswordChangeView.as_view(
-            template_name='forgot_password.html',
-            success_url = '/'),
-        name='forgot'),
+    path('forgot-password', views.forgot_password_view, name='forgot'),
+    path('reset-password/', views.forgot_password_validation, name='rget'),
+    path('admin', views.admin, name='admin'),
+    path('edit_profile', views.edit_profile, name='edit'),
     path('registration', views.registration, name="registration"),
-    path('regisconfirmation', views.regisconfirmation, name='regisconfirmation')
+    path('regisconfirmation', views.regisconfirmation, name='regisconfirmation'),
+    path('edit_card', views.edit_card, name='editcard'),
+    path('changepassword', PasswordChangeView.as_view(
+            template_name='change_password.html',success_url="login"),
+        name='changepassword'),
 
 
 ]

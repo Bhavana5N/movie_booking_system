@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ebooking.apps.EBookingConfig',
-    'home'
+    'ebooking',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +133,5 @@ EMAIL_HOST = 'smtp.office365.com'
 EMAIL_HOST_USER = 'n.bhavana.reddy5@outlook.com'
 EMAIL_HOST_PASSWORD = 'Krishna@126'
 SESSION_COOKIE_AGE = 360
+
+

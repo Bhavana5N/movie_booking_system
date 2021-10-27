@@ -9,8 +9,6 @@ TEMPLATE_DIRS = (
 def index(request):
     return render(request, "index.html")
 
-def login(request):
-    return render(request, 'login.html')
 def regisconfirmation(request):
     return render(request, 'regisconfirmation.html')
 def admin(request):
@@ -21,9 +19,6 @@ def managemovie(request):
     return render(request, 'managemovie.html')
 def checkout(request):
     return render(request, 'checkout.html')
-def edit_profile(request):
-    args = {'user': request.user}
-    return render(request, 'edit_profile.html', args)
 def home(request):
     return render(request, 'home.html')
 def moviedetails(request):
@@ -42,3 +37,9 @@ def summary(request):
     return render(request, 'summary.html')
 def logout(request):
     return render(request, 'logout.html')
+def registration(request):
+    return render(request, 'registration.html')
+def login(request):
+    return render(request, 'login.html')
+def edit_profile(request):
+    return render(request, 'edit_profile.html')

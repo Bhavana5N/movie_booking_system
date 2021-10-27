@@ -1,121 +1,130 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title></title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<!-- Font Awesome -->
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-		<!-- MDB -->
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet"/>
-		<!-- MDB -->
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-</head>
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">E-Cinema Booking System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-  </header>
-  <main>
-  <div>
-	<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-      <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-            <div class="card" style="border-radius: 15px;">
-              <div class="card-body p-5">
-  <div class="editfield">
-    <form id="info">
-		  <fieldset id="general">
-		  <legend class="text-uppercase text-center mb-5"> User Info </legend>
-		  <div class="input-group flex-nowrap">
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1" style="width: 130px;">First Name</span>
-				<input type="text" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1">
-			</div>
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Middle Name</span>
-				<input type="text" class="form-control" placeholder="Middle name" aria-label="Middle Name" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Last Name</span>
-				<input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Address</span>
-				<input type="text" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1" style="width: 130px;">Email</span>
-				<span class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> abcde@mail.com </span>
-			</div>
-		  <div class="d-flex justify-content-center" style="margin-top: 30px;">
-		  <a href="home.html"><input type="button" value="submit" id="submit" class="btn btn-secondary" style="margin-right:40px; background-color:grey;"></a>
-		  <a href="home.html"><input type="button" value="cancel" id="cancel" class="btn btn-secondary" style="background-color:grey;"></a>
+{% block content %}
+<head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
 
-		  </div>
-		  </div>
-		  </div>
-		  </div>
-		  </div>
-		  </div>
-		  </div>
-		  </div>
-		  </section>
-		  </div>
-    </form>
-	</div>
-  </main>
-  <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<body>
-  
-<html>
+  <div class="container h-70 pt-5">
+        <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
+            <div class="card" style="height:760px;width:1200px">
+              <div class="card-body p-5">
+                <h1 class="text-uppercase text-center mb-5">Edit Profile</h1>
+                  {% if user.is_authenticated %}
+
+                  <form method="POST" action="edit_profile">
+                      {% csrf_token %}
+
+                  <div class="col ml-auto">
+
+                    <div class="row ml-auto py-3">
+                        <div class="col ml-auto">
+                            <input type="text" id="formControlReadonly" class="form-control form-control-lg" placeholder={{user.email}} aria-label={{user.email}} readonly>
+                            <label for="formControlReadonly">E-Mail</label>
+                        </div>
+                        <div class="col ml-auto">
+                            <input type="text" id="phone_number" class="form-control form-control-lg" placeholder={{user.phone_number}}>
+                            <label for="phone_number">Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="row ml-auto py-3">
+                        <div class="col ml-auto">
+                            <input type="text" id="first_name" class="form-control form-control-lg" placeholder={{user.first_name}}>
+                            <label for="first_name">First name</label>
+                        </div>
+                        <div class="col ml-auto">
+                            <input type="text"  id="last_name" class="form-control form-control-lg" placeholder={{user.last_name}}>
+                            <label for="first_name">Last name</label>
+                            </div>
+                    </div>
+                      <div class="row ml-2 pt-2">
+<<<<<<< HEAD
+                          <div class="col">
+                          <p>Billing Address</p>
+                          </div>
+                        <div class="col">
+=======
+                          <div class="col"
+                          <p>Billing Address</p>
+                          </div>
+                        <div class="col"
+>>>>>>> 6480ca7cc6ef4abcc4142df3346f90200260f25d
+                          <p>Home Address</p>
+                          </div>
+                     </div>
+                      <div class="row ml-auto">
+                        <div class="col ml-auto">
+                            <div class="row mb-4" style="float:left">
+                           <div class="form-outline mb-4 px-2" style="float:left;width:190px">
+                            <input type="text" id="saddress" class="form-control"/>
+                            <label class="form-label" for="saddress">Street Address</label>
+                          </div>
+                         <div class="form-outline mb-4 px-2" style="float:left;width:80px">
+                           <input type="text" id="aptnumber" class="form-control" />
+                            <label class="form-label" for="aptnumber">Apt #</label>
+                         </div>
+                        </div>
+                        <div class="row mb-4 px-5">
+                        <div class="form-outline mb-4 px-2" style="width:80px">
+                           <input type="text" id="bstate" class="form-control" />
+                            <label class="form-label" for="bstate" >State</label>
+                         </div>
+                         <div class="form-outline mb-4" style="float:left;width:80px">
+                           <input type="email" id="bzipcode" class="form-control" />
+                            <label class="form-label" for="bzipcode">Zip Code</label>
+                         </div></div>
+                        </div>
+                        <div class="col ml-auto">
+                            <div class="row mb-4" style="float:left">
+                           <div class="form-outline mb-4 px-2" style="float:left;width:190px">
+                            <input type="text" id="saddress" class="form-control"/>
+                            <label class="form-label" for="saddress">Street Address</label>
+                          </div>
+                         <div class="form-outline mb-4 px-2" style="float:left;width:80px">
+                           <input type="text" id="aptnumber" class="form-control" />
+                            <label class="form-label" for="aptnumber">Apt #</label>
+                         </div>
+                        </div>
+                        <div class="row mb-4 px-5">
+                        <div class="form-outline mb-4 px-2" style="width:80px">
+                           <input type="text" id="bstate" class="form-control" />
+                            <label class="form-label" for="bstate" >State</label>
+                         </div>
+                         <div class="form-outline mb-4" style="float:left;width:80px">
+                           <input type="email" id="bzipcode" class="form-control" />
+                            <label class="form-label" for="bzipcode">Zip Code</label>
+                         </div></div>
+                        </div>
+                    </div>
+
+                      <div style="text-align: center;">
+                    <button class="btn btn-success btn-block btn-lg gradient-custom-3 text-body px-2" type="submit">Update</button>
+
+            </div>
+                       </form></br></br>
+                  <div class="col ml-auto p-3">
+                      <div class="row ml-auto">
+                          <form method="POST" action="changepassword">
+                          {% csrf_token %}
+                              <div class="col ml-auto"><button style="color:red" type="submit" value="Change Password",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Change Password</button>
+
+                              </div> </form>
+                         <form method="POST" action="edit_card">
+                          {% csrf_token %}
+
+                              <div class="col ml-auto"><button type="submit" value="Change Card Details",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Change Card Details</button>
+
+                              </div>
+
+                        </form>
+                          </div>
+                      </div>
+                  </div>
+                  {% else %}
+                <p class="text-center text-muted mt-5 mb-0">User Not Logged IN <a href="login" class="fw-bold text-body"><u>Login here</u></a></p>
+                      {% endif %}
+              </div>
+
+            </div></div></div></div>
+        {% endblock %}
