@@ -132,6 +132,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_HOST_USER = 'n.bhavana.reddy5@outlook.com'
 EMAIL_HOST_PASSWORD = 'Krishna@126'
-SESSION_COOKIE_AGE = 360
 
 

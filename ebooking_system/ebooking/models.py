@@ -14,6 +14,7 @@ class customuser(AbstractUser):
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
     promotion = models.TextField(default='off')
+    rememberme = models.BooleanField(default='False')
 
 
 class EbookingCard(models.Model):
