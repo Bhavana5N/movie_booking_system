@@ -102,7 +102,9 @@ def edit_card(request):
         for i in b:
             if request.POST.get('delete') and str(i.id) in request.POST.get('delete'):
                 EbookingCard.objects.filter(id=i.id).delete()
+    print(request.POST)
     if request.POST.get('addcard'):
+        print(b)
         if len(b) <=3:
             return render(request, "edit_card.html", {'cards': b, 'is_new': True})
         else:

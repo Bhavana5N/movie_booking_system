@@ -9,12 +9,12 @@
               <div class="card-body p-5">
                 <h3 class="text-uppercase text-center mb-5">Edit Payment Card Details</h3>
                   <form method="POST" action="edit_card">
-
+                    {% csrf_token %}
                       </br></br>
 
                   {% for i in cards %}
 
-                      {% csrf_token %}
+
                       </br></br>
                       <div class="card card-outline-danger"> <span class="button" >
                           <button type="submit" value={{i.id}} name="delete"{{i.id}}>Delete</button>
