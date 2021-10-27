@@ -139,6 +139,10 @@ def registration(request):
             user.is_active = True
             user.username = user.email
             print("got here")
+            b = UserRegisrationForm.objects.filter(uid=str(custom_user.username))
+            #if b:
+            #    messages.info(request, f'An account with this username already exists. Try again!')
+            #    return render(request, 'registration.html')
             user.save()
             send_mail(
                 subject='Password Reset Link',
