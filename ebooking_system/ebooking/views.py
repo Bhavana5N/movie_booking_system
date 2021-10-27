@@ -145,6 +145,11 @@ def registration(request):
                 message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
                 from_email="n.bhavana.reddy5@outlook.com",
                 recipient_list=[user.email])
+            send_mail(
+                subject='EBooking Account Created Successfully!',
+                message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
+                from_email="n.bhavana.reddy5@outlook.com",
+                recipient_list=[user.email])
             return render(request, 'regisconfirmation.html')
         else:
             print("invalid")

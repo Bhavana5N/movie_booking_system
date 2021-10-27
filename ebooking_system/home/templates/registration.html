@@ -32,17 +32,17 @@
                     {{register_form}}
 
                   <div class="form-outline mb-4">
-                    <input type="text" id="firstName" name="first_name" class="form-control form-control-lg" />
+                    <input type="text" id="firstName" class="form-control form-control-lg" name="first_name"/>
                     <label class="form-label" for="firstName">First Name</label>
                   </div>
                     <div class="form-outline mb-4">
-                    <input type="text" id="lastName" class="form-control form-control-lg" />
+                    <input type="text" id="lastName" class="form-control form-control-lg" name="last_name"/>
                     <label class="form-label" for="lastName">Last Name</label>
                   </div>
 
                   <div class="form-outline mb-4">
 
-                    <input name='email' type="email" id="email" class="form-control form-control-lg" required/>
+                    <input type="email" id="email" class="form-control form-control-lg" name="email" required/>
                     <label class="form-label" for="email">Your Email *</label>
                     <div class="invalid-feedback">Please choose a username.</div>
                   </div>
@@ -180,6 +180,11 @@
 
                     <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                   </div>
+                  {% if messages %}
+                      {% for message in messages %}
+                        <p class="text-red">{{message}}</p>
+                      {% endfor %}
+                  {% endif %}
 
                   <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a></p>
                   </div>
