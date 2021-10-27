@@ -18,7 +18,8 @@
                       </br></br>
                       <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px">
                           <span class="button">
-                          <button type="button" style="margin:20px" class="btn btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
+                          <button type="submit" style="margin:20px"
+                                  value={{i.id}} name="delete"{{i.id}} class="btn btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
                       </span>
                    <div class="card-body p-2">
                        <blockquote class="card-blockquote">
@@ -48,13 +49,14 @@
                       </div>
                       </div></blockquote></div>
                   </div>
-                      {% endfor %}</form>
+                      {% endfor %}
                     </br></br>
 
                     </br></br>
+
                       {% if is_new %}
                             <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px">
-                                <span class="close">&times;<button type="button" style="margin:20px" value={{i.id}} name="delete"{{i.id}}
+                                <span class="close">&times;<button type="submit" style="margin:20px"
                                                                    class="btn btn-danger btn-rounded"
                                                                    data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
                       </span>
@@ -103,15 +105,20 @@
                       </div></div>
                     </br></br>
                       <div class="card card-outline-danger"> <span class="close">&times;</span>
-                          <div class="card-body p-2"></div></div></blockquote></div></div></div>{% endif %}
-                      <button class="btn btn-outline-success" type="submit" style="width:200px;margin-left:450px;margin-bottom:20px" name="addcard", value="addcard">Add a New Card</button>
+                          <div class="card-body p-2"></div></div></blockquote></div></div>{% endif %}
+                     <button class="btn btn-outline-success" type="submit"
+                          style="width:200px;margin-left:450px;margin-bottom:20px"
+                          name="addcard" value="addcard">Add a New Card</button>
+
                       <div style="text-align: center;"><button class="btn btn-success" type="submit" value="save" name="save">Save</button>
-                          <button class="btn btn-danger" type="submit">Cancel</button></div></div>
-                            </div> {% if messages %}
+                          <button class="btn btn-danger" type="submit">Cancel</button></div>
+
+            {% if messages %}
         {% for message in messages %}
           <h2>{{message}}</h2>
         {% endfor %}
-    {% endif %}</form></br></br>
+    {% endif %}
+            </form></br></br>
 
 
 
