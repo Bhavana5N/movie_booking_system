@@ -126,19 +126,31 @@ def edit_profile(request):
     return render(request, "edit_profile.html")
 
 def registration(request):
+    if request.user.is_authenticated:
+        print("is auth")
+        redirect("/")
     if request.method == 'POST':
+        print("post")
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+            print("valid")
             user = form.save(commit=False)
             user.is_active = False
+            user.username = user.email
+            print("got here")
             user.save()
-            messages.success(request, f'Account created for {email}!')
             return render(request, 'regisconfirmation.html')
         else:
+            print("invalid")
+            for k in form.errors.get_json_data():
+                v = form.errors.get_json_data()[k][0]["message"]
+                messages.error(request, v)
+                print(v)
+            print(form.errors)
             messages.info(request, f'Some detail made the form invalid. Try again!')
             return render(request, 'registration.html')
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
         args = {'form': form}
         return  render(request, 'registration.html', args)
 
