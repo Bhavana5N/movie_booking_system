@@ -10,8 +10,8 @@ from .settings import EMAIL_HOST, EMAIL_HOST_USER
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
 
+
 def login_user(request):
-    print(request)
 
     if request.method == "POST":
         username = request.POST['username']
@@ -37,20 +37,20 @@ def regisconfirmation(request):
     return render(request, 'regisconfirmation.html')
 
 def forgot_password_view(request):
+
     if request.method == "POST":
         if request.POST["username"]:
             current_user = request.POST["username"]
-            print(current_user)
             try:
                 user = customuser.objects.get(username=current_user)
                 if user:
 
                     send_mail(
                     subject = 'Password Reset Link',
-                    message = 'http://127.0.0.1:8080/reset-password?user_name='+current_user,
+                    message = 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/reset-password?user_name='+current_user,
                     from_email =EMAIL_HOST_USER,
                     recipient_list = [current_user])
-                    messages.info(request, "Password Reset Mail is sent")
+                    messages.info(request, "Password Reset Mail is sent.")
                     return render(request, "forgot_password.html")
             except Exception as e:
                 import traceback
@@ -172,7 +172,8 @@ def registration(request):
             try:
                 send_mail(
                     subject='EBooking Account Created Successfully!',
-                    message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
+                    message="Your account is registered!\nPlease click on the following link to login:\n" +
+                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
                     from_email=EMAIL_HOST_USER,
                     recipient_list=[user.email])
             except:
