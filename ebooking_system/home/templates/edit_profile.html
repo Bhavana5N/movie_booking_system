@@ -96,9 +96,15 @@
                          </div></div>
                         </div>
                     </div>
+
                     <div >
-                          <input type="checkbox" id="promotion" name="promotion" CheckboxPlaceHolder={{user.promotion}}>
+                        {% if user.promotion == 'on' %}
+                          <input type="checkbox" id="promotion" name="promotion" value="on" checked>
                             <label for="promotion"> Subscribe for Promotion</label><br>
+                        {% else %}
+                            <input type="checkbox" id="promotion" value="off" name="promotion">
+                            <label for="promotion"> Subscribe for Promotion</label><br>
+                        {% endif %}
                     </div>
                       <div style="text-align: center;">
 
@@ -132,4 +138,5 @@
               </div>
 
             </div></div></div></div>
+
         {% endblock %}
