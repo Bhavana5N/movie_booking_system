@@ -115,20 +115,39 @@ def edit_card(request):
                           name=request.POST['cname'], expireyear=request.POST['expireyear'],
                           expiredate=request.POST['expiredate'], uid= request.user.id)
         card.save()
+        send_mail(
+            subject='Customer Card Information is Updated',
+            message='New Payment Card is added',
+            from_email="n.bhavana.reddy5@outlook.com",
+            recipient_list=[request.user])
         b = EbookingCard.objects.filter(uid=str(custom_user.id))
         if b:
             for i in b:
                 if request.POST.get('delete') and str(i.id) in request.POST.get('delete'):
                     EbookingCard.objects.filter(id=i.id).delete()
+                    send_mail(
+                        subject='Customer Card is Deleted',
+                        message='User Payment Card is Deleted',
+                        from_email="n.bhavana.reddy5@outlook.com",
+                        recipient_list=[request.user])
 
     return render(request, "edit_card.html", {'cards': b})
 
 def edit_profile(request):
+    current_user = request.user
     edit_values = {}
+    print(request.POST)
     for field in customuser._meta.fields:
         if field.name!='id' and field.name in request.POST and request.POST[field.name]:
             edit_values[field.name] = request.POST[field.name]
-    customuser.objects.filter(username=request.user).update(**edit_values)
+    print(edit_values)
+    if edit_values:
+        customuser.objects.filter(username=current_user).update(**edit_values)
+        send_mail(
+            subject='Profile is Updated',
+            message='User Profile is Updated' + current_user.username,
+            from_email="n.bhavana.reddy5@outlook.com",
+            recipient_list=[current_user])
     return render(request, "edit_profile.html")
 
 def registration(request):
