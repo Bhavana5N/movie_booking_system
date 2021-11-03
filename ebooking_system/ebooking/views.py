@@ -164,6 +164,7 @@ def registration(request):
             user = form.save(commit=False)
             user.is_active = True
             user.username = user.email
+            user.is_active = 0
             b = customuser.objects.filter(username=str(user.username ))
             if b:
                 messages.info(request, f'An account with this username already exists. Try again!')
