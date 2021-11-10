@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+   <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Add Movie</h2>
+
+                <form id="addmovie-form" method="post"
+                  action="addmovie">
+                {% csrf_token %}
+                  Title *
+                  <div class="form-outline mb-4">
+                    <input type="text" name="title" class="form-control form-control-lg" placeholder="Example Movie Title"/>
+                    <!--<label class="form-label" for="form3Example1cg">Example Movie Title</label>-->
+                  </div>
+                  <div class="d-flex justify-content-center flex-row-mb-2">
+                    <div class="dropdown" style="padding-left:30px;padding-right:30px">
+                      Category
+                    <button class="btn btn-primary dropdown-toggle">Category</button>
+                      </br></br>
+                    <div class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Suspense</a></li>
+                      <li><a class="dropdown-item" href="#">Horror</a></li>
+                      <li><a class="dropdown-item" href="#">Adventure</a></li>
+                      <li><a class="dropdown-item" href="#">Romance</a></li>
+                      <li><a class="dropdown-item" href="#">Comedy</a></li>
+                      <li><a class="dropdown-item" href="#">Thriller</a></li>
+                      <li><a class="dropdown-item" href="#">Documentary</a></li>
+                    </div>
+                  </div>
+                    <div class="dropdown" style="padding-left:30px;padding-right:30px">
+                    Age Rating
+                    <button
+                      class="btn btn-primary dropdown-toggle"
+                      type="button"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Ratings
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="#">PG</a></li>
+                      <li><a class="dropdown-item" href="#">PG-13</a></li>
+                      <li><a class="dropdown-item" href="#">R</a></li>
+                      <li><a class="dropdown-item" href="#">NR</a></li>
+                    </ul>
+                  </div>
+                    <div class="dropdown" style="padding-left:30px;padding-right:30px">
+                    Film Reviews
+                    <button
+                      class="btn btn-primary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Ratings
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="#">1 Star</a></li>
+                      <li><a class="dropdown-item" href="#">2 Stars</a></li>
+                      <li><a class="dropdown-item" href="#">3 Stars</a></li>
+                      <li><a class="dropdown-item" href="#">4 Stars</a></li>
+                      <li><a class="dropdown-item" href="#">5 Stars</a></li>
+                    </ul>
+
+                  </div>
+                  </div>
+                  Director
+                  <div class="form-outline mb-4">
+                    <input type="text" name="director" class="form-control form-control-lg" placeholder="Example Name"/>
+                    <!--<label class="form-label" for="form3Example1cg">Example Name</label>-->
+                  </div>
+                  Producer
+                  <div class="form-outline mb-4">
+                    <input type="text" name="producer" class="form-control form-control-lg" placeholder="Example Name"/>
+                    <!--<label class="form-label" for="form3Example1cg">Example Name</label>-->
+                  </div>
+                  Cast
+                  <div class="form-outline">
+                    <textarea class="form-control" name="actors" rows="4" placeholder="Cast Members"></textarea>
+                    <!--<label class="form-label" for="textAreaExample">Cast Members</label>-->
+                  </div>
+                  Synopsis
+                  <div class="form-outline">
+                    <textarea class="form-control" rows="4" name="synopsis" placeholder="Example Synopsis"></textarea>
+                    <!--<label class="form-label" for="textAreaExample">Example </label>-->
+                  </div>
+                  Trailer
+                  <div class="form-outline">
+                    <input type="tel" name="trailerURL" class="form-control" placeholder="URL"/>
+                    <!--<label class="form-label" for="trailerURL">URL</label>-->
+                  </div>
+
+                  <div class="form-outline mb-4" style="padding-top:30px">
+                  </div>
+                  <input type="submit" value="Add Movie"
+                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" />
+
+                  <p class="text-center text-muted mt-5 mb-0">E-Cinema Booking System<a href="#" class="fw-bold text-body"></a></p>
+
+                </form>
+                {% if messages %}
+        {% for message in messages %}
+          <h3>{{message}}</h3>
+        {% endfor %}
+    {% endif %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
