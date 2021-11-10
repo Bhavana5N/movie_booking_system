@@ -52,13 +52,20 @@ class UserRegisrationForm(models.Model):
     zipCodeHome = models.IntegerField()
 
 class EbookingMovie(models.Model):
-    movie_title = models.TextField(blank=True, null=True)
+    movie_title = models.TextField(blank=True, null=True, unique=True)
     actors = models.TextField(blank=True, null=True)
-    type = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
     ratings = models.TextField(blank=True, null=True)
     release_date = models.DateField(blank=True, null=True)
-    trailer_link = models.BinaryField(blank=True, null=True)
-    image_link = models.BinaryField(blank=True, null=True)
+    trailer_link = models.TextField(blank=True, null=True)
+    image_link = models.TextField(blank=True, null=True)
+    producer = models.TextField(blank=True, null=True)
+    director = models.TextField(blank=True, null=True)
+    category = models.TextField(blank=True, null=True)
+    synopsis = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.movie_title
 
     class Meta:
         managed = False

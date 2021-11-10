@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import  render, redirect
-from .models import customuser, EbookingCard
+from .models import customuser, EbookingCard, EbookingMovie
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
@@ -192,7 +192,9 @@ def registration(request):
         args = {'form': form}
         return  render(request, 'registration.html', args)
 def index(request):
-    return render(request, "index.html")
+    movie = EbookingMovie.objects.filter(movie_title="RRR")
+    print(movie[0].trailer_link)
+    return render(request, "index.html", {'movie_list': movie})
 def checkout(request):
     return render(request, 'checkout.html')
 def moviedetails(request):
@@ -211,6 +213,27 @@ def summary(request):
     return render(request, 'summary.html')
 def addpromotion(request):
     return render(request, "addpromotion.html")
-def managemovie(request):
-    print(request.POST)
-    return render(request, "managemovie.html")
+
+
+def addmovie(request):
+    if request.method == 'POST':
+        movie_details = request.POST
+        try:
+            print(request.POST)
+            movie_object = EbookingMovie(movie_title=movie_details["title"],actors=movie_details["actors"],
+                          status='oncoming',  producer=movie_details["producer"],
+                                         trailer_link=movie_details["trailerURL"],
+                          director=movie_details["director"], synopsis=movie_details["synopsis"],
+                          category="horror")
+            b = EbookingMovie.objects.filter(movie_title=movie_details["title"])
+            print(b)
+            if b:
+                messages.info(request, f'A Movie with title already exists. Try again!')
+                return render(request, 'addmovie.html')
+            movie_object.save()
+            messages.info(request, f'Movie is successfully Added')
+        except Exception as e:
+            print(e)
+            messages.error(request, f'Movie is not Added')
+        return render(request, "addmovie.html")
+    return render(request, "addmovie.html")

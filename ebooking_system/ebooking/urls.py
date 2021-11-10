@@ -24,8 +24,8 @@ from django.contrib.auth.views import LogoutView, PasswordChangeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('index', views.index, name="index"),
+    #path('', include('home.urls')),
+    path('', views.index, name="index"),
     path('login/',  views.login_user, name="login"),
     path('logout', LogoutView.as_view(), name="logout"),
     path('forgot-password/', views.forgot_password_view, name='forgot'),
@@ -40,7 +40,7 @@ urlpatterns = [
         name='changepassword'),
     path('orderSummary', views.orderSummary, name="orderSummary"),
     path('addpromotion', views.addpromotion, name='addpromotion'),
-    path('managemovie', views.managemovie, name='managemovie'),
+    path('addmovie', views.addmovie, name='addmovie'),
     path('checkout', views.checkout, name='checkout'),
     path('moviedetails', views.moviedetails, name='moviedetails'),
     path('seats', views.seats, name='seats'),
