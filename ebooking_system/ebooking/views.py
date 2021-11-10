@@ -212,4 +212,5 @@ def summary(request):
 def addpromotion(request):
     return render(request, "addpromotion.html")
 def managemovie(request):
+    print(request.POST)
     return render(request, "managemovie.html")

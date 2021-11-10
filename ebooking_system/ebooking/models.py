@@ -50,3 +50,18 @@ class UserRegisrationForm(models.Model):
     aptNumberHome = models.TextField()
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
+
+class EbookingMovie(models.Model):
+    movie_title = models.TextField(blank=True, null=True)
+    actors = models.TextField(blank=True, null=True)
+    type = models.TextField(blank=True, null=True)
+    ratings = models.TextField(blank=True, null=True)
+    release_date = models.DateField(blank=True, null=True)
+    trailer_link = models.BinaryField(blank=True, null=True)
+    image_link = models.BinaryField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ebooking_movie'
+
+
