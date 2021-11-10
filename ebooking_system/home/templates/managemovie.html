@@ -2,28 +2,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title></title>
-        <!-- Favicon-->
-   <!-- MDB -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-        <!-- Bootstrap icons--><!-- Core theme CSS (includes Bootstrap)-->
-  <link rel="stylesheet" href="managemovie.css">
-        <link rel="stylesheet" href="../static/home/css/bootstrap.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
-
+  <link rel="stylesheet" href="{% static 'home/css/registration.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet"/>
+    <!-- MDB -->
 </head>
 <body>
-   <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<section class="py-5 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
-              <div class="card-body p-5">
+              <se class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Manage Movie</h2>
 
                 <form>
@@ -33,68 +28,36 @@
                     <!--<label class="form-label" for="form3Example1cg">Example Movie Title</label>-->
                   </div>
                   <div class="d-flex justify-content-center flex-row-mb-2">
-                    <div class="dropdown" style="padding-left:30px;padding-right:30px">
-                    Category <br></br>
-                    <button
-                      class="btn btn-primary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-mdb-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Categories
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Suspense</a></li>
-                      <li><a class="dropdown-item" href="#">Horror</a></li>
-                      <li><a class="dropdown-item" href="#">Adventure</a></li>
-                      <li><a class="dropdown-item" href="#">Romance</a></li>
-                      <li><a class="dropdown-item" href="#">Comedy</a></li>
-                      <li><a class="dropdown-item" href="#">Thriller</a></li>
-                      <li><a class="dropdown-item" href="#">Documentary</a></li>
-                    </ul>
+                    <select name="category" id="category_select">
+                        <option value="">Category</option>
+                        <option value="action">Action</option>
+                        <option value="suspense">Suspense</option>
+                        <option value="horror">Horror</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="romance">Romance</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="documentary">Documentary</option>
+                      </ul>
                     <br></br>
-                  </div>
-                    <div class="dropdown" style="padding-left:30px;padding-right:30px">
-                    Age Rating <br></br>
-                    <button
-                      class="btn btn-primary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-mdb-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Ratings
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <li><a class="dropdown-item" href="#">PG</a></li>
-                      <li><a class="dropdown-item" href="#">PG-13</a></li>
-                      <li><a class="dropdown-item" href="#">R</a></li>
-                      <li><a class="dropdown-item" href="#">NR</a></li>
-                    </ul>
+                    </select>
+                    <select name="category" id="category_select">
+                      <option value="">MPAA-US Rating</option>
+                      <option value="PG">PG</option>
+                      <option value="PG-13">PG-13</option>
+                      <option value="R">R</option>
+                      <option value="NR">NR</option>
                     <br></br>
-                  </div>
-                    <div class="dropdown" style="padding-left:30px;padding-right:30px">
-                    Film Reviews <br></br>
-                    <button
-                      class="btn btn-primary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-mdb-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Ratings
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <li><a class="dropdown-item" href="#">1 Star</a></li>
-                      <li><a class="dropdown-item" href="#">2 Stars</a></li>
-                      <li><a class="dropdown-item" href="#">3 Stars</a></li>
-                      <li><a class="dropdown-item" href="#">4 Stars</a></li>
-                      <li><a class="dropdown-item" href="#">5 Stars</a></li>
+                    </select>
+                    <select name="category" id="category_select">
+                      <option value="">Review Rating</option>
+                      <option value="1 Star">*</option>
+                      <option value="2 Stars">**</option>
+                      <option value="3 Stars">***</option>
+                      <option value="4 Stars">****</option>
+                      <option value="5 Stars">*****</option>
                     </ul>
-                    <br></br>
-                  </div>
+                    </select>
                   </div>
                   Director
                   <div class="form-outline mb-4">
@@ -121,6 +84,28 @@
                     <input type="tel" id="trailerURL" class="form-control" placeholder="URL"/>
                     <!--<label class="form-label" for="trailerURL">URL</label>-->
                   </div>
+
+                  <div class="form-outline">
+                    <input type="datetime-local" id="showtime"
+                    name="meeting-time" value="2021-06-12T19:30"
+                    min="2021-06-07T00:00" max="2030-06-14T00:00">
+                      <span class="button">
+                            <button type="submit" style="margin:5px"
+                                    value={{i.id}} name="delete"{{i.id}} class="btn-small btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
+                        </span>
+                    <br>
+                    <input type="datetime-local" id="showtime"
+                    name="meeting-time" value="2021-06-12T19:30"
+                    min="2021-06-07T00:00" max="2030-06-14T00:00">
+                      <span class="button">
+                            <button type="submit" style="margin:5px"
+                                    value={{i.id}} name="delete"{{i.id}} class="btn-small btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
+                        </span>
+                  </div>
+                  <button class="btn btn-outline-success" type="submit"
+                          style="width:200px;margin-left:175px;margin-bottom:20px"
+                          name="addcard" value="addcard">Add Showtime</button>
+
                   <div class="d-flex justify-content-center">
                     <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Select Show Dates/Times</button>
                   </div>
@@ -134,7 +119,6 @@
 
                 </form>
 
-              </div>
             </div>
           </div>
         </div>
