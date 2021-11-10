@@ -15,11 +15,11 @@
                 {% csrf_token %}
                   <div class="form-outline mb-4">
                     <input type="text" id="id_username" class="form-control form-control-lg"
-                    name = "username"/>
+                    name = "username" required/>
                     <label class="form-label" for="id_username">Your Email *</label>
                   </div>
                   <div class="form-outline mb-4">
-                    <input type="password" id="id_password" class="form-control form-control-lg" name = "password"/>
+                    <input type="password" id="id_password" class="form-control form-control-lg" name = "password" required/>
                     <label class="form-label" for="id_password">Password *</label>
                   </div>
                 <input type="submit" value="Login"
@@ -28,7 +28,7 @@
                </form>
               {% if messages %}
         {% for message in messages %}
-          <p>{{message}}</p>
+          <h3>{{message}}</h3>
         {% endfor %}
     {% endif %}
 
@@ -42,7 +42,7 @@
                             <label for="rememberme" class="text-center text-muted mt-5 mb-0"> Remember Me</label><br>
                   </div></div>
 
-                <p class="text-center text-muted mt-5 mb-0">New User? <a href="registration" class="fw-bold text-body"><u>SingUp here</u></a></p>
+                <p class="text-center text-muted mt-5 mb-0">New User? <a href="/registration" class="fw-bold text-body"><u>SignUp here</u></a></p>
                   <p class="text-center text-muted mt-5 mb-0"><a href="/">E-Cinema Booking System</a></p>
               </div>
             </div>

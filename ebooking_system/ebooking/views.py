@@ -6,14 +6,13 @@ from .models import customuser, EbookingCard
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
-from .settings import EMAIL_HOST
+from .settings import EMAIL_HOST, EMAIL_HOST_USER
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
 
+
 def login_user(request):
-    print(request)
-    # newEmployee = customuser(first_name="name", username="bn32157@uga.edu", password=make_password("mypassword2"))
-    # newEmployee.save()
+
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -38,29 +37,28 @@ def regisconfirmation(request):
     return render(request, 'regisconfirmation.html')
 
 def forgot_password_view(request):
+
     if request.method == "POST":
         if request.POST["username"]:
             current_user = request.POST["username"]
             try:
                 user = customuser.objects.get(username=current_user)
                 if user:
-                    messages.info(request, "Password Reset Mail is sent")
+
                     send_mail(
                     subject = 'Password Reset Link',
-                    message = 'http://127.0.0.1:8080/reset-password?user_name='+current_user,
-                    from_email ="n.bhavana.reddy5@outlook.com",
+                    message = 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/reset-password?user_name='+current_user,
+                    from_email =EMAIL_HOST_USER,
                     recipient_list = [current_user])
+                    messages.info(request, "Password Reset Mail is sent.")
                     return render(request, "forgot_password.html")
             except Exception as e:
                 import traceback
-                print(traceback.format_exc())
-                print(e)
                 messages.info(request, "Username does not exist")
                 return render(request, "forgot_password.html")
         else:
             current_user = request.user
 
-        print(request.user.is_authenticated, current_user)
         if current_user:
             if request.method == "POST":
                 return render(request, "forgot_password.html")
@@ -115,20 +113,46 @@ def edit_card(request):
                           name=request.POST['cname'], expireyear=request.POST['expireyear'],
                           expiredate=request.POST['expiredate'], uid= request.user.id)
         card.save()
+        try:
+            send_mail(
+                subject='Customer Card Information is Updated',
+                message='New Payment Card is added',
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[request.user.username])
+        except:
+            pass
         b = EbookingCard.objects.filter(uid=str(custom_user.id))
         if b:
             for i in b:
                 if request.POST.get('delete') and str(i.id) in request.POST.get('delete'):
                     EbookingCard.objects.filter(id=i.id).delete()
+                    try:
+                        send_mail(
+                            subject='Customer Card is Deleted',
+                            message='User Payment Card is Deleted',
+                            from_email=EMAIL_HOST_USER,
+                            recipient_list=[request.user.username])
+                    except:
+                        pass
 
     return render(request, "edit_card.html", {'cards': b})
 
 def edit_profile(request):
+    current_user = request.user
     edit_values = {}
     for field in customuser._meta.fields:
         if field.name!='id' and field.name in request.POST and request.POST[field.name]:
             edit_values[field.name] = request.POST[field.name]
-    customuser.objects.filter(username=request.user).update(**edit_values)
+    if edit_values:
+        customuser.objects.filter(username=current_user).update(**edit_values)
+        try:
+            send_mail(
+                subject='Profile is Updated',
+                message='User Profile is Updated',
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[current_user.username])
+        except:
+            pass
     return render(request, "edit_profile.html")
 
 def registration(request):
@@ -140,16 +164,21 @@ def registration(request):
             user = form.save(commit=False)
             user.is_active = True
             user.username = user.email
+            user.is_active = 0
             b = customuser.objects.filter(username=str(user.username ))
             if b:
                 messages.info(request, f'An account with this username already exists. Try again!')
                 return render(request, 'registration.html')
             user.save()
-            send_mail(
-                subject='EBooking Account Created Successfully!',
-                message="Your account is registered!\nPlease click on the following link to login:\n" + 'http://127.0.0.1:8080/login/',
-                from_email="n.bhavana.reddy5@outlook.com",
-                recipient_list=[user.email])
+            try:
+                send_mail(
+                    subject='EBooking Account Created Successfully!',
+                    message="Your account is registered!\nPlease click on the following link to login:\n" +
+                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
+                    from_email=EMAIL_HOST_USER,
+                    recipient_list=[user.email])
+            except:
+                pass
             return render(request, 'login.html')
         else:
             for k in form.errors.get_json_data():

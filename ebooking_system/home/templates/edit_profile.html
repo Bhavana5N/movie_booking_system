@@ -73,8 +73,8 @@
                         <div class="col ml-auto">
                             <div class="row mb-4" style="float:left">
                            <div class="form-outline mb-4 px-2" style="float:left;width:190px">
-                            <input name="streetAddress" type="text" id="haddress" class="form-control"
-                                   placeholder={{user.streetAddress}}>
+                            <input name="streetAddressHome" type="text" id="haddress" class="form-control"
+                                   placeholder={{user.streetAddressHome}}>
                             <label class="form-label" for="haddress">Street Address</label>
                           </div>
                          <div class="form-outline mb-4 px-2" style="float:left;width:80px">
@@ -96,15 +96,10 @@
                          </div></div>
                         </div>
                     </div>
-
                     <div >
-                        {% if user.promotion == 'on' %}
-                          <input type="checkbox" id="promotion" name="promotion" value="on" checked>
-                            <label for="promotion"> Subscribe for Promotion</label><br>
-                        {% else %}
-                            <input type="checkbox" id="promotion" value="off" name="promotion">
-                            <label for="promotion"> Subscribe for Promotion</label><br>
-                        {% endif %}
+                          <input type="checkbox" id="promotion" name="promotion">
+                        <label for="promotion"> Subscribe for Promotion</label><br>
+
                     </div>
                       <div style="text-align: center;">
 
@@ -138,5 +133,4 @@
               </div>
 
             </div></div></div></div>
-
         {% endblock %}

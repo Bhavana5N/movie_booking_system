@@ -13,7 +13,7 @@ class customuser(AbstractUser):
     aptNumberHome = models.TextField()
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
-    promotion = models.TextField(default='off')
+    promotion = models.BooleanField(default='False')
     rememberme = models.BooleanField(default='False')
 
 
@@ -38,6 +38,7 @@ class UserRegisrationForm(models.Model):
     password1 = models.TextField()
     password2 = models.TextField()
     email = models.EmailField()
+    promotion = models.BooleanField()
     phone_number = models.IntegerField()
     cardNum = models.IntegerField()
     cardExpDate = models.DateField()

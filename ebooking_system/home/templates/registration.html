@@ -180,6 +180,7 @@
                         type="checkbox"
                         value=""
                         id="promotion"
+                        name="promotion"
                       />
                       <label class="form-check-label" for="promotion">
                         Subscribe to get e-mailed promotions
@@ -192,11 +193,11 @@
                   </div>
                   {% if messages %}
                       {% for message in messages %}
-                        <p class="text-red">{{message}}</p>
+                        <h4 class="text-red">{{message}}</h4>
                       {% endfor %}
                   {% endif %}
 
-                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a></p>
+                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login/" class="fw-bold text-body"><u>Login here</u></a></p>
                   </div>
                 </form>
                   <p class="text-center text-muted mt-5 mb-0"><a href="/">E-Cinema Booking System</a></p>              </div>
