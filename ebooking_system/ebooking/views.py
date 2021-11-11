@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import  render, redirect
-from .models import customuser, EbookingCard, EbookingMovie
+from .models import *
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
@@ -195,10 +195,17 @@ def index(request):
     movie = EbookingMovie.objects.filter(movie_title="RRR")
     print(movie[0].trailer_link)
     return render(request, "index.html", {'movie_list': movie})
+
+def moviedetails(request):
+    movie = EbookingMovie.objects.filter(movie_title="RRR")
+    print(movie[0].trailer_link)
+    return render(request, "moviedetails.html", {'movie_list': movie})
+
+
+
 def checkout(request):
     return render(request, 'checkout.html')
-def moviedetails(request):
-    return render(request, 'moviedetails.html')
+
 def seats(request):
     return render(request, 'seats.html')
 def fullcalendar(request):
@@ -212,6 +219,16 @@ def orderconfirmation(request):
 def summary(request):
     return render(request, 'summary.html')
 def addpromotion(request):
+    if request.method == 'POST':
+        p_details = request.POST
+        p_object = Promotions(promotion_code=p_details["code"], expiray_date=p_details["edate"],
+                                      discount=p_details["discount"])
+        p_object.save()
+        messages.info(request, f'Promotion is successfully Added')
+        b = customuser.objects.filter(promotion='on')
+        print(b)
+        for i in b:
+            print(i.email)
     return render(request, "addpromotion.html")
 
 
@@ -221,10 +238,11 @@ def addmovie(request):
         try:
             print(request.POST)
             movie_object = EbookingMovie(movie_title=movie_details["title"],actors=movie_details["actors"],
-                          status='oncoming',  producer=movie_details["producer"],
-                                         trailer_link=movie_details["trailerURL"],
+                          status='coming_soon',  producer=movie_details["producer"],
+                          trailer_link=movie_details["trailerURL"], release_date=movie_details["releasedate"],
                           director=movie_details["director"], synopsis=movie_details["synopsis"],
-                          category="horror")
+                          category=movie_details["category"], ratings=movie_details["rating"],
+                          age_category=movie_details["age_category"])
             b = EbookingMovie.objects.filter(movie_title=movie_details["title"])
             print(b)
             if b:

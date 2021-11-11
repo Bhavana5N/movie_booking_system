@@ -19,7 +19,8 @@
                 {% csrf_token %}
                   Title *
                   <div class="form-outline mb-4">
-                    <input type="text" name="title" class="form-control form-control-lg" placeholder="Example Movie Title"/>
+                    <input type="text" name="title" class="form-control form-control-lg" required
+                           placeholder="Example Movie Title"/>
                     <!--<label class="form-label" for="form3Example1cg">Example Movie Title</label>-->
                   </div>
                   <div class="d-flex justify-content-center flex-row-mb-2">
@@ -36,7 +37,7 @@
                       </ul>
                     <br></br>
                     </select>
-                    <select name="category" id="category_select">
+                    <select name="age_category" id="age_select">
                       <option value="">MPAA-US Rating</option>
                       <option value="PG">PG</option>
                       <option value="PG-13">PG-13</option>
@@ -44,7 +45,7 @@
                       <option value="NR">NR</option>
                     <br></br>
                     </select>
-                    <select name="category" id="category_select">
+                    <select name="rating" id="rating_select">
                       <option value="">Review Rating</option>
                       <option value="1 Star">*</option>
                       <option value="2 Stars">**</option>
@@ -80,25 +81,14 @@
                     <!--<label class="form-label" for="trailerURL">URL</label>-->
                   </div>
                   <div class="form-outline">
-                    <input type="datetime-local" id="showtime"
+                    <label class="form-label" for="rdate">Release Date</label>
+                    <input type="datetime-local" name="releasedate"
                     name="meeting-time" value="2021-06-12T19:30"
-                    min="2021-06-07T00:00" max="2030-06-14T00:00">
-                      <span class="button">
-                            <button type="submit" style="margin:5px"
-                                    value={{i.id}} name="delete"{{i.id}} class="btn-small btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
-                        </span>
+                    min="2021-06-07T00:00" max="2030-06-14T00:00" id="rdate">
+
                     <br>
-                    <input type="datetime-local" id="showtime"
-                    name="meeting-time" value="2021-06-12T19:30"
-                    min="2021-06-07T00:00" max="2030-06-14T00:00">
-                      <span class="button">
-                            <button type="submit" style="margin:5px"
-                                    value={{i.id}} name="delete"{{i.id}} class="btn-small btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
-                        </span>
+
                   </div>
-                  <button class="btn btn-outline-success" type="submit"
-                          style="width:200px;margin-left:125px;margin-bottom:20px"
-                          name="addcard" value="addcard">Add Showtime</button>
 
                   <div class="form-outline mb-4" style="padding-top:30px">
                   </div>
