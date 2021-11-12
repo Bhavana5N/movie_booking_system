@@ -218,6 +218,8 @@ def orderconfirmation(request):
     return render(request, 'orderconfirmation.html')
 def summary(request):
     return render(request, 'summary.html')
+def searchResults(request):
+    return render(request, 'searchResults.html')
 def addpromotion(request):
     if request.method == 'POST':
         p_details = request.POST
