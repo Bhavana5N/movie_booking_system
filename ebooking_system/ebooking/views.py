@@ -227,8 +227,14 @@ def addpromotion(request):
         messages.info(request, f'Promotion is successfully Added')
         b = customuser.objects.filter(promotion='on')
         print(b)
+        email_list = []
         for i in b:
-            print(i.email)
+            email_list.append(i.email)
+            send_mail(
+                subject='Promotion Code Details',
+                message="A New promotion code is added '{}'".format(p_details["code"]),
+                from_email=EMAIL_HOST_USER,
+                recipient_list=list(set(email_list)))
     return render(request, "addpromotion.html")
 
 
