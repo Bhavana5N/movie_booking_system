@@ -1,4 +1,5 @@
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,23 +49,26 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-    <img src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/blackwidow_lob_crd_06.jpg" alt="Logo" width="445" height="545" style="margin-bottom: 20px;">
-	<a href="https://www.youtube.com/watch?v=Fp9pNPdNwjI" style="color: black; margin-left: 175px;"> Movie Trailer </a>
+	{% for i in movie_list %}
+    <img src={{i.image_link}} width="445" height="545" style="margin-bottom: 20px;">
+	<a href={{i.trailer_link}} style="color: black; margin-left: 175px;"> Movie Trailer </a>
     <div class="mt-3">
 		<div class="d-flex justify-content-center small text-warning mb-1">
+			{% for j in range({i.rating}) %}
             <div class="bi-star-fill"></div>
-            <div class="bi-star-fill"></div>
-            <div class="bi-star-fill"></div>
-            <div class="bi-star-fill"></div>
-            <div class="bi-star-fill"></div>
+			{% endfor %}
         </div>
-		<h5  class="text-uppercase text-center mb-1" style="font-weight:bold;"> Movie Title : PG-13</h5>
-		<p  class="text-uppercase text-center mb-4" style="font-size: 14px;"> category1, category2</p>
-		<p  class="text-uppercase text-center mb-5"> Movie Description </p>
-		<p  class="text-uppercase text-center" style="font-weight:bold;"> Movie Director <br>Cate Shortland</br></p>
-		<p  class="text-uppercase text-center" style="font-weight:bold;"> Movie Producers </p>
+		<h5  class="text-uppercase text-center mb-1" style="font-weight:bold;"> {{i.movie_title}} : {{i.age_category}}</h5>
+		<p  class="text-uppercase text-center mb-4" style="font-size: 14px;"> {{i.category}} </p>
+		<p  class="text-uppercase text-center mb-5"> {{i.synopsis}} </p>
+		<p  class="text-uppercase text-center" style="font-weight:bold;"> Director </p>
+	    	<p  class="text-uppercase text-center" style="font-weight:bold;"> {{i.director}} </p>
+		<p  class="text-uppercase text-center" style="font-weight:bold;"> Producers </p>
+	    	<p  class="text-uppercase text-center" style="font-weight:bold;"> {{i.producer}} </p>
 		<p  class="text-uppercase text-center mb-5" style="font-weight:bold;"> Movie Cast </p>
+	    	<p  class="text-uppercase text-center mb-5" style="font-weight:bold;"> {{i.actors}} </p>
 	</div>
+	{% endfor %}
     <div  class="text-uppercase text-center mb-5"> 
 	<h4>Adult: $8.99</h4>
 	<h4>Child: $4.99</h4>
