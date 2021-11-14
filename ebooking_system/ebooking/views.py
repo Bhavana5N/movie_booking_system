@@ -196,6 +196,32 @@ def index(request):
     print(movie[0].trailer_link)
     return render(request, "index.html", {'movie_list': movie})
 
+def base(request):
+    if request.method == 'GET':
+        movie_title = request.GET['movie_name']
+        movie_category = 'ALL'
+        count = 0
+        if request.GET['movie_category'] == 'ALL':
+            movie = EbookingMovie.objects.filter(movie_title__contains=str(movie_title))
+            count = EbookingMovie.objects.filter(movie_title__contains=str(movie_title)).count()
+        else:
+            movie_category = request.GET['movie_category']
+            movie = EbookingMovie.objects.filter(movie_title__contains=str(movie_title), category=str(movie_category))
+            count = EbookingMovie.objects.filter(movie_title__contains=str(movie_title), category=str(movie_category)).count()
+        rows = int(count/5) + 1
+        print(rows)
+        current = 0
+        movie_list = {
+            "movie": movie,
+            "movie_title": movie_title,
+            "movie_category": movie_category,
+            "movie_count": count,
+            "movie_rows": rows,
+            "current":current
+        }
+
+        return render(request, 'searchResults.html', {'movie_list': movie_list})
+    
 def moviedetails(request):
     movie = EbookingMovie.objects.filter(movie_title="RRR")
     print(movie[0].trailer_link)
