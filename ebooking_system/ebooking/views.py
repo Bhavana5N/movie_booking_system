@@ -192,8 +192,7 @@ def registration(request):
         args = {'form': form}
         return  render(request, 'registration.html', args)
 def index(request):
-    movie = EbookingMovie.objects.filter(movie_title="RRR")
-    print(movie[0].trailer_link)
+    movie = EbookingMovie.objects.all()
     return render(request, "index.html", {'movie_list': movie})
 
 def moviedetails(request):
@@ -220,6 +219,8 @@ def summary(request):
     return render(request, 'summary.html')
 def searchResults(request):
     return render(request, 'searchResults.html')
+def categories(request):
+    return render(request, 'categories.html')
 def addpromotion(request):
     if request.method == 'POST':
         p_details = request.POST
