@@ -21,10 +21,11 @@
     <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
       <div class="d-flex justify-content-center align-items-center h-100">
         <div class="text-white">
-          <h1 class="mb-3" >{{i.movie_title}}</h1>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >Book Now</a
-          >
+            <h1 class="mb-3" >{{i.movie_title}}</h1>
+            <form id="movie_details" method="post" action="/moviedetails">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-outline-light btn-lg" value="Book Now">
+            </form>
         </div>
       </div>
     </div>
@@ -52,7 +53,9 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <form name="to_details" method="post" >
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Book Tickets</a></div>
+                                </form>
                             </div>
                         </div>
                     </div>
