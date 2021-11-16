@@ -264,3 +264,6 @@ def addmovie(request):
             messages.error(request, f'Movie is not Added')
         return render(request, "addmovie.html")
     return render(request, "addmovie.html")
+
+def schedule(request):
+    return render(request, 'schedule.html')

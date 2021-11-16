@@ -83,4 +83,11 @@ class EbookingMovie(models.Model):
         managed = False
         db_table = 'ebooking_movie'
 
+class EbookingSchedule(models.Model):
+    movie_title = models.TextField(blank=True, null=True, unique=True)
+    date = models.IntegerField(blank=True, null=True)
+    time = models.IntegerField(blank=True, null=True)
 
+    class Meta:
+        managed = False
+        db_table = 'movie_schedule'
