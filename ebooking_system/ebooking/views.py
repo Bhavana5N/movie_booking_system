@@ -9,6 +9,7 @@ from django.db.models.query_utils import Q
 from .settings import EMAIL_HOST, EMAIL_HOST_USER
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
+from datetime import datetime
 
 
 def login_user(request):
@@ -207,16 +208,11 @@ def base(request):
             movie_category = request.GET['movie_category']
             movie = EbookingMovie.objects.filter(movie_title__contains=str(movie_title), category=str(movie_category))
             count = EbookingMovie.objects.filter(movie_title__contains=str(movie_title), category=str(movie_category)).count()
-        rows = int(count/5) + 1
-        print(rows)
-        current = 0
         movie_list = {
             "movie": movie,
             "movie_title": movie_title,
             "movie_category": movie_category,
-            "movie_count": count,
-            "movie_rows": rows,
-            "current":current
+            "movie_count": count
         }
 
         return render(request, 'searchResults.html', {'movie_list': movie_list})
@@ -294,3 +290,25 @@ def addmovie(request):
             messages.error(request, f'Movie is not Added')
         return render(request, "addmovie.html")
     return render(request, "addmovie.html")
+
+
+def schedule(request):
+    if request.method == 'POST':
+        s_details = request.POST
+        date_and_time = s_details["date"] + " " + s_details["time"]
+        target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
+        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
+        d = EbookingSchedule.objects.filter(date_time=target_datetime)
+        if d:
+            messages.info(request, f'A Movie at this date and time already exists. Try again!')
+            return render(request, 'schedule.html')
+        s_object.save()
+        messages.info(request, f'Movie is successfully scheduled')
+        return render(request, 'schedule.html')
+    else:
+        return render(request, 'schedule.html')
+
+
+def schedulemovie(request):
+    return render(request, 'schedulemovie.html')
+
