@@ -227,7 +227,19 @@ def moviedetails(request):
     print(movie[0].trailer_link)
     return render(request, "moviedetails.html", {'movie_list': movie})
 
-
+def book_movie(request):
+    print(request.POST)
+    print(request.GET['movie_title'])
+    movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
+    print(movie[0].movie_title)
+    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
+    print(schedule_movie[0].date_time, schedule_movie[1].date_time)
+    for i in schedule_movie:
+         my_date = datetime.strftime(i.date_time, "%Y-%m-%d")
+         my_time = datetime.strftime(i.date_time, "%H:%M")
+         print(my_date, my_time)
+    #return render(request, "moviedetails.html", {'movie_list': movie})
+    return render(request, 'bookmovie.html', {"movie": movie[0], "time_list": schedule_movie[0]})
 
 def checkout(request):
     return render(request, 'checkout.html')
