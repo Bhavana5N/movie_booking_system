@@ -50,6 +50,5 @@ urlpatterns = [
     path('searchResults', views.searchResults, name='searchResults'),
     path('categories', views.categories, name='categories'),
     path('schedule', views.schedule, name='schedule'),
-    path('schedulemovie.html', views.schedulemovie, name='schedulemovie'),
+    path('schedulemovie', views.schedulemovie, name='schedulemovie')
 ]
-
