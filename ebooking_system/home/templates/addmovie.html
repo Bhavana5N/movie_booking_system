@@ -24,7 +24,7 @@
                     <!--<label class="form-label" for="form3Example1cg">Example Movie Title</label>-->
                   </div>
                   <div class="d-flex justify-content-center flex-row-mb-2">
-                    <select name="category" id="category_select" required>
+                    <select name="category" id="category_select">
                         <option value="">Category</option>
                         <option value="action">Action</option>
                         <option value="suspense">Suspense</option>
@@ -37,7 +37,7 @@
                       </ul>
                     <br></br>
                     </select>
-                    <select name="age_category" id="age_select" required>
+                    <select name="age_category" id="age_select">
                       <option value="">MPAA-US Rating</option>
                       <option value="PG">PG</option>
                       <option value="PG-13">PG-13</option>
@@ -45,7 +45,7 @@
                       <option value="NR">NR</option>
                     <br></br>
                     </select>
-                    <select name="rating" id="rating_select" required>
+                    <select name="rating" id="rating_select">
                       <option value="">Review Rating</option>
                       <option value="1 Star">*</option>
                       <option value="2 Stars">**</option>
@@ -57,42 +57,32 @@
                   </div>
                   Director
                   <div class="form-outline mb-4">
-                    <input type="text" name="director" required class="form-control form-control-lg" placeholder="Example Name"/>
+                    <input type="text" name="director" class="form-control form-control-lg" placeholder="Example Name"/>
                     <!--<label class="form-label" for="form3Example1cg">Example Name</label>-->
                   </div>
                   Producer
                   <div class="form-outline mb-4">
-                    <input type="text" name="producer" required class="form-control form-control-lg" placeholder="Example Name"/>
+                    <input type="text" name="producer" class="form-control form-control-lg" placeholder="Example Name"/>
                     <!--<label class="form-label" for="form3Example1cg">Example Name</label>-->
                   </div>
                   Cast
                   <div class="form-outline">
-                    <textarea class="form-control" required name="actors" rows="4" placeholder="Cast Members"></textarea>
+                    <textarea class="form-control" name="actors" rows="4" placeholder="Cast Members"></textarea>
                     <!--<label class="form-label" for="textAreaExample">Cast Members</label>-->
                   </div>
                   Synopsis
                   <div class="form-outline">
-                    <textarea class="form-control" required rows="4" name="synopsis" placeholder="Example Synopsis"></textarea>
+                    <textarea class="form-control" rows="4" name="synopsis" placeholder="Example Synopsis"></textarea>
                     <!--<label class="form-label" for="textAreaExample">Example </label>-->
                   </div>
                   Trailer
                   <div class="form-outline">
-                    <input type="tel" name="trailerURL" required class="form-control" placeholder="URL"/>
-                    <!--<label class="form-label" for="trailerURL">URL</label>-->
-                  </div>
-                  Runtime
-                  <div class="form-outline">
-                    <input type="tel" name="runtime" required class="form-control" placeholder="Runtime"/>
-                    <!--<label class="form-label" for="trailerURL">URL</label>-->
-                  </div>
-                  Price
-                  <div class="form-outline">
-                    <input type="tel" name="price" required class="form-control" placeholder="price"/>
+                    <input type="tel" name="trailerURL" class="form-control" placeholder="URL"/>
                     <!--<label class="form-label" for="trailerURL">URL</label>-->
                   </div>
                   <div class="form-outline">
                     <label class="form-label" for="rdate">Release Date</label>
-                    <input type="datetime-local" name="releasedate" required
+                    <input type="datetime-local" name="releasedate"
                     name="meeting-time" value="2021-06-12T19:30"
                     min="2021-06-07T00:00" max="2030-06-14T00:00" id="rdate">
 
