@@ -302,12 +302,9 @@ def addmovie(request):
     return render(request, "addmovie.html")
 
 def schedule(request):
-    if request.method == 'GET':
-        all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
-        print(all_movie_titles)
-        current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
-        return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
-                      'current_time': current_time})
+    all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
+    print(all_movie_titles)
+    current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     if request.method == 'POST':
         s_details = request.POST
         #date_and_time = s_details["date"] + " " + s_details["time"]
@@ -320,7 +317,7 @@ def schedule(request):
             messages.info(request, f'A movie at this date and time already exists. Try again!')
             return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
                                                      'current_time': current_time})
-        goal_datetime = datetime.strptime(target_datetime, '%Y-%d-%mT%H:%M')
+        goal_datetime = datetime.strptime(target_datetime, '%Y-%m-%dT%H:%M')
 
         #if goal_datetime < datetime.now():
         #    messages.info(request, f'You cannot schedule movies in the past. Try again!')
@@ -331,7 +328,7 @@ def schedule(request):
                                                  'current_time': current_time})
     else:
         return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
-                                                 'current_time': current_time})
+                                                     'current_time': current_time})
 
 
 def schedulemovie(request):
