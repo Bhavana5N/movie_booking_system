@@ -305,11 +305,13 @@ def schedule(request):
         #date_and_time = s_details["date"] + " " + s_details["time"]
         #target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
         target_datetime = s_details["date_time"]
-        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
+        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
+                                    showroom=s_details["showroom"])
         d = EbookingSchedule.objects.filter(date_time=target_datetime)
         if d:
             messages.info(request, f'A movie at this date and time already exists. Try again!')
-            return render(request, 'schedule.html')
+            return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
+                                                     'current_time': current_time})
         goal_datetime = datetime.strptime(target_datetime, '%Y-%d-%mT%H:%M')
 
         #if goal_datetime < datetime.now():
@@ -317,9 +319,11 @@ def schedule(request):
         #    return render(request, 'schedule.html')
         s_object.save()
         messages.info(request, f'Movie is successfully scheduled')
-        return render(request, 'schedule.html')
+        return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
+                                                 'current_time': current_time})
     else:
-        return render(request, 'schedule.html')
+        return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
+                                                 'current_time': current_time})
 
 
 def schedulemovie(request):
