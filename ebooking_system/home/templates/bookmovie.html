@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
-    <form method="POST" action="seats">
+    <form method="POST" action="/seats">
         {% csrf_token %}
 
           <div class="col ml-auto">
@@ -12,11 +12,20 @@
                     <!-- Product name-->
                     <h5 class="fw-bolder">{{movie.movie_title}}</h5>
                     <!-- Product price-->
-                    $40.00 - $80.00
+                    <h5 class="fw-bolder">{{movie.price}}</h5>
                 </div>
-            </div>
-    <div class="col ml-auto"><button style="color:red" type="submit" value="book",
+                <div class="text-center">
+                {% for date, time in time_list.items %}
+                    <div class="text-center">{{date}}</div>
+                    <div class="row ml-auto">
+                    {% for i  in time %}
+                <div class="col ml-auto"><input type="submit" value={{i}}
+                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></div> {% endfor %}
+                    </div>{% endfor %}
+            </div></br></br>
+    <div class="col ml-auto">
+        <button style="color:red" type="submit" value="book",
                                      class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Select Seats</button>
 
-    </div></div></form>
+    </div></div></div></form>
 {% endblock %}

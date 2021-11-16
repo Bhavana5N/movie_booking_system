@@ -193,9 +193,10 @@ def registration(request):
         args = {'form': form}
         return  render(request, 'registration.html', args)
 def index(request):
-    movie = EbookingMovie.objects.filter(movie_title="RRR")
-    print(movie[0].trailer_link)
-    return render(request, "index.html", {'movie_list': movie})
+    new_movies = EbookingMovie.objects.filter(status="coming_soon")
+    present_movies = EbookingMovie.objects.filter(status="airing")
+    #print(movie[0].trailer_link)
+    return render(request, "index.html", {'new_movies': new_movies, 'present_movies': present_movies})
 
 def base(request):
     if request.method == 'GET':
@@ -224,18 +225,28 @@ def moviedetails(request):
     return render(request, "moviedetails.html", {'movie_list': movie})
 
 def book_movie(request):
-    print(request.POST)
-    print(request.GET['movie_title'])
+
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
     print(movie[0].movie_title)
     schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
-    print(schedule_movie[0].date_time, schedule_movie[1].date_time)
+    current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
+    total_time_list = {}
+
     for i in schedule_movie:
-         my_date = datetime.strftime(i.date_time, "%Y-%m-%d")
-         my_time = datetime.strftime(i.date_time, "%H:%M")
-         print(my_date, my_time)
+        stored_time = datetime.strftime(i.date_time, '%Y-%m-%dT%H:%M')
+        if current_time < stored_time:
+
+            my_date = datetime.strftime(i.date_time, "%Y-%m-%d")
+            my_time = datetime.strftime(i.date_time, "%H:%M")
+            if my_date in total_time_list:
+                 total_time_list[my_date].append(my_time)
+            else:
+                 total_time_list[my_date] = [my_time]
+
+        print(total_time_list)
+
     #return render(request, "moviedetails.html", {'movie_list': movie})
-    return render(request, 'bookmovie.html', {"movie": movie[0], "time_list": schedule_movie[0]})
+    return render(request, 'bookmovie.html', {"movie": movie[0], "time_list": total_time_list})
 
 def checkout(request):
     return render(request, 'checkout.html')
@@ -312,7 +323,7 @@ def schedule(request):
         target_datetime = s_details["date_time"]
         s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
                                     showroom=s_details["showroom"])
-        d = EbookingSchedule.objects.filter(date_time=target_datetime)
+        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
         if d:
             messages.info(request, f'A movie at this date and time already exists. Try again!')
             return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
@@ -323,6 +334,8 @@ def schedule(request):
         #    messages.info(request, f'You cannot schedule movies in the past. Try again!')
         #    return render(request, 'schedule.html')
         s_object.save()
+        edit_values = {'status': 'airing'}
+        EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update(**edit_values)
         messages.info(request, f'Movie is successfully scheduled')
         return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
                                                  'current_time': current_time})
@@ -331,18 +344,21 @@ def schedule(request):
                                                      'current_time': current_time})
 
 
-def schedulemovie(request):
-    if request.method == 'POST':
-        s_details = request.POST
-        date_and_time = s_details["date"] + " " + s_details["time"]
-        target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
-        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
-        d = EbookingSchedule.objects.filter(date_time=target_datetime)
-        if d:
-            messages.info(request, f'A Movie at this date and time already exists. Try again!')
-            return render(request, 'schedulemovie.html')
-        s_object.save()
-        messages.info(request, f'Movie is successfully scheduled')
-        return render(request, 'schedulemovie.html')
-    else:
-        return render(request, 'schedulemovie.html')
+# def schedulemovie(request):
+#     print(request.POST)
+#     if request.method == 'POST':
+#         s_details = request.POST
+#         date_and_time = s_details["date"] + " " + s_details["time"]
+#         target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
+#         s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
+#         d = EbookingSchedule.objects.filter(date_time=target_datetime)
+#         if d:
+#             messages.info(request, f'A Movie at this date and time already exists. Try again!')
+#             return render(request, 'schedulemovie.html')
+#         s_object.save()
+#         print(s_details["movie_title"], {'status': 'airing'})
+#         EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update({'status': 'airing'})
+#         messages.info(request, f'Movie is successfully scheduled')
+#         return render(request, 'schedulemovie.html')
+#     else:
+#         return render(request, 'schedulemovie.html')
