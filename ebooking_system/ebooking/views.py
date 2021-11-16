@@ -231,7 +231,7 @@ def book_movie(request):
     schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
     current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     total_time_list = {}
-
+    print(schedule_movie)
     for i in schedule_movie:
         stored_time = datetime.strftime(i.date_time, '%Y-%m-%dT%H:%M')
         if current_time < stored_time:
@@ -246,7 +246,7 @@ def book_movie(request):
         print(total_time_list)
 
     #return render(request, "moviedetails.html", {'movie_list': movie})
-    return render(request, 'bookmovie.html', {"movie": movie[0], "time_list": total_time_list})
+    return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list})
 
 def checkout(request):
     return render(request, 'checkout.html')
