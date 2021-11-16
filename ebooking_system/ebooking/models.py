@@ -75,6 +75,8 @@ class EbookingMovie(models.Model):
     category = models.TextField(blank=True, null=True)
     synopsis = models.TextField(blank=True, null=True)
     age_category = models.TextField(blank=True, null=True)
+    runtime = models.IntegerField()
+    price = models.IntegerField()
 
     def __str__(self):
         return self.movie_title

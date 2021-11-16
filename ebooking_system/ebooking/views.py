@@ -286,7 +286,8 @@ def addmovie(request):
                           trailer_link=movie_details["trailerURL"], release_date=movie_details["releasedate"],
                           director=movie_details["director"], synopsis=movie_details["synopsis"],
                           category=movie_details["category"], ratings=movie_details["rating"],
-                          age_category=movie_details["age_category"])
+                          age_category=movie_details["age_category"], runtime=movie_details["runtime"],
+                                         price=movie_details["price"])
             b = EbookingMovie.objects.filter(movie_title=movie_details["title"])
             print(b)
             if b:
