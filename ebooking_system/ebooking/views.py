@@ -197,7 +197,6 @@ def index(request):
     print(movie[0].trailer_link)
     return render(request, "index.html", {'movie_list': movie})
 
-
 def base(request):
     if request.method == 'GET':
         movie_title = request.GET['movie_name']
@@ -223,7 +222,7 @@ def base(request):
         }
 
         return render(request, 'searchResults.html', {'movie_list': movie_list})
-
+    
 def moviedetails(request):
     movie = EbookingMovie.objects.filter(movie_title="RRR")
     print(movie[0].trailer_link)
