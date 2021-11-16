@@ -246,7 +246,11 @@ def summary(request):
 def searchResults(request):
     return render(request, 'searchResults.html')
 def categories(request):
-    return render(request, 'categories.html')
+    movie = EbookingMovie.objects.all()
+    if request.method == 'POST':
+        name = request.POST['category']
+        movie = EbookingMovie.objects.filter(category=str(name))
+        return render(request, "categories.html", {'movie_list': movie})
 def addpromotion(request):
     if request.method == 'POST':
         p_details = request.POST
