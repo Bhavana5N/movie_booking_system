@@ -9,6 +9,7 @@ from django.db.models.query_utils import Q
 from .settings import EMAIL_HOST, EMAIL_HOST_USER
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
+from datetime import datetime
 
 
 def login_user(request):
@@ -192,8 +193,7 @@ def registration(request):
         args = {'form': form}
         return  render(request, 'registration.html', args)
 def index(request):
-    movie = EbookingMovie.objects.filter(movie_title="RRR")
-    print(movie[0].trailer_link)
+    movie = EbookingMovie.objects.all()
     return render(request, "index.html", {'movie_list': movie})
 
 def base(request):
@@ -246,6 +246,8 @@ def summary(request):
     return render(request, 'summary.html')
 def searchResults(request):
     return render(request, 'searchResults.html')
+def categories(request):
+    return render(request, 'categories.html')
 def addpromotion(request):
     if request.method == 'POST':
         p_details = request.POST
@@ -289,6 +291,23 @@ def addmovie(request):
             messages.error(request, f'Movie is not Added')
         return render(request, "addmovie.html")
     return render(request, "addmovie.html")
+
+
+def schedule(request):
+    if request.method == 'POST':
+        s_details = request.POST
+        date_and_time = s_details["date"] + " " + s_details["time"]
+        target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
+        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
+        d = EbookingSchedule.objects.filter(date_time=target_datetime)
+        if d:
+            messages.info(request, f'A Movie at this date and time already exists. Try again!')
+            return render(request, 'schedule.html')
+        s_object.save()
+        messages.info(request, f'Movie is successfully scheduled')
+        return render(request, 'schedule.html')
+    else:
+        return render(request, 'schedule.html')
 
 
 def schedulemovie(request):
