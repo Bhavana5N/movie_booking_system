@@ -208,16 +208,11 @@ def base(request):
             movie_category = request.GET['movie_category']
             movie = EbookingMovie.objects.filter(movie_title__contains=str(movie_title), category=str(movie_category))
             count = EbookingMovie.objects.filter(movie_title__contains=str(movie_title), category=str(movie_category)).count()
-        rows = int(count/5) + 1
-        print(rows)
-        current = 0
         movie_list = {
             "movie": movie,
             "movie_title": movie_title,
             "movie_category": movie_category,
-            "movie_count": count,
-            "movie_rows": rows,
-            "current":current
+            "movie_count": count
         }
 
         return render(request, 'searchResults.html', {'movie_list': movie_list})
