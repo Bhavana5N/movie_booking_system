@@ -49,5 +49,7 @@ urlpatterns = [
     path('summary', views.summary, name='summary'),
     path('searchResults', views.searchResults, name='searchResults'),
     path('categories', views.categories, name='categories'),
-    path('schedule', views.schedule, name='schedule')
+    path('schedule', views.schedule, name='schedule'),
+    path('schedulemovie.html', views.schedulemovie, name='schedulemovie'),
 ]
+
