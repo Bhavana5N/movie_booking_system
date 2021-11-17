@@ -38,55 +38,30 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for i in movie_list %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{i.image_link}}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Spider-Man: No Way Home</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <form name="to_details" method="post" >
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Book Tickets</a></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://w7.pngwing.com/pngs/561/815/png-transparent-marvel-avengers-2-poster-thor-god-of-thunder-loki-jane-foster-film-movie-poster-template-advertisement-poster-poster-computer-wallpaper.png" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Avengers 2: Age of Ultron</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        {% for ratings in i.ratings%}
-                                            <div class="bi-star-fill"></div>
-                                        {% endfor %}
-                                    </div>
+                    {% for movie in present_movies %}
+                    <div class="col mb-5 " style="min-width: 280px; max-width: 280px">
+                                            <div class="card h-100 w-100">
+                                                <!-- Product image-->
+                                                <img class="card-img-top" src='{{movie.image_link}}' alt="..." />
+                                                <!-- Product details-->
+                                                <div class="card-body p-4">
+                                                    <div class="text-center">
+                                                        <!-- Product name-->
+                                                        <h5 class="fw-bolder">{{movie.movie_title}}</h5>
+                                                        <!-- Rating-->
+                                                        <h5 class="fw-bolder">Rating:  {{movie.ratings}}</h5>
+                                                        <!-- Product price-->
+                                                        ${{movie.price}}
 
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                            href='bookmovie?movie_title={{i.movie_title}}'>Book Tickets</a></div>
-                            </div>
-                        </div>
-                    </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Product actions-->
+                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="bookmovie?movie_title={{movie.movie_title}}">Book Tickets</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                     {% endfor %}
                 </div>
             </div>
@@ -97,51 +72,48 @@
       background-color: black;
       height: 200px;
     "
-  >
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white">
-          <h1 class="mb-3">Coming Soon</h1>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >See More</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-            <section class="py-5">
+            ></div>
+        ction class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for i in movie_list %}
-                    {% if i.status == "coming_soon" %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{i.image_link}}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{i.movie_title}}</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">Movie Premiere</span>
-                                    October 7th, 2021
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">See Details</a></div>
-                            </div>
-                        </div>
+                    {% for movie in new_movies %}
+                    <div class="col mb-5 " style="min-width: 280px; max-width: 280px">
+                                            <div class="card h-100 w-100">
+                                                <!-- Product image-->
+                                                <img class="card-img-top" src='{{movie.image_link}}' alt="..." />
+                                                <!-- Product details-->
+                                                <div class="card-body p-4">
+                                                    <div class="text-center">
+                                                        <!-- Product name-->
+                                                        <h5 class="fw-bolder">{{movie.movie_title}}</h5>
+                                                        <!-- Rating-->
+                                                        <h5 class="fw-bolder">Rating:  {{movie.ratings}}</h5>
+                                                        <!-- Product price-->
 
-                    </div> {% endif %}
+
+                                                    </div>
+                                                </div>
+                                                <!-- Product actions-->
+                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Book Tickets</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                     {% endfor %}
                 </div>
             </div>
         </section>
-        </section>
+            <div
+    class="p-5 text-center bg-image"
+    style="
+      background-color: black;
+      height: 200px;
+    "
+            ></div></section>
+
+
+
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; E-Cinema Booking 2021</p></div>
