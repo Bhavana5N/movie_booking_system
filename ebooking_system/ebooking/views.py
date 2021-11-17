@@ -202,8 +202,7 @@ def index(request):
                                           'category_list': category_list})
 
 def base(request):
-    category_list = Category.objects.all()
-    print(category_list)
+    category = Category.objects.all()
     if request.method == 'GET':
         movie_title = request.GET['movie_name']
         movie_category = 'ALL'
@@ -221,8 +220,7 @@ def base(request):
             "movie_category": movie_category,
             "movie_count": count
         }
-
-        return render(request, 'searchResults.html', {'movie_list': movie_list, 'category_list': category_list})
+        return render(request, 'searchResults.html', {'movie_list': movie_list, 'category_list': category})
     
 def moviedetails(request):
     movie = EbookingMovie.objects.filter(movie_title="RRR")
@@ -233,7 +231,7 @@ def book_movie(request):
 
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
     print(movie[0].movie_title)
-    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
+    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title']).order_by('date_time')
     current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     total_time_list = {}
     print(schedule_movie)

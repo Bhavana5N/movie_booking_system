@@ -8,7 +8,7 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
-    <form method="POST" action="/seats">
+    <div method="POST" action="/seats">
         {% csrf_token %}
 
 
@@ -41,16 +41,19 @@
 	              <h4>Price: ${{i.price}}</h4>
 
 	              </div>
-	              <div class="container h-100">
-                <h1 style="text-align:center"> Showtimes</h1>{% endfor %}
+        <div class="container h-100"></div>
 
+                {% endfor %}
+                      {% if time_list %}
+                <h1 style="text-align:center"> Showtimes</h1>
                 {% for date, time in time_list.items %}
                     <div class="text-center">{{date}}</div>
                     <div class="row ml-auto">
-                    {% for i  in time %}
-                <div class="col ml-auto"><input type="submit" value={{i}}
-                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></div> {% endfor %}
-                    </div>{% endfor %}
+                    {% for j  in time %}
+                <div class="col ml-auto text-center">
+                    <a class="btn btn-outline-dark" href='\seats\?movie_title={{i.movie_title}}&date_time={{date}}_{{j}}'>{{j}}</a>
+                                </div> {% endfor %}
+                    </div></br>{% endfor %}{% endif%}
             </div></br></br>
    </form></div></div></div></div></div></section>
 {% endblock %}

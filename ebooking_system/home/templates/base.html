@@ -22,8 +22,10 @@
                 <a class="navbar-brand" href="index">E-Cinema Booking System</a>
                 <form id="searchbar-form" method="get" action="base" class="d-flex">
                     <select class="form-select" aria-label="selectform" id="movie_category" name="movie_category">
-                         {% for i in category_list %}
-                        <option {% if movie_list.movie_category == i.c_type %} selected {%endif%}>{{i.c_type}}</option>{% endfor %}
+                        <option {% if movie_list.movie_category == 'ALL'%} selected {%endif%}>ALL</option>
+                        {% for c in category_list %}
+                        <option {% if movie_list.movie_category == c.c_type %} selected {%endif%}>{{c.c_type}}</option>
+                        {% endfor %}
                                            </select>
                     <input class="form-control me-2" type="text" value="{{movie_list.movie_title}}" aria-label="Search" id="movie_name" name="movie_name" style="width: 300px">
                     <button class="btn btn-success" type="submit">Search</button>
