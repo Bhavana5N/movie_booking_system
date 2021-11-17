@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
+    <form method="POST" action="seats">
+        {% csrf_token %}
+
+          <div class="col ml-auto">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">{{movie.movie_title}}</h5>
+                    <!-- Product price-->
+                    $40.00 - $80.00
+                </div>
+            </div>
+    <div class="col ml-auto"><button style="color:red" type="submit" value="book",
+                                     class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Select Seats</button>
+
+    </div></div></form>
+{% endblock %}

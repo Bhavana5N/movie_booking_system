@@ -75,6 +75,8 @@ class EbookingMovie(models.Model):
     category = models.TextField(blank=True, null=True)
     synopsis = models.TextField(blank=True, null=True)
     age_category = models.TextField(blank=True, null=True)
+    runtime = models.IntegerField()
+    price = models.IntegerField()
 
     def __str__(self):
         return self.movie_title
@@ -83,4 +85,11 @@ class EbookingMovie(models.Model):
         managed = False
         db_table = 'ebooking_movie'
 
+class EbookingSchedule(models.Model):
+    movie_title = models.TextField(blank=True, null=True, unique=True)
+    date_time = models.DateTimeField(blank=True, null=True)
+    showroom = models.IntegerField(blank=True, null=True)
 
+    class Meta:
+        managed = False
+        db_table = 'movie_schedule'
