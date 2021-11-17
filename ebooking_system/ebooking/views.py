@@ -196,9 +196,14 @@ def index(request):
     new_movies = EbookingMovie.objects.filter(status="coming_soon")
     present_movies = EbookingMovie.objects.filter(status="airing")
     #print(movie[0].trailer_link)
-    return render(request, "index.html", {'new_movies': new_movies, 'present_movies': present_movies})
+    category = EbookingCategory.objects.all()
+    movie_list = {
+        'all_category': category
+    }
+    return render(request, "index.html", {'new_movies': new_movies, 'present_movies': present_movies, 'movie_list': movie_list})
 
 def base(request):
+    category = EbookingCategory.objects.all()
     if request.method == 'GET':
         movie_title = request.GET['movie_name']
         movie_category = 'ALL'
@@ -214,7 +219,8 @@ def base(request):
             "movie": movie,
             "movie_title": movie_title,
             "movie_category": movie_category,
-            "movie_count": count
+            "movie_count": count,
+            "all_category": category
         }
 
         return render(request, 'searchResults.html', {'movie_list': movie_list})

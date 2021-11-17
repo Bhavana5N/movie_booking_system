@@ -93,3 +93,10 @@ class EbookingSchedule(models.Model):
     class Meta:
         managed = False
         db_table = 'movie_schedule'
+
+class EbookingCategory(models.Model):
+    category = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
