@@ -25,16 +25,8 @@
                   </div>
                   <div class="d-flex justify-content-center flex-row-mb-2">
                     <select name="category" id="category_select">
-                        <option value="">Category</option>
-                        <option value="action">Action</option>
-                        <option value="suspense">Suspense</option>
-                        <option value="horror">Horror</option>
-                        <option value="adventure">Adventure</option>
-                        <option value="romance">Romance</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="thriller">Thriller</option>
-                        <option value="documentary">Documentary</option>
-                      </ul>
+                      {% for i in category_list %}
+                        <option value={{i.c_type}}>{{i.c_type}}</option>{% endfor %}
                     <br></br>
                     </select>
                     <select name="age_category" id="age_select" >
@@ -47,11 +39,11 @@
                     </select>
                     <select name="rating" id="rating_select" >
                       <option value="">Review Rating</option>
-                      <option value="1 Star">*</option>
-                      <option value="2 Stars">**</option>
-                      <option value="3 Stars">***</option>
-                      <option value="4 Stars">****</option>
-                      <option value="5 Stars">*****</option>
+                      <option value="*">*</option>
+                      <option value="**">**</option>
+                      <option value="***">***</option>
+                      <option value="****">****</option>
+                      <option value="*****">*****</option>
                     </ul>
                     </select>
                   </div>
