@@ -244,7 +244,6 @@ def book_movie(request):
                  total_time_list[my_date] = [my_time]
 
         print(total_time_list)
-
     #return render(request, "moviedetails.html", {'movie_list': movie})
     return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list})
 

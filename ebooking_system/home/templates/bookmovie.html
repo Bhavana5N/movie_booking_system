@@ -22,11 +22,10 @@
                    </iframe></div>
                 <div class="mt-3">
 		              <div class="d-flex justify-content-center small text-warning mb-1">
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
+                                        {% for ratings in i.ratings%}
+                                            <div class="bi-star-fill"></div>
+                                        {% endfor %}
+                                    </div>
                 </div>
 		            <h5  class="text-uppercase text-center mb-1" style="font-weight:bold;"> {{i.movie_title}} : {{i.age_category}}</h5>
 		            <p  class="text-uppercase text-center mb-4" style="font-size: 14px;"> {{i.category}} </p>
@@ -39,7 +38,7 @@
                 <p  class="text-uppercase text-center" style="font-weight:bold;"> {{i.actors}} </p>
 	              </div>
                 <div  class="text-uppercase text-center mb-5">
-	              <h4>Price: {{i.price}}</h4>
+	              <h4>Price: ${{i.price}}</h4>
 
 	              </div>
 	              <div class="container h-100">
@@ -53,9 +52,5 @@
                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></div> {% endfor %}
                     </div>{% endfor %}
             </div></br></br>
-    <div class="col ml-auto">
-        <button style="color:red" type="submit" value="book",
-                                     class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Select Seats</button>
-
-    </div></div></form></div></div></div></div></div></section>
+   </form></div></div></div></div></div></section>
 {% endblock %}
