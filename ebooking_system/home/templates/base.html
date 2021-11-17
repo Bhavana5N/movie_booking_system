@@ -23,15 +23,10 @@
                 <form id="searchbar-form" method="get" action="base" class="d-flex">
                     <select class="form-select" aria-label="selectform" id="movie_category" name="movie_category">
                         <option {% if movie_list.movie_category == 'ALL'%} selected {%endif%}>ALL</option>
-                        <option {% if movie_list.movie_category == 'action'%} selected {%endif%}>action</option>
-                        <option {% if movie_list.movie_category == 'comedies'%} selected {%endif%}>comedies</option>
-                        <option {% if movie_list.movie_category == 'romantic'%} selected {%endif%}>romantic</option>
-                        <option {% if movie_list.movie_category == 'rom-coms'%} selected {%endif%}>rom-coms</option>
-                        <option {% if movie_list.movie_category == 'adventures'%} selected {%endif%}>adventures</option>
-                        <option {% if movie_list.movie_category == 'musical'%} selected {%endif%}>musical</option>
-                        <option {% if movie_list.movie_category == 'dramas'%} selected {%endif%}>dramas</option>
-                        <option {% if movie_list.movie_category == 'documentary'%} selected {%endif%}>documentary</option>
-                    </select>
+                        {% for c in category_list %}
+                        <option {% if movie_list.movie_category == c.c_type %} selected {%endif%}>{{c.c_type}}</option>
+                        {% endfor %}
+                                           </select>
                     <input class="form-control me-2" type="text" value="{{movie_list.movie_title}}" aria-label="Search" id="movie_name" name="movie_name" style="width: 300px">
                     <button class="btn btn-success" type="submit">Search</button>
                 </form>

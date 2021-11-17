@@ -66,7 +66,7 @@ class EbookingMovie(models.Model):
     movie_title = models.TextField(blank=True, null=True, unique=True)
     actors = models.TextField(blank=True, null=True)
     status = models.TextField(blank=True, null=True, default="coming_soon")
-    ratings = models.TextField(blank=True, null=True)
+    ratings = models.IntegerField(blank=True, null=True)
     release_date = models.DateTimeField(blank=True, null=True)
     trailer_link = models.TextField(blank=True, null=True)
     image_link = models.TextField(blank=True, null=True)
@@ -93,3 +93,21 @@ class EbookingSchedule(models.Model):
     class Meta:
         managed = False
         db_table = 'movie_schedule'
+
+
+class Showroom(models.Model):
+    showroom_title = models.TextField(blank=True, null=True)
+    seats_count = models.IntegerField(blank=True, null=True)
+    rows_count = models.IntegerField(blank=True, null=True)
+    column_count = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'showroom'
+
+class Category(models.Model):
+    c_type = models.IntegerField(unique=True, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
