@@ -175,7 +175,7 @@ def registration(request):
                 send_mail(
                     subject='EBooking Account Created Successfully!',
                     message="Your account is registered!\nPlease click on the following link to login:\n" +
-                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
+                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login',
                     from_email=EMAIL_HOST_USER,
                     recipient_list=[user.email])
             except:
@@ -202,6 +202,7 @@ def index(request):
                                           'category_list': category_list})
 
 def base(request):
+    print("hi", request.method)
     category = Category.objects.all()
     if request.method == 'GET':
         movie_title = request.GET['movie_name']
