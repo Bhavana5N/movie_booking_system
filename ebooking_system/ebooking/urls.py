@@ -51,6 +51,7 @@ urlpatterns = [
     path('categories', views.categories, name='categories'),
     path('schedule', views.schedule, name='schedule'),
     #path('schedulemovie', views.schedulemovie, name='schedulemovie'),
-    path('bookmovie/', views.book_movie, name='bookmovie')
+    path('bookmovie/', views.book_movie, name='bookmovie'),
+    path('base', views.base, name='base')
 ]
 
