@@ -343,21 +343,20 @@ def schedule(request):
                                                      'current_time': current_time})
 
 
-# def schedulemovie(request):
-#     print(request.POST)
-#     if request.method == 'POST':
-#         s_details = request.POST
-#         date_and_time = s_details["date"] + " " + s_details["time"]
-#         target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
-#         s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
-#         d = EbookingSchedule.objects.filter(date_time=target_datetime)
-#         if d:
-#             messages.info(request, f'A Movie at this date and time already exists. Try again!')
-#             return render(request, 'schedulemovie.html')
-#         s_object.save()
-#         print(s_details["movie_title"], {'status': 'airing'})
-#         EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update({'status': 'airing'})
-#         messages.info(request, f'Movie is successfully scheduled')
-#         return render(request, 'schedulemovie.html')
-#     else:
-#         return render(request, 'schedulemovie.html')
+def schedulemovie(request):
+    all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
+    if request.method == 'POST':
+        s_details = request.POST
+        date_and_time = s_details["date"] + " " + s_details["time"]
+        target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
+        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
+        d = EbookingSchedule.objects.filter(date_time=target_datetime)
+        if d:
+            messages.info(request, f'A Movie at this date and time already exists. Try again!')
+            return render(request, 'schedulemovie.html')
+        s_object.save()
+        messages.info(request, f'Movie is successfully scheduled')
+        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
+                                                     'target_datetime': target_datetime})
+    else:
+        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles})
