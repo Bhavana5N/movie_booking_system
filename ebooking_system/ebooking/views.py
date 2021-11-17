@@ -297,7 +297,7 @@ def addmovie(request):
                           director=movie_details["director"], synopsis=movie_details["synopsis"],
                           category=movie_details["category"], ratings=movie_details["rating"],
                           age_category=movie_details["age_category"], runtime=movie_details["runtime"],
-                                         price=movie_details["price"])
+                                         price=movie_details["price"], image_link=movie_details["image_link"])
             b = EbookingMovie.objects.filter(movie_title=movie_details["title"])
             print(b)
             if b:
