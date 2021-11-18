@@ -23,13 +23,13 @@ from . import views
 from django.contrib.auth.views import LogoutView, PasswordChangeView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     #path('', include('home.urls')),
     path('', views.index, name="index"),
-    path('login/',  views.login_user, name="login"),
+    path('login',  views.login_user, name="login"),
     path('logout', LogoutView.as_view(), name="logout"),
-    path('forgot-password/', views.forgot_password_view, name='forgot'),
-    path('reset-password/', views.forgot_password_validation, name='rget'),
+    path('forgot-password', views.forgot_password_view, name='forgot'),
+    path('reset-password', views.forgot_password_validation, name='rget'),
     path('admin', views.admin, name='admin'),
     path('edit_profile', views.edit_profile, name='edit'),
     path('registration', views.registration, name="registration"),
@@ -51,7 +51,7 @@ urlpatterns = [
     path('categories', views.categories, name='categories'),
     path('schedule', views.schedule, name='schedule'),
     #path('schedulemovie', views.schedulemovie, name='schedulemovie'),
-    path('bookmovie/', views.book_movie, name='bookmovie'),
+    path('bookmovie', views.book_movie, name='bookmovie'),
     path('base', views.base, name='base')
 ]
 

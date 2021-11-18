@@ -21,11 +21,16 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="index">E-Cinema Booking System</a>
                 <form id="searchbar-form" method="get" action="base" class="d-flex">
-                    <select class="form-select" aria-label="selectform" id="movie_category" name="movie_category">
+                    <select class="form-select" aria-label="selectform" id="movie_category" name="movie_category">                       
                         <option {% if movie_list.movie_category == 'ALL'%} selected {%endif%}>ALL</option>
-                        {% for c in movie_list.all_category %}
-                        <option {% if movie_list.movie_category == c.category%} selected {%endif%}>{{c.category}}</option>
-                        {% endfor %}                     
+                        <option {% if movie_list.movie_category == 'Action'%} selected {%endif%} >Action</option>
+                        <option {% if movie_list.movie_category == 'Suspense'%} selected {%endif%} >Suspense</option>
+                        <option {% if movie_list.movie_category == 'Horror'%} selected {%endif%} >Horror</option>
+                        <option {% if movie_list.movie_category == 'Adventure'%} selected {%endif%}>Adventure</option>
+                        <option {% if movie_list.movie_category == 'Romance'%} selected {%endif%} >Romance</option>
+                        <option {% if movie_list.movie_category == 'Comedy'%} selected {%endif%}>Comedy</option>
+                        <option {% if movie_list.movie_category == 'Thriller'%} selected {%endif%}>Thriller</option>
+                        <option {% if movie_list.movie_category == 'Documentary'%} selected {%endif%}>Documentary</option>              
                     </select>
                     <input class="form-control me-2" type="text" value="{{movie_list.movie_title}}" aria-label="Search" id="movie_name" name="movie_name" style="width: 300px">
                     <button class="btn btn-success" type="submit">Search</button>
@@ -65,8 +70,8 @@
                         <li class="nav-item active"><a class="nav-link" href="logout">Logout</a></li>
                         <li class="nav-item active"><a class="nav-link" href="edit_profile">Profile</a></li>
                         {% else %}
-                        <li class="nav-item active"><a class="nav-link" href="/login/">Login</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="/registration">Registration</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="login">Login</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="registration">Registration</a></li>
                         {% endif %}
                     </ul>
                     <form class="d-flex" method="POST" action="orderSummary">
