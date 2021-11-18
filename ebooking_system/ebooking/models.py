@@ -51,8 +51,6 @@ class UserRegisrationForm(models.Model):
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
 
-
-
 class Promotions(models.Model):
     promotion_code = models.TextField()
     expiray_date = models.TextField()  # This field type is a guess.
@@ -66,7 +64,7 @@ class EbookingMovie(models.Model):
     movie_title = models.TextField(blank=True, null=True, unique=True)
     actors = models.TextField(blank=True, null=True)
     status = models.TextField(blank=True, null=True, default="coming_soon")
-    ratings = models.IntegerField(blank=True, null=True)
+    ratings = models.TextField(blank=True, null=True)
     release_date = models.DateTimeField(blank=True, null=True)
     trailer_link = models.TextField(blank=True, null=True)
     image_link = models.TextField(blank=True, null=True)
