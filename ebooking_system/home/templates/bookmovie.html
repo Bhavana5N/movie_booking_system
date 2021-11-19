@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
-<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg'); height: 1550px;">
+<section style="background-image: url('https://s3.envato.com/files/138478059/eps2014112023166080793.jpg'); height: 160%;">
       <div class="container h-100">
         <div class="row d-flex justify-content-center h-100" style="padding-top:70px">
             <div class="card" style="border-radius: 15px;">
@@ -21,9 +21,21 @@
                    </iframe></div>
                 <div class="mt-3">
 		              <div class="d-flex justify-content-center small text-warning mb-1">
-                                        {% for ratings in i.ratings%}
+                                        {% if i.ratings >= '1' %}
                                             <div class="bi-star-fill"></div>
-                                        {% endfor %}
+                                            {% if i.ratings >= '2' %}
+                                                <div class="bi-star-fill"></div>
+                                                {% if i.ratings >= '3' %}
+                                                    <div class="bi-star-fill"></div>
+                                                {% endif %}
+                                                    {% if i.ratings >= '4' %}
+                                                    <div class="bi-star-fill"></div>
+                                                        {% if i.ratings >= '5' %}
+                                                        <div class="bi-star-fill"></div>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
                                     </div>
                 </div>
 		            <h5  class="text-uppercase text-center mb-1" style="font-weight:bold;"> {{i.movie_title}} : {{i.age_category}}</h5>
