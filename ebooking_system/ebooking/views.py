@@ -228,7 +228,7 @@ def book_movie(request):
 
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
     print(movie[0].movie_title)
-    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
+    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title']).order_by('date_time')
     current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     total_time_list = {}
     print(schedule_movie)
@@ -307,8 +307,8 @@ def addmovie(request):
             movie_object.save()
             messages.info(request, f'Movie is successfully Added')
         except Exception as e:
-            print(e)
-            messages.error(request, f'Movie is not Added')
+            messages.error(request, str(e))
+            #messages.error(request, f'Movie is not Added')
         return render(request, "addmovie.html")
     return render(request, "addmovie.html")
 

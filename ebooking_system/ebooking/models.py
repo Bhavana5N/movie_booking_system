@@ -51,8 +51,6 @@ class UserRegisrationForm(models.Model):
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
 
-
-
 class Promotions(models.Model):
     promotion_code = models.TextField()
     expiray_date = models.TextField()  # This field type is a guess.
@@ -93,3 +91,21 @@ class EbookingSchedule(models.Model):
     class Meta:
         managed = False
         db_table = 'movie_schedule'
+
+
+class Showroom(models.Model):
+    showroom_title = models.TextField(blank=True, null=True)
+    seats_count = models.IntegerField(blank=True, null=True)
+    rows_count = models.IntegerField(blank=True, null=True)
+    column_count = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'showroom'
+
+class Category(models.Model):
+    c_type = models.IntegerField(unique=True, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
