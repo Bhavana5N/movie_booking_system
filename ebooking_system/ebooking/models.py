@@ -65,7 +65,7 @@ class Promotions(models.Model):
 class EbookingMovie(models.Model):
     movie_title = models.TextField(blank=True, null=True, unique=True)
     actors = models.TextField(blank=True, null=True)
-    status = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True, default="coming_soon")
     ratings = models.TextField(blank=True, null=True)
     release_date = models.DateTimeField(blank=True, null=True)
     trailer_link = models.TextField(blank=True, null=True)
@@ -75,6 +75,8 @@ class EbookingMovie(models.Model):
     category = models.TextField(blank=True, null=True)
     synopsis = models.TextField(blank=True, null=True)
     age_category = models.TextField(blank=True, null=True)
+    runtime = models.FloatField()
+    price = models.TextField()
 
     def __str__(self):
         return self.movie_title
@@ -86,6 +88,7 @@ class EbookingMovie(models.Model):
 class EbookingSchedule(models.Model):
     movie_title = models.TextField(blank=True, null=True, unique=True)
     date_time = models.DateTimeField(blank=True, null=True)
+    showroom = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
