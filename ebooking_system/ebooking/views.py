@@ -167,28 +167,28 @@ def registration(request):
             user.is_active = True
             user.username = user.email
             user.is_active = 0
-            b = customuser.objects.filter(username=str(user.username ))
+            b = customuser.objects.filter(username=str(user.username))
             if b:
                 messages.info(request, f'An account with this email already exists. Try again!')
                 return render(request, 'registration.html')
             user.save()
-            try:
-                send_mail(
-                    subject='EBooking Account Created Successfully!',
-                    message=  # "Your account is registered!\nPlease click on the following link to login:\n" +
-                    # 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
-                    render_to_string('activate.html', {
-                        'user': request.user,
-                        'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'],
-                        'uid': urlsafe_base64_encode(force_bytes(user.id)),
-                        'token': generate_token.make_token(user)
-                    }),
-                    from_email=EMAIL_HOST_USER,
-                    recipient_list=[user.email])
-            except Exception as e:
-                print("email did not send, error:")
-                print(e)
-                pass
+            # try:
+            send_mail(
+                subject='EBooking Account Created Successfully!',
+                message=  # "Your account is registered!\nPlease click on the following link to login:\n" +
+                # 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
+                render_to_string('activate.html', {
+                    'user': user,
+                    'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'],
+                    'uid': urlsafe_base64_encode(force_bytes(user.username)),
+                    'token': generate_token.make_token(user)
+                }),
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[user.email])
+            #except Exception as e:
+            #    print("email did not send, error:")
+            #    print(e)
+            #    pass
             return render(request, 'regisconfirmation.html')
         else:
             for k in form.errors.get_json_data():
@@ -202,27 +202,29 @@ def registration(request):
         args = {'form': form}
         return  render(request, 'registration.html', args)
 
+
 def regisconfirmation(request, uidb64, token):
+    #try:
+    uid = force_text(urlsafe_base64_decode(uidb64))
 
-        try:
-            uid = force_text(urlsafe_base64_decode(uidb64))
+    user = customuser.objects.filter(username=uid)
+    print("got to try")
 
-            user = User.objects.get(id=uid)
+    #except Exception as e:
+    #    user = None
 
-        except Exception as e:
-            user = None
+    if user and generate_token.check_token(user, token):
+        user.is_active = True
+        user.save()
 
-        if user and generate_token.check_token(user, token):
-            user.is_email_verified = True
-            user.save()
+        messages.add_message(request, messages.SUCCESS,
+                             'Email is verified, you can now login')
 
-            messages.add_message(request, messages.SUCCESS,
-                                 'Email is verified, you can no login')
-
-            return redirect(reverse('login'))
-
-        return render(request, 'registration.html')
-        # return render(request, 'regisconfirmation.html')
+        return render(reverse('login'))
+    else:
+        print("did not change is_active")
+    return render(request, 'login.html')
+    # return render(request, 'regisconfirmation.html')
 
 def index(request):
     new_movies = EbookingMovie.objects.filter(status="coming_soon")
@@ -380,33 +382,33 @@ def schedule(request):
                                                      'current_time': current_time})
 
 
-def schedulemovie(request):
-    all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
-    print(all_movie_titles)
-    current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
-    if request.method == 'POST':
-        s_details = request.POST
-        # date_and_time = s_details["date"] + " " + s_details["time"]
-        # target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
-        target_datetime = s_details["date_time"]
-        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
-                                    showroom=s_details["showroom"])
-        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
-        if d:
-            messages.info(request, f'A movie at this date and time already exists. Try again!')
-            return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-                                                     'current_time': current_time})
-        goal_datetime = datetime.strptime(target_datetime, '%Y-%m-%dT%H:%M')
+#def schedulemovie(request):
+#    all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
+#    print(all_movie_titles)
+#    current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
+#    if request.method == 'POST':
+#        s_details = request.POST
+#        # date_and_time = s_details["date"] + " " + s_details["time"]
+#        # target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
+#        target_datetime = s_details["date_time"]
+#        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
+#                                    showroom=s_details["showroom"])
+#        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
+#        if d:
+#            messages.info(request, f'A movie at this date and time already exists. Try again!')
+#            return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
+#                                                     'current_time': current_time})
+#        goal_datetime = datetime.strptime(target_datetime, '%Y-%m-%dT%H:%M')
 
         # if goal_datetime < datetime.now():
         #    messages.info(request, f'You cannot schedule movies in the past. Try again!')
         #    return render(request, 'schedule.html')
-        s_object.save()
-        edit_values = {'status': 'airing'}
-        EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update(**edit_values)
-        messages.info(request, f'Movie is successfully scheduled')
-        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-                                                 'current_time': current_time})
-    else:
-        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-                                                 'current_time': current_time})
+#        s_object.save()
+#        edit_values = {'status': 'airing'}
+#        EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update(**edit_values)
+#        messages.info(request, f'Movie is successfully scheduled')
+#        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
+#                                                 'current_time': current_time})
+#    else:
+#        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
+#                                                 'current_time': current_time})

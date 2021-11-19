@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin', views.admin, name='admin'),
     path('edit_profile', views.edit_profile, name='edit'),
     path('registration', views.registration, name="registration"),
-    path('regisconfirmation', views.regisconfirmation, name='regisconfirmation'),
+    path('regisconfirmation/<uidb64>/<token>', views.regisconfirmation, name='regisconfirmation'),
     path('edit_card', views.edit_card, name='editcard'),
     path('changepassword', PasswordChangeView.as_view(
             template_name='change_password.html',success_url="login"),
