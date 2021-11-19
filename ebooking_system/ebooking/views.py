@@ -175,7 +175,7 @@ def registration(request):
                 send_mail(
                     subject='EBooking Account Created Successfully!',
                     message="Your account is registered!\nPlease click on the following link to login:\n" +
-                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login',
+                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
                     from_email=EMAIL_HOST_USER,
                     recipient_list=[user.email])
             except:
@@ -196,14 +196,9 @@ def index(request):
     new_movies = EbookingMovie.objects.filter(status="coming_soon")
     present_movies = EbookingMovie.objects.filter(status="airing")
     #print(movie[0].trailer_link)
-    category_list = Category.objects.all()
-    print(category_list)
-    return render(request, "index.html", {'new_movies': new_movies, 'present_movies': present_movies,
-                                          'category_list': category_list})
+    return render(request, "index.html", {'new_movies': new_movies, 'present_movies': present_movies})
 
 def base(request):
-    print("hi", request.method)
-    category = Category.objects.all()
     if request.method == 'GET':
         movie_title = request.GET['movie_name']
         movie_category = 'ALL'
@@ -221,7 +216,8 @@ def base(request):
             "movie_category": movie_category,
             "movie_count": count
         }
-        return render(request, 'searchResults.html', {'movie_list': movie_list, 'category_list': category})
+
+        return render(request, 'searchResults.html', {'movie_list': movie_list})
     
 def moviedetails(request):
     movie = EbookingMovie.objects.filter(movie_title="RRR")
@@ -231,14 +227,15 @@ def moviedetails(request):
 def book_movie(request):
 
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
-    print(movie[0].ratings)
-    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title']).order_by('date_time')
+    print(movie[0].movie_title)
+    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
     current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     total_time_list = {}
     print(schedule_movie)
     for i in schedule_movie:
         stored_time = datetime.strftime(i.date_time, '%Y-%m-%dT%H:%M')
         if current_time < stored_time:
+
             my_date = datetime.strftime(i.date_time, "%Y-%m-%d")
             my_time = datetime.strftime(i.date_time, "%H:%M")
             if my_date in total_time_list:
@@ -290,16 +287,13 @@ def addpromotion(request):
 
 
 def addmovie(request):
-    category_list = Category.objects.all()
-    print(category_list)
     if request.method == 'POST':
         movie_details = request.POST
         try:
             print(request.POST)
             movie_object = EbookingMovie(movie_title=movie_details["title"],actors=movie_details["actors"],
                           status='coming_soon',  producer=movie_details["producer"],
-                          trailer_link=movie_details["trailerURL"],
-            #, release_date=movie_details["releasedate"],
+                          trailer_link=movie_details["trailerURL"], release_date=movie_details["releasedate"],
                           director=movie_details["director"], synopsis=movie_details["synopsis"],
                           category=movie_details["category"], ratings=movie_details["rating"],
                           age_category=movie_details["age_category"], runtime=movie_details["runtime"],
@@ -308,14 +302,14 @@ def addmovie(request):
             print(b)
             if b:
                 messages.info(request, f'A Movie with title already exists. Try again!')
-                return render(request, 'addmovie.html', {'category_list': category_list})
+                return render(request, 'addmovie.html')
             movie_object.save()
             messages.info(request, f'Movie is successfully Added')
         except Exception as e:
             print(e)
-            messages.error(request, str(e))
-        return render(request, "addmovie.html", {'category_list': category_list})
-    return render(request, "addmovie.html", {'category_list': category_list})
+            messages.error(request, f'Movie is not Added')
+        return render(request, "addmovie.html")
+    return render(request, "addmovie.html")
 
 def schedule(request):
     all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)

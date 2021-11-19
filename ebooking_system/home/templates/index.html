@@ -38,16 +38,16 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <a href='bookmovie?movie_title={{i.movie_title}}'>
-                            <img class="card-img-top" src="{{i.image_link}}" alt="..." /></a>
+                            <img class="card-img-top" src="{{i.image_link}}" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{i.movie_title}}</h5>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    {% for ratings in i.ratings%}
-                                                            <div class="bi-star-fill"></div>{% endfor %}
+                                        {% for ratings in i.ratings%}
+                                            <div class="bi-star-fill"></div>
+                                        {% endfor %}
                                     </div>
 
                                 </div>
@@ -94,10 +94,7 @@
                                 <div class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{i.movie_title}}</h5>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    {% for ratings in i.ratings%}
-                                                            <div class="bi-star-fill"></div>{% endfor %}
-                                    </div>
+                                    <!-- Product price-->
                                     <span class="text-muted text-decoration-line-through">Movie Premiere</span>
                                    {{i.release_date}}
                                 </div>

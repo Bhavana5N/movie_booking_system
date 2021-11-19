@@ -30,19 +30,15 @@
                                                         <!-- Product name-->
                                                         <h5 class="fw-bolder">{{movie.movie_title}}</h5>
                                                         <!-- Rating-->
-                                                      <div class="d-flex justify-content-center small text-warning mb-2">
-                                                        {% for ratings in movie.ratings%}
-                                                            <div class="bi-star-fill"></div>
-                                                        {% endfor %}
-                                                        </div>
+                                                        <h5 class="fw-bolder">Rating:  {{movie.ratings}}</h5>
                                                         <!-- Product price-->
-                                                        $ {{movie.price}}
+                                                        $40.00 - $80.00
                                                         
                                                     </div>
                                                 </div>
                                                 <!-- Product actions-->
                                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="bookmovie?movie_title={{movie.movie_title}}">Book Tickets</a></div>
+                                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Book Tickets</a></div>
                                                 </div>
                                             </div>
                                         </div>
