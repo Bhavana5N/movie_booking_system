@@ -16,27 +16,53 @@
 
         <section class="py-5" style="padding-left:50px;padding-right:50px">
                     <div class="row ml-auto p-3">
-                      <div class="col ml-auto">
+                        <div class="col ml-auto">
                           <form method="GET" action="addmovie">
                           {% csrf_token %}
                               <div class="col ml-auto"><button style="color:red" type="submit" value="add_movie",
                                                                class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Add Movie</button>
 
                               </div> </form></div>
-                    <div class="col ml-auto">
+                        <div class="col ml-auto">
                           <form method="GET" action="addpromotion">
                           {% csrf_token %}
                               <div class="col ml-auto"><button style="color:red" type="submit" value="add_promotion",
                                                                class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Add Promotion</button>
 
                               </div> </form></div>
-                <div class="col ml-auto">
+                        <div class="col ml-auto">
                           <form method="GET" action="schedule">
                           {% csrf_token %}
                               <div class="col ml-auto"><button style="color:red" type="submit" value="schedule",
                                                                class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Schedule Movie</button>
 
-                              </div> </form></div></div>
+                              </div> </form></div>
+
+                    </div>
+            <div class="row ml-auto p-3">
+            <div class="col ml-auto">
+                          <form method="GET" action="schedule">
+                          {% csrf_token %}
+                              <div class="col ml-auto"><button style="color:red" type="submit" value="schedule",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Manage Movies</button>
+
+                              </div> </form></div>
+                        <div class="col ml-auto">
+                          <form method="GET" action="schedule">
+                          {% csrf_token %}
+                              <div class="col ml-auto"><button style="color:red" type="submit" value="schedule",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Manage Promotions</button>
+
+                              </div> </form></div>
+                        <div class="col ml-auto">
+                          <form method="GET" action="schedule">
+                          {% csrf_token %}
+                              <div class="col ml-auto"><button style="color:red" type="submit" value="schedule",
+                                                               class="btn btn-success btn-block btn-lg gradient-custom-6 text-body">Manage Users</button>
+
+                              </div> </form></div>
+            </div>
+
 
         </section>
 
