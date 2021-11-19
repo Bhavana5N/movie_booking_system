@@ -11,7 +11,7 @@
       background-color:black;
       height: 780px; padding:none;">
 
-    <iframe width="1100" height="600" src={{movie_list.0.trailer_link}} title="YouTube video player"
+    <iframe width="1100" height="600" src={{present_movies.0.trailer_link}} title="YouTube video player"
                             frameborder="0" allow="accelerometer; autoplay;
                             clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
@@ -20,10 +20,7 @@
     <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
       <div class="d-flex justify-content-center align-items-center h-100">
         <div class="text-white">
-          <h1 class="mb-3" >{{ movie_list.0.movie_title }}</h1>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >Book Now</a
-          >
+
         </div>
       </div>
     </div>
@@ -37,7 +34,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for i in movie_list %}
+                    {% for i in present_movies %}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -52,13 +49,13 @@
                                             <div class="bi-star-fill"></div>
                                         {% endfor %}
                                     </div>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
+
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'moviedetails' i.id %}">Book Tickets</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                                            href='bookmovie?movie_title={{i.movie_title}}'>Book Tickets</a></div>
                             </div>
                         </div>
                     </div>
@@ -77,9 +74,7 @@
       <div class="d-flex justify-content-center align-items-center h-100">
         <div class="text-white">
           <h1 class="mb-3">Coming Soon</h1>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >See More</a
-          >
+
         </div>
       </div>
     </div>
@@ -87,8 +82,7 @@
             <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for i in movie_list %}
-                    {% if i.status == "coming_soon" %}
+                    {% for i in new_movies %}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Sale badge-->
@@ -102,16 +96,16 @@
                                     <h5 class="fw-bolder">{{i.movie_title}}</h5>
                                     <!-- Product price-->
                                     <span class="text-muted text-decoration-line-through">Movie Premiere</span>
-                                    October 7th, 2021
+                                   {{i.release_date}}
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">See Details</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href='bookmovie?movie_title={{i.movie_title}}'>See Details</a></div>
                             </div>
                         </div>
 
-                    </div> {% endif %}
+                    </div>
                     {% endfor %}
                 </div>
             </div>

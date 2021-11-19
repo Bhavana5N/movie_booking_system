@@ -2,10 +2,9 @@
 {% load static %}
 {% block content %}
 <head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
-<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg'); padding-top:30px; padding-bottom:30px; height: 1550px;">
+<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg'); height: 1550px;">
       <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="row d-flex justify-content-center h-100" style="padding-top:70px">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
     <form method="POST" action="/seats">
@@ -15,7 +14,7 @@
 
             <div class="card-body p-10">
                 {% for i in movie %}
-	               <div class="mt-3"><iframe width="1100" height="600" src={{i.trailer_link}} title="YouTube video player"
+	               <div class="mt-3"><iframe width="1000" height="600" src={{i.trailer_link}} title="YouTube video player"
                             frameborder="0" allow="accelerometer; autoplay;
                             clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
@@ -52,5 +51,5 @@
                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></div> {% endfor %}
                     </div>{% endfor %}
             </div></br></br>
-   </form></div></div></div></div></div></section>
+   </form></div></div></div></div></section>
 {% endblock %}
