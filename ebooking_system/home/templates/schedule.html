@@ -15,37 +15,29 @@
                     <div class="form-outline mb-4">
                       <!--<input type="text" id="movie_title" class="form-control
                       form-control-lg" name="movie_title" required/> -->
-                      <select name = "movie_title"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                      <div class="card-body p-5">
+                      <select name = "movie_title"  class="form-select form-select-lg mb-3 rounded border border-5 border-dark" aria-label=".form-select-lg example" style="box-shadow: 0px 0px 10px 4px rgba(127, 255, 212, 0.322);">
                           {% for movie_title in all_movie_titles %}
-                          <option value="{{ movie_title }}">{{ movie_title }}</option>
+                          <option value="{{ movie_title }}" style="background-color: white;">{{ movie_title }}</option>
                           {% endfor %}
                         </select>
-                      <select name="showroom">
+                    </div>
+                    <div class="card-body p-5">
+                      <select name="showroom"  class="form-select form-select-lg mb-3 rounded border border-5 border-dark" aria-label=".form-select-lg example" style="box-shadow: 0px 0px 10px 4px rgba(127, 255, 212, 0.322);">
                           <option value="1">Showroom 1</option>
                           <option value="2">Showroom 2</option>
                           <option value="3">Showroom 3</option>
                       </select>
+                    </div>
                       <!-- <label class="form-label" for="movie_title">Movie Title *</label> -->
                   </div>
+                  <div class="card-body p-5">
                   <input type="datetime-local" name="date_time" value="2021-12-12T19:45"
-                                  min="{{ current_time }}" max="2030-06-14T00:00" id="rdate">
-                     <h3 class="text-uppercase text-center mb-5"> List of times </h3>
-                      <div>
-                        <input type="radio" name="time_slot" id="t0" value="" class="form-check-input">
-                        <label class="form-check-label" for="t0">
-                          time_1
-                        </label><br>
-                        <input type="radio" name="time_slot" id="t1" value="" class="form-check-input">
-                        <label class="form-check-label" for="t1">
-                          time_2
-                        </label><br>
-                        <input type="radio" name="time_slot" id="t2" value="" class="form-check-input">
-                        <label class="form-check-label" for="t2">
-                          time_3
-                        </label><br>
-                      </div>
+                                  min="{{ current_time }}" max="2030-06-14T00:00" id="rdate" class="rounded">
+                    </div>
+                    
                       <input type="submit" value="Set Time" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
-                    </form>>
+                  </div>
                 </div>
               </div>
             </div>
