@@ -15,6 +15,7 @@
                     <div class="form-outline mb-4">
                       <!--<input type="text" id="movie_title" class="form-control
                       form-control-lg" name="movie_title" required/> -->
+                        <div class="d-flex justify-content-center">
                       <select name = "movie_title"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                           {% for movie_title in all_movie_titles %}
                           <option value="{{ movie_title }}">{{ movie_title }}</option>
@@ -24,7 +25,7 @@
                           <option value="1">Showroom 1</option>
                           <option value="2">Showroom 2</option>
                           <option value="3">Showroom 3</option>
-                      </select>
+                      </select></div>
                       <!-- <label class="form-label" for="movie_title">Movie Title *</label> -->
                   </div>
                   <input type="datetime-local" name="date_time" value="2021-12-12T19:45"

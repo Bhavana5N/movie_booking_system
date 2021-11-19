@@ -288,6 +288,7 @@ def addpromotion(request):
 
 
 def addmovie(request):
+    category_list = Category.objects.all()
     if request.method == 'POST':
         movie_details = request.POST
         try:
@@ -303,14 +304,14 @@ def addmovie(request):
             print(b)
             if b:
                 messages.info(request, f'A Movie with title already exists. Try again!')
-                return render(request, 'addmovie.html')
+                return render(request, 'addmovie.html', {'category_list': category_list})
             movie_object.save()
             messages.info(request, f'Movie is successfully Added')
         except Exception as e:
             messages.error(request, str(e))
             #messages.error(request, f'Movie is not Added')
-        return render(request, "addmovie.html")
-    return render(request, "addmovie.html")
+        return render(request, "addmovie.html", {'category_list': category_list})
+    return render(request, "addmovie.html", {'category_list': category_list})
 
 def schedule(request):
     all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)

@@ -5,7 +5,7 @@
       <main>
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
           <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100" style="margin: 50px">
               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body p-5">
@@ -16,13 +16,15 @@
                       form-control-lg" name="movie_title" required/> -->
                       <h3 class="text-center"> Schedule Movie </h3>
                       <div class="card-body p-5 rounded mt-4 mb-5" style="background-color: rgba(127, 255, 212, 0.322);">
+                          <h4 class="text-center"> Movie </h4>
+                        <div class="d-flex justify-content-center">
 
-                        <h4 class="text-center"> Movie </h4>
-                        <select name = "movie_title"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example" style="margin-left: 15%;">
+                        <select name = "movie_title"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example">
                           {% for movie_title in all_movie_titles %}
                           <option value="{{ movie_title }}" style="background-color: white;">{{ movie_title }}</option>
                           {% endfor %}
                         </select>
+                            </div>
                         <h4 class="text-center"> Showroom </h4>
                       <select name="showroom"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example" style="margin-left: 33%;">
                           <option value="1">Showroom 1</option>
@@ -30,10 +32,12 @@
                           <option value="3">Showroom 3</option>
                       </select>
                       <!-- <label class="form-label" for="movie_title">Movie Title *</label> -->
-                      <h4 class="text-center"> Schedule Movie </h4>
+
+                          <h4 class="text-center"> Schedule Movie </h4>
+                           <div class="d-flex justify-content-center">
                       <input type="datetime-local" name="date_time" value="2021-12-12T19:45"
                                   min="{{ current_time }}" max="2030-06-14T00:00" id="rdate" class="rounded" style="margin-left: 16%;" >
-                    </div>
+                           </div></div>
                       <input type="submit" value="Set Time" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                       </form>
                       {% if messages %}

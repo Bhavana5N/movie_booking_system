@@ -83,6 +83,7 @@
             <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                   {% if new_movies %}
                     {% for i in new_movies %}
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -110,6 +111,9 @@
 
                     </div>
                     {% endfor %}
+                    {% else %}
+            <div class="m-0 text-center text-white"><h1 class="m-0 text-center text-white">No Coming Soon Movies</h1></div>
+       {% endif %}
                 </div>
             </div>
         </section>
