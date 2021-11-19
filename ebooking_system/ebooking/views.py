@@ -251,7 +251,8 @@ def checkout(request):
     return render(request, 'checkout.html')
 
 def seats(request):
-    return render(request, 'seats.html')
+    movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
+    return render(request, 'seats.html', {"movie": movie})
 def fullcalendar(request):
     return render(request, 'fullcalendar.html')
 def orderSummary(request):
