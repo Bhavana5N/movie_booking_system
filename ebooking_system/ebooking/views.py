@@ -213,6 +213,10 @@ def regisconfirmation(request, uidb64, token):
     except Exception as e:
         user = None
 
+    if user:
+        print("user is fine")
+    if not generate_token.check_token(user, token):
+        print("generate token not fine")
     if user and generate_token.check_token(user, token):
         user.is_active = True
         user.save()
@@ -220,7 +224,7 @@ def regisconfirmation(request, uidb64, token):
         messages.add_message(request, messages.SUCCESS,
                              'Email is verified, you can now login')
 
-        return render(reverse('login'))
+        return redirect('login')
     else:
         print("did not change is_active")
     return render(request, 'login.html')
@@ -262,7 +266,7 @@ def book_movie(request):
 
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
     print(movie[0].movie_title)
-    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title'])
+    schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title']).order_by('date_time')
     current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     total_time_list = {}
     print(schedule_movie)
@@ -285,7 +289,8 @@ def checkout(request):
     return render(request, 'checkout.html')
 
 def seats(request):
-    return render(request, 'seats.html')
+    movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
+    return render(request, 'seats.html', {"movie": movie})
 def fullcalendar(request):
     return render(request, 'fullcalendar.html')
 def orderSummary(request):
@@ -331,7 +336,7 @@ def addmovie(request):
                           director=movie_details["director"], synopsis=movie_details["synopsis"],
                           category=movie_details["category"], ratings=movie_details["rating"],
                           age_category=movie_details["age_category"], runtime=movie_details["runtime"],
-                                         price=movie_details["price"])
+                                         price=movie_details["price"], image_link=movie_details["image_link"])
             b = EbookingMovie.objects.filter(movie_title=movie_details["title"])
             print(b)
             if b:
@@ -340,8 +345,8 @@ def addmovie(request):
             movie_object.save()
             messages.info(request, f'Movie is successfully Added')
         except Exception as e:
-            print(e)
-            messages.error(request, f'Movie is not Added')
+            messages.error(request, str(e))
+            #messages.error(request, f'Movie is not Added')
         return render(request, "addmovie.html")
     return render(request, "addmovie.html")
 
@@ -356,7 +361,7 @@ def schedule(request):
         target_datetime = s_details["date_time"]
         s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
                                     showroom=s_details["showroom"])
-        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
+        d = EbookingSchedule.objects.filter(date_time=target_datetime, showroom=s_details["showroom"])
         if d:
             messages.info(request, f'A movie at this date and time already exists. Try again!')
             return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
