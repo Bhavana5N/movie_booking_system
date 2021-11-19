@@ -179,7 +179,7 @@ def registration(request):
                     # 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
                     render_to_string('activate.html', {
                         'user': request.user,
-                        'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'] + '/',
+                        'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'],
                         'uid': urlsafe_base64_encode(force_bytes(user.id)),
                         'token': generate_token.make_token(user)
                     }),
@@ -357,6 +357,11 @@ def schedule(request):
         d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
         if d:
             messages.info(request, f'A movie at this date and time already exists. Try again!')
+            return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
+                                                     'current_time': current_time})
+        same_showroom = EbookingSchedule.objects.filter(date_time=target_datetime, showroom=s_details["showroom"])
+        if same_showroom:
+            messages.info(request, f'A movie at this time and in this room already exists. Try again!')
             return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
                                                      'current_time': current_time})
         goal_datetime = datetime.strptime(target_datetime, '%Y-%m-%dT%H:%M')
