@@ -217,10 +217,12 @@ def base(request):
 
         return render(request, 'searchResults.html', {'movie_list': movie_list})
     
-def moviedetails(request):
-    movie = EbookingMovie.objects.filter(movie_title="RRR")
-    print(movie[0].trailer_link)
-    return render(request, "moviedetails.html", {'movie_list': movie})
+def moviedetails(request, id):
+    movie = EbookingMovie.objects.filter(id=id)
+    context = {'movie': movie}
+    return render(request, 'moviedetails.html', context)
+#def moviedetails(request):
+    #return render(request, 'moviedetails.html')
 
 
 

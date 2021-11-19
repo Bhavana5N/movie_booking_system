@@ -42,7 +42,7 @@ urlpatterns = [
     path('addpromotion', views.addpromotion, name='addpromotion'),
     path('addmovie', views.addmovie, name='addmovie'),
     path('checkout', views.checkout, name='checkout'),
-    path('moviedetails', views.moviedetails, name='moviedetails'),
+    #path('moviedetails', views.moviedetails, name='moviedetails'),
     path('seats', views.seats, name='seats'),
     path('fullcalendar', views.fullcalendar, name='fullcalendar'),
     path('orderconfirmation', views.orderconfirmation, name='orderconfirmation'),
@@ -51,5 +51,6 @@ urlpatterns = [
     path('categories', views.categories, name='categories'),
     path('schedule', views.schedule, name='schedule'),
     path('schedulemovie.html', views.schedulemovie, name='schedulemovie'),
+    path('<int:id>/moviedetails', views.moviedetails, name='moviedetails'),
 ]
 
