@@ -323,7 +323,7 @@ def schedule(request):
         target_datetime = s_details["date_time"]
         s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
                                     showroom=s_details["showroom"])
-        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
+        d = EbookingSchedule.objects.filter(date_time=target_datetime, showroom=s_details["showroom"])
         if d:
             messages.info(request, f'A movie at this date and time already exists. Try again!')
             return render(request, 'schedule.html', {'all_movie_titles': all_movie_titles,
