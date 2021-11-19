@@ -180,7 +180,7 @@ def registration(request):
                 render_to_string('activate.html', {
                     'user': user,
                     'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'],
-                    'uid': urlsafe_base64_encode(force_bytes(user.username)),
+                    'uid': urlsafe_base64_encode(force_bytes(user.email)),
                     'token': generate_token.make_token(user)
                 }),
                 from_email=EMAIL_HOST_USER,
@@ -196,7 +196,7 @@ def registration(request):
                 messages.error(request, v)
                 print(v)
             messages.info(request, f'Some detail made the form invalid. Try again!')
-            return render(request, 'regisconfirmation.html')
+            return render(request, 'registration.html')
     else:
         form = UserRegistrationForm()
         args = {'form': form}
@@ -204,14 +204,14 @@ def registration(request):
 
 
 def regisconfirmation(request, uidb64, token):
-    #try:
-    uid = force_text(urlsafe_base64_decode(uidb64))
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
 
-    user = customuser.objects.filter(username=uid)
-    print("got to try")
+        user = customuser.objects.get(email=uid)
+        print("got to try")
 
-    #except Exception as e:
-    #    user = None
+    except Exception as e:
+        user = None
 
     if user and generate_token.check_token(user, token):
         user.is_active = True
