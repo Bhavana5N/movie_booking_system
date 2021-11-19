@@ -10,6 +10,10 @@ from .settings import EMAIL_HOST, EMAIL_HOST_USER
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
 from datetime import datetime
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
+from .utils import generate_token
 
 
 def login_user(request):
@@ -33,9 +37,6 @@ def login_user(request):
 def admin(request):
     return render(request, 'admin.html')
 
-
-def regisconfirmation(request):
-    return render(request, 'regisconfirmation.html')
 
 def forgot_password_view(request):
 
@@ -168,30 +169,61 @@ def registration(request):
             user.is_active = 0
             b = customuser.objects.filter(username=str(user.username ))
             if b:
-                messages.info(request, f'An account with this username already exists. Try again!')
+                messages.info(request, f'An account with this email already exists. Try again!')
                 return render(request, 'registration.html')
             user.save()
             try:
                 send_mail(
                     subject='EBooking Account Created Successfully!',
-                    message="Your account is registered!\nPlease click on the following link to login:\n" +
-                            'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
+                    message=  # "Your account is registered!\nPlease click on the following link to login:\n" +
+                    # 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
+                    render_to_string('activate.html', {
+                        'user': request.user,
+                        'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'] + '/',
+                        'uid': urlsafe_base64_encode(force_bytes(user.id)),
+                        'token': generate_token.make_token(user)
+                    }),
                     from_email=EMAIL_HOST_USER,
                     recipient_list=[user.email])
-            except:
+            except Exception as e:
+                print("email did not send, error:")
+                print(e)
                 pass
-            return render(request, 'login.html')
+            return render(request, 'regisconfirmation.html')
         else:
             for k in form.errors.get_json_data():
                 v = form.errors.get_json_data()[k][0]["message"]
                 messages.error(request, v)
                 print(v)
             messages.info(request, f'Some detail made the form invalid. Try again!')
-            return render(request, 'registration.html')
+            return render(request, 'regisconfirmation.html')
     else:
         form = UserRegistrationForm()
         args = {'form': form}
         return  render(request, 'registration.html', args)
+
+def regisconfirmation(request, uidb64, token):
+
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+
+            user = User.objects.get(id=uid)
+
+        except Exception as e:
+            user = None
+
+        if user and generate_token.check_token(user, token):
+            user.is_email_verified = True
+            user.save()
+
+            messages.add_message(request, messages.SUCCESS,
+                                 'Email is verified, you can no login')
+
+            return redirect(reverse('login'))
+
+        return render(request, 'registration.html')
+        # return render(request, 'regisconfirmation.html')
+
 def index(request):
     new_movies = EbookingMovie.objects.filter(status="coming_soon")
     present_movies = EbookingMovie.objects.filter(status="airing")
@@ -345,18 +377,31 @@ def schedule(request):
 
 def schedulemovie(request):
     all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
+    print(all_movie_titles)
+    current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     if request.method == 'POST':
         s_details = request.POST
-        date_and_time = s_details["date"] + " " + s_details["time"]
-        target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
-        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime)
-        d = EbookingSchedule.objects.filter(date_time=target_datetime)
+        # date_and_time = s_details["date"] + " " + s_details["time"]
+        # target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
+        target_datetime = s_details["date_time"]
+        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
+                                    showroom=s_details["showroom"])
+        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
         if d:
-            messages.info(request, f'A Movie at this date and time already exists. Try again!')
-            return render(request, 'schedulemovie.html')
+            messages.info(request, f'A movie at this date and time already exists. Try again!')
+            return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
+                                                     'current_time': current_time})
+        goal_datetime = datetime.strptime(target_datetime, '%Y-%m-%dT%H:%M')
+
+        # if goal_datetime < datetime.now():
+        #    messages.info(request, f'You cannot schedule movies in the past. Try again!')
+        #    return render(request, 'schedule.html')
         s_object.save()
+        edit_values = {'status': 'airing'}
+        EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update(**edit_values)
         messages.info(request, f'Movie is successfully scheduled')
         return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-                                                     'target_datetime': target_datetime})
+                                                 'current_time': current_time})
     else:
-        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles})
+        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
+                                                 'current_time': current_time})
