@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<html>
-  <body>
+
       <main>
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
           <div class="container h-100">
@@ -17,14 +16,15 @@
                       form-control-lg" name="movie_title" required/> -->
                       <h3 class="text-center"> Schedule Movie </h3>
                       <div class="card-body p-5 rounded mt-4 mb-5" style="background-color: rgba(127, 255, 212, 0.322);">
+                        
                         <h4 class="text-center"> Movie </h4>
-                        <select name = "movie_title"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example" style="margin-left: 50px;">
+                        <select name = "movie_title"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example" style="margin-left: 15%;">
                           {% for movie_title in all_movie_titles %}
                           <option value="{{ movie_title }}" style="background-color: white;">{{ movie_title }}</option>
                           {% endfor %}
                         </select>
                         <h4 class="text-center"> Showroom </h4>
-                      <select name="showroom"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example" style="margin-left: 116px;">
+                      <select name="showroom"  class="form-select form-select-lg rounded border border-5 border-dark mb-5" aria-label=".form-select-lg example" style="margin-left: 33%;">
                           <option value="1">Showroom 1</option>
                           <option value="2">Showroom 2</option>
                           <option value="3">Showroom 3</option>
@@ -32,7 +32,7 @@
                       <!-- <label class="form-label" for="movie_title">Movie Title *</label> -->
                       <h4 class="text-center"> Schedule Movie </h4>
                       <input type="datetime-local" name="date_time" value="2021-12-12T19:45"
-                                  min="{{ current_time }}" max="2030-06-14T00:00" id="rdate" class="rounded" style="margin-left: 50px;" >
+                                  min="{{ current_time }}" max="2030-06-14T00:00" id="rdate" class="rounded" style="margin-left: 16%;" >
                     </div>
                       <input type="submit" value="Set Time" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                       </form>
