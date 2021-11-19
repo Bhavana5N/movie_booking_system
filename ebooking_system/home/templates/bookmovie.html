@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg'); padding-top:30px; padding-bottom:30px; height: 1550px;">
-      <div class="container h-100">
+<section style="background-image: url('https://s3.envato.com/files/138478059/eps2014112023166080793.jpg'); height: 160%;">      <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-            <div class="card" style="border-radius: 15px;">
+          <div class="row d-flex justify-content-center h-100" style="padding-top:70px">
+              <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
     <div method="POST" action="/seats">
         {% csrf_token %}
@@ -14,7 +13,7 @@
 
             <div class="card-body p-10">
                 {% for i in movie %}
-	               <div class="mt-3"><iframe width="450" height="350" src={{i.trailer_link}} title="YouTube video player"
+	               <div class="mt-3"><iframe width="1100" height="600" src={{i.trailer_link}} title="YouTube video player"
                             frameborder="0" allow="accelerometer; autoplay;
                             clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
@@ -42,7 +41,7 @@
 	              </div>
         <div class="container h-100"></div>
 
-                {% endfor %}
+
                       {% if time_list %}
                 <h1 style="text-align:center"> Showtimes</h1>
                 {% for date, time in time_list.items %}
@@ -52,7 +51,7 @@
                 <div class="col ml-auto text-center">
                     <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date_time={{date}}_{{j}}'>{{j}}</a>
                                 </div> {% endfor %}
-                    </div></br>{% endfor %}{% endif%}
+                    </div></br>{% endfor %}{% endif%}{% endfor %}
             </div></br></br>
    </form></div></div></div></div></div></section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
