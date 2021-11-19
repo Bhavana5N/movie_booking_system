@@ -61,7 +61,6 @@
 	              </div>
         <div class="container h-100"></div>
 
-                {% endfor %}
                       {% if time_list %}
                 <h1 style="text-align:center"> Showtimes</h1>
                 {% for date, time in time_list.items %}
@@ -71,7 +70,7 @@
                 <div class="col ml-auto text-center">
                     <a class="btn btn-outline-dark" href='\seats\?movie_title={{i.movie_title}}&date_time={{date}}_{{j}}'>{{j}}</a>
                                 </div> {% endfor %}
-                    </div></br>{% endfor %}{% endif%}
+                    </div></br>{% endfor %}{% endif%}{% endfor %}
             </div></br></br>
    </form></div></div></div></div></div></section>
 {% endblock %}
