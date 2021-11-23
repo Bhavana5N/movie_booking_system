@@ -52,6 +52,7 @@ urlpatterns = [
     path('schedule', views.schedule, name='schedule'),
     #path('schedulemovie', views.schedulemovie, name='schedulemovie'),
     path('bookmovie/', views.book_movie, name='bookmovie'),
-    path('base', views.base, name='base')
+    path('base', views.base, name='base'),
+    path('manage', views.manage, name='manage'),
 ]
 

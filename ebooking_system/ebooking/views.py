@@ -312,7 +312,7 @@ def addpromotion(request):
                                       discount=p_details["discount"])
         p_object.save()
         messages.info(request, f'Promotion is successfully Added')
-        b = customuser.objects.filter(promotion='on')
+        b = customuser.objects.filter(promotion='on', is_active=1, is_staff=0)
         print(b)
         email_list = []
         for i in b:
@@ -331,6 +331,11 @@ def addmovie(request):
         movie_details = request.POST
         try:
             print(request.POST)
+            if (not movie_details["trailerURL"].startswith("http")) or (not movie_details["image_link"].startswith("http")):
+                messages.error(request, "TrailerURL/ Image URL has to be link")
+                # messages.error(request, f'Movie is not Added')
+                return render(request, "addmovie.html", {'category_list': category_list})
+
             movie_object = EbookingMovie(movie_title=movie_details["title"],actors=movie_details["actors"],
                           status='coming_soon',  producer=movie_details["producer"],
                           trailer_link=movie_details["trailerURL"], release_date=movie_details["releasedate"],
@@ -388,33 +393,6 @@ def schedule(request):
                                                      'current_time': current_time})
 
 
-#def schedulemovie(request):
-#    all_movie_titles = EbookingMovie.objects.values_list('movie_title', flat=True)
-#    print(all_movie_titles)
-#    current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
-#    if request.method == 'POST':
-#        s_details = request.POST
-#        # date_and_time = s_details["date"] + " " + s_details["time"]
-#        # target_datetime = datetime.strptime(date_and_time, '%d/%m/%Y %H:%M:%S')
-#        target_datetime = s_details["date_time"]
-#        s_object = EbookingSchedule(movie_title=s_details["movie_title"], date_time=target_datetime,
-#                                    showroom=s_details["showroom"])
-#        d = EbookingSchedule.objects.filter(date_time=target_datetime, movie_title=s_details["movie_title"])
-#        if d:
-#            messages.info(request, f'A movie at this date and time already exists. Try again!')
-#            return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-#                                                     'current_time': current_time})
-#        goal_datetime = datetime.strptime(target_datetime, '%Y-%m-%dT%H:%M')
+def manage(request):
+    return render(request, 'manage.html')
 
-        # if goal_datetime < datetime.now():
-        #    messages.info(request, f'You cannot schedule movies in the past. Try again!')
-        #    return render(request, 'schedule.html')
-#        s_object.save()
-#        edit_values = {'status': 'airing'}
-#        EbookingMovie.objects.filter(movie_title=s_details["movie_title"]).update(**edit_values)
-#        messages.info(request, f'Movie is successfully scheduled')
-#        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-#                                                 'current_time': current_time})
-#    else:
-#        return render(request, 'schedulemovie.html', {'all_movie_titles': all_movie_titles,
-#                                                 'current_time': current_time})
