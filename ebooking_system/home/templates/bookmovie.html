@@ -47,10 +47,11 @@
                 {% for date, time in time_list.items %}
                     <div class="text-center mb-2">{{date}}</div>
                     <div class="row ml-auto">
-                    {% for j  in time %}
+                    {% for j in time %}
+                        {% for k, show_room in j.items %}
                 <div class="col ml-auto text-center">
-                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date_time={{date}}_{{j}}'>{{j}}</a>
-                                </div> {% endfor %}
+                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date={{date}}&time={{k}}&show_room={{show_room}}'>{{k}}</a>
+                                </div> {% endfor %} {% endfor %}
                     </div></br>{% endfor %}{% endif%}{% endfor %}
             </div></br></br>
         </form></div></div></div></div></div></div></section>

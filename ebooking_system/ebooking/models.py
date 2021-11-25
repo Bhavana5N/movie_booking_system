@@ -51,6 +51,20 @@ class UserRegisrationForm(models.Model):
     stateHome = models.TextField()
     zipCodeHome = models.IntegerField()
 
+class Order(models.Model):
+    user_id = models.TextField(blank=True, null=True)
+    showroom = models.TextField(blank=True, null=True)
+    tickets = models.IntegerField(blank=True, null=True)
+    seats = models.TextField(blank=True, null=True)
+    show_time = models.TextField(blank=True, null=True)
+    price = models.TextField(blank=True, null=True)
+    movie = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'order'
+
+
 class Promotions(models.Model):
     promotion_code = models.TextField()
     expiray_date = models.TextField()  # This field type is a guess.
@@ -59,6 +73,23 @@ class Promotions(models.Model):
     class Meta:
         managed = False
         db_table = 'promotions'
+
+class Ratings(models.Model):
+    rating = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ratings'
+
+
+class Showroom(models.Model):
+    showroom = models.TextField(unique=True, blank=True, null=True)
+    row_seats = models.IntegerField(blank=True, null=True)
+    col_seats = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'showroom'
 
 class EbookingMovie(models.Model):
     movie_title = models.TextField(blank=True, null=True, unique=True)
@@ -86,22 +117,12 @@ class EbookingMovie(models.Model):
 class EbookingSchedule(models.Model):
     movie_title = models.TextField(blank=True, null=True, unique=True)
     date_time = models.DateTimeField(blank=True, null=True)
-    showroom = models.IntegerField(blank=True, null=True)
+    showroom = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'movie_schedule'
 
-
-class Showroom(models.Model):
-    showroom_title = models.TextField(blank=True, null=True)
-    seats_count = models.IntegerField(blank=True, null=True)
-    rows_count = models.IntegerField(blank=True, null=True)
-    column_count = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'showroom'
 
 class Category(models.Model):
     c_type = models.IntegerField(unique=True, blank=True, null=True)

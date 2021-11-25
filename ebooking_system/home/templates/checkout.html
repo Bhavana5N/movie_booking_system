@@ -1,4 +1,4 @@
-{% extends 'logout.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
       <div class="container h-75">
@@ -9,16 +9,17 @@
                 <h3 class="text-uppercase text-center mb-5">Order Summary</h3>
                   <div class="col ml-auto">
                       <div class="row ml-auto">
-                          <div class="col ml-auto"><p>Theatre:</p></div>
-                          <div class="col ml-auto"><p>AMB Movies</p></div>
-                          <div class="col ml-auto"><p>Movie:</p></div>
-                          <div class="col ml-auto"><p>Hawk</p></div>
+                          <div class="col ml-auto"><p>Show Room</p></div>
+                          <div class="col ml-auto"><input type="text" name="show_room" id="show room" class="form-control form-control-lg" placeholder="Show Room"/> </div>
+
+                          <div class="col ml-auto"><p>Movie</p></div>
+                          <div class="col ml-auto"><input type="text" name="movie" id="movie" class="form-control form-control-lg" placeholder="movie"/> </div>
                     </div>
                       <div class="row ml-auto">
                         <div class="col ml-auto"><p>Show Time:</p></div>
-                        <div class="col ml-auto"><p>10/02/2021 7:30 PM</p></div>
+                          <div class="col ml-auto"><input type="text" name="show_time" id="show_time" class="form-control form-control-lg" placeholder="Show Number"/> </div>
                         <div class="col ml-auto"><p>Seats:</p></div>
-                        <div class="col ml-auto"><p>A1,A2,A3</p></div>
+                        <div class="col ml-auto"><input type="text" name="seats" id="seats" class="form-control form-control-lg" placeholder="Seats Number"/> </div>
                     </div>
                 </div>
               </div>
@@ -34,34 +35,36 @@
 
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>No.of Tickets</p></div>
-                        <div class="col ml-auto"><p>3</p></div>
+                        <div class="col ml-auto"><input type="text" name="no_of_tickets" id="no_of_tickets" class="form-control form-control-lg" placeholder="Num of Tickets"/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Tickets Price</p></div>
-                        <div class="col ml-auto"><p>$50</p></div>
+                        <div class="col ml-auto"><input type="text" name="tickets_price" id="tickets_price" class="form-control form-control-lg" placeholder="Ticket Prices"/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Taxes</p></div>
-                        <div class="col ml-auto"><p>$7.50</p></div>
+                        <div class="col ml-auto"><input type="text" name="taxes" id="taxes" class="form-control form-control-lg" placeholder="Taxes"/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Total</p></div>
-                        <div class="col ml-auto"><p>$57.50</p></div>
+                        <div class="col ml-auto"><input type="text" name="total" id="total" class="form-control form-control-lg" placeholder="Total"/> </div>
                     </div>
                     <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Promotion Code</label></div>
-                        <div class="col ml-auto"><input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Promo Code"/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="promotion_code">Promotion Code</label></div>
+                        <div class="col ml-auto"><input type="text" name="promotion_code" id="promotion_code" class="form-control form-control-lg" placeholder="Promo Code"/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Discount</p></div>
-                        <div class="col ml-auto"><p>$6.00</p></div>
+                        <div class="col ml-auto"><input type="text" name="discount" id="discount" class="form-control form-control-lg" placeholder="Discount Amount"/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Payment Amount</p></div>
-                        <div class="col ml-auto"><p>$51.50</p></div>
+                        <div class="col ml-auto">
+                        <input type="text" id="amount" class="form-control form-control-lg" placeholder="Card Number *"/>
+                        </div>
                     </div>
 
-                    <button class="btn btn-outline-success" type="submit">Cancel Checkout</button>
+                    <button class="btn btn-outline-success" name="cancel_checkout" type="submit">Cancel Checkout</button>
 
               </div>
             </div>
@@ -72,20 +75,20 @@
                 <h3 class="text-uppercase text-center mb-5">Payment</h3>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto">
-                            <label class="form-label" for="form3Example1cg">Card Number</label>
+                            <label class="form-label" for="card_number">Card Number</label>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Card Number *"/>
+                            <input type="text" id="card_number" class="form-control form-control-lg" placeholder="Card Number *"/>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="card_name">Card Holder Name</label></div>
+                        <div class="col ml-auto"><input type="text"  name="card_name" id="card_name" class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">CVV</label></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="CVV *"/> </div>
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
+                        <div class="col ml-auto"><label class="form-label" for="cvv">CVV</label></div>
+                        <div class="col ml-auto"><input type="text" name="cvv" id="cvv"  class="form-control form-control-lg" placeholder="CVV *"/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="expireMM">Exp. Date</label></div>
                         <div class="col ml-auto"><select name='expireMM' id='expireMM'>
                                     <option value=''>Month</option>
                                     <option value='01'>01</option>
@@ -112,8 +115,8 @@
                     <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </div>
                   </div>
 
-                    <button class="btn btn-outline-success" type="submit">Proceed Payment</button>
-                    <button class="btn btn-outline-success" type="submit">Cancel</button>
+                    <button class="btn btn-outline-success" name="Proceed Payment" type="submit">Proceed Payment</button>
+                    <button class="btn btn-outline-success" name="Cancel" type="submit">Cancel</button>
 
               </div>
             </div>

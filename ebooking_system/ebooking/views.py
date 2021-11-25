@@ -271,26 +271,54 @@ def book_movie(request):
     total_time_list = {}
     print(schedule_movie)
     for i in schedule_movie:
+        showroom = i.showroom
         stored_time = datetime.strftime(i.date_time, '%Y-%m-%dT%H:%M')
         if current_time < stored_time:
 
             my_date = datetime.strftime(i.date_time, "%Y-%m-%d")
             my_time = datetime.strftime(i.date_time, "%H:%M")
             if my_date in total_time_list:
-                 total_time_list[my_date].append(my_time)
+                 total_time_list[my_date].append({my_time: showroom})
             else:
-                 total_time_list[my_date] = [my_time]
+                 total_time_list[my_date] = [{my_time: showroom}]
 
         print(total_time_list)
     #return render(request, "moviedetails.html", {'movie_list': movie})
     return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list})
 
 def checkout(request):
+    print(request.GET, request.POST, "qqqqqqqqqqqqqqqqq")
     return render(request, 'checkout.html')
 
 def seats(request):
+    print(request.GET, "qqqqqqqqqq")
+    print(request.POST, "eeeeeeeeeeeee")
+    movie_title = request.GET['movie_title']
+    date=request.GET['date']
+    tm= request.GET['time']
+    sm = request.GET['show_room']
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
-    return render(request, 'seats.html', {"movie": movie})
+    show_time = Showroom.objects.filter(showroom=sm)[0]
+    row_count = show_time.row_seats
+    column_count = show_time.col_seats
+
+    if request.method == "POST":
+        post_details= request.POST
+        seat_list = []
+
+        for key, value in post_details.items():
+            print(value)
+            if value == 'on':
+                seat_list.append(key)
+        seat_list = ','.join(seat_list)
+        return render(request, 'seats.html', {"row_count": range(row_count), "column_count": range(column_count),
+                                              "show_room": show_time.showroom, "movie": movie,
+                                              "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list})
+
+    return render(request, 'seats.html', {"row_count": range(row_count), "column_count": range(column_count),
+                                              "show_room": show_time.showroom, "movie": movie,
+                                              "date": date, "title": movie_title, "time": tm})
+
 def fullcalendar(request):
     return render(request, 'fullcalendar.html')
 def orderSummary(request):
@@ -395,4 +423,6 @@ def schedule(request):
 
 def manage(request):
     return render(request, 'manage.html')
+
+
 

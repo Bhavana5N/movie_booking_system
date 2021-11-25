@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -28,10 +27,12 @@
             <div class="card" style="border-radius: 15px;">
                 <div class="mask" style="background-color: black;">
       <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white" method="post">
+
+        <div class="text-white">
 			{% csrf_token %}
 			{% for i in movie %}
           <h1 class="mb-3"> {{i.movie_title}} </h1>
+			<h1 class="mb-3"> {{show_room}} </h1>
 			{% endfor %}
         </div>
       </div>
@@ -39,373 +40,47 @@
               <div class="card-body p-5" style="display: block;
     margin-left: auto;
     margin-right: auto;">
-
+				 <form method="post" action="/seats/?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}">
+					 {% csrf_token %}
                   <div>
                       <h1 style="text-align:center">Select Seats</h1>
-                      <h2 style="text-align:center">Tickets: <small class="text-muted">2</small></h2>
                   </div>
 				<div>
 					<table style="display:inline">
+						{% for i in row_count %}
 						<tr>
+							{% for j in column_count %}
                             </td>
                             <td style="width:60px">
 							</td>
+
                             <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
+								<input type="checkbox" class="btn-check" id={{i}}{{j}} name={{i}}{{j}} autocomplete="off"/>
+								<label class="btn btn-primary" for={{i}}{{j}} style="500px">Seat</label>
 							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check2" style="500px">Seat</label>
-							</td>
-                            </td>
-                            <td style="width:60px">
-							</td>
-							<td>
-								<input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check3" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check4" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check4" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check5" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check5" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check6" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check6" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check7" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check7" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check8" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check8" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check9" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check9" id="open" style="500px">Seat</label>
-							</td>
-                            <td style="width:60px">
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check10" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check10" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check11" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check11" style="500px">Seat</label>
-							</td>
+							{% endfor %}
 						</tr>
-                        <tr>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            </td>
-                            <td style="width:60px">
-							</td>
-							<td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td style="width:60px">
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-						</tr>
-                        <tr>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            </td>
-                            <td style="width:60px">
-							</td>
-							<td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td style="width:60px">
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-						</tr>
-                        <tr>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            </td>
-                            <td style="width:60px">
-							</td>
-							<td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td style="width:60px">
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-						</tr>
-                        <tr>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            </td>
-                            <td style="width:60px">
-							</td>
-							<td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" id="closed" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td style="width:60px">
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-						</tr>
-                        <tr>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            </td>
-                            <td style="width:60px">
-							</td>
-							<td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td style="width:60px">
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-                            <td>
-								<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off"/>
-								<label class="btn btn-primary" for="btn-check" style="500px">Seat</label>
-							</td>
-						</tr>
+						{% endfor %}
 					</table>
 				</div>
-						<input type="button" class="btn btn-secondary" name="save" value="Reserve Selected Seats">
-							<input type="button" class="btn btn-danger" name="cancel" value="Cancel">
-						</form>
+				 <input type="submit" value="Reserve"
+                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></form>
+				  <form method="POST" action="checkout">
+				 <div class="col ml-auto text-center">
+                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}&seat_list={{seat_list}}'>checkout</a>
+                                </div>
+                    </div>
+				  </form>
+
+						<!--div class="col ml-auto text-center">
+                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}'>Reserve</a>
+                                </div>-->
 						</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</section>
+	</section></div>
   </main>
   <!-- Footer-->
         <footer class="py-5 bg-dark">
@@ -419,7 +94,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-<body>
+</body>
 
-<html>
 	{% endblock content %}
