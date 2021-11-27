@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, AbstractUser
 #from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import base64
 
 class customuser(AbstractUser):
     phone_number = models.IntegerField()
@@ -16,9 +17,23 @@ class customuser(AbstractUser):
     promotion = models.TextField(default='off')
     rememberme = models.TextField(default='off')
 
+class EncryptKey():
+    is_instance = None
+    def __init__(self):
+        from cryptography.fernet import Fernet
+        key = Fernet.generate_key()  # this is your "password"
+        self.cipher_suite = Fernet(key)
+
+    @staticmethod
+    def get_instance():
+        if not EncryptKey.is_instance:
+            EncryptKey.is_instance = EncryptKey()
+
+        return EncryptKey.is_instance
+
 
 class EbookingCard(models.Model):
-    card_number = models.IntegerField()
+    card_number = models.BinaryField()
     expiredate = models.IntegerField()
     expireyear = models.IntegerField()
     name = models.TextField()
@@ -30,6 +45,17 @@ class EbookingCard(models.Model):
         managed = False
         db_table = 'ebooking_card'
 
+    e_instance = EncryptKey.get_instance()
+
+
+
+    @property
+    def retreive_card(cls):
+        print(cls.card_number, type(cls.card_number))
+        if cls.card_number:
+            return cls.e_instance.cipher_suite.decrypt(cls.card_number).decode()
+        else:
+            return ''
 
 class UserRegisrationForm(models.Model):
     username = models.TextField()

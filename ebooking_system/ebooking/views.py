@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
 from .utils import generate_token
+import base64
 
 
 def login_user(request):
@@ -111,7 +112,8 @@ def edit_card(request):
             return render(request, "edit_card.html", {'cards': b, 'is_new': False})
 
     if request.POST.get('save') and 'card_number' in request.POST:
-        card=EbookingCard(card_number=request.POST['card_number'],
+
+        card=EbookingCard(card_number=EbookingCard().e_instance.cipher_suite.encrypt(bytes(request.POST['card_number'],'UTF-8')),
                           name=request.POST['cname'], expireyear=request.POST['expireyear'],
                           expiredate=request.POST['expiredate'], uid= request.user.id)
         card.save()
@@ -310,11 +312,12 @@ def checkout(request):
         if len(cards) >= 3:
             messages.info(request, "only three cards are allowed")
         else:
-            card = EbookingCard(card_number=request.POST['card_number'],
+            card = EbookingCard(card_number=EbookingCard().e_instance.cipher_suite.encrypt(bytes(request.POST['card_number'],'UTF-8')),
                                 name=request.POST['cname'], expireyear=request.POST['expireyear'],
                                 expiredate=request.POST['expiredate'], uid=user_id)
             card.save()
     cvv_list = []
+    cards = EbookingCard.objects.filter(uid=user_id)
     for i in cards:
         cvv_list.append('cvv'+str(i.id))
     print(cvv_list)
