@@ -288,7 +288,77 @@ def book_movie(request):
 
 def checkout(request):
     print(request.GET, request.POST, "qqqqqqqqqqqqqqqqq")
-    return render(request, 'checkout.html')
+    seat_list = request.GET['seat_list']
+    num_of_tickets = len(seat_list.split(","))
+    movie_title = request.GET['movie_title']
+    print(request.GET["show_room"])
+    cards = []
+
+    if request.method == "POST" and 'proceed_checkout' in request.POST and request.POST["proceed_checkout"] == 'save':
+
+        new_order = Order(user_id = "bn32157@uga.edu", showroom=request.GET["show_room"],
+                movie = movie_title,
+                tickets = num_of_tickets,#request.GET["movie_title"]
+                seats = seat_list,
+                show_time = request.GET["show_room"],
+                price = 35)#request.GET["price"],)
+        new_order.save()
+    user_id = customuser.objects.filter(username="bn32157@uga.edu")[0].id
+    cards = EbookingCard.objects.filter(uid=user_id)
+
+    if "rememberme" in request.POST and request.POST["rememberme"] == 'on':
+        if len(cards) >= 3:
+            messages.info(request, "only three cards are allowed")
+        else:
+            card = EbookingCard(card_number=request.POST['card_number'],
+                                name=request.POST['cname'], expireyear=request.POST['expireyear'],
+                                expiredate=request.POST['expiredate'], uid=user_id)
+            card.save()
+    cvv_list = []
+    for i in cards:
+        cvv_list.append('cvv'+str(i.id))
+    print(cvv_list)
+    for i in cvv_list:
+        print(request.POST, i, i in request.POST)
+        if i in request.POST:
+
+            if request.POST[i]:
+                messages.info(request, "Payment is Done")
+
+
+
+
+
+    b = EbookingMovie.objects.filter(movie_title=movie_title)
+
+    tickets_price = num_of_tickets * b[0].price
+    taxes = tickets_price * 2/100
+    total_price = tickets_price + taxes
+    discount_amount = 0
+    promotion_code = ''
+
+
+    if "promotion_code" in request.POST:
+        promotion_list = Promotions.objects.filter(promotion_code=request.POST["promotion_code"])
+        current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
+        if request.POST["promotion_code"]  and request.POST["promotion_code"] not in promotion_list:
+            messages.info(request, "Promotion code is not valid")
+        for i in promotion_list:
+            promotion_code = i.promotion_code
+            stored_time = datetime.strftime(i.expiray_date, '%Y-%m-%dT%H:%M')
+            if current_time > stored_time:
+                messages.info(request, "Promotion code is expired")
+            else:
+                discount_amount = i.discount
+    payment_amount = total_price - discount_amount
+
+    return render(request, 'checkout.html', {"show_room": request.GET['show_room'], 'cards': cards,
+                                              "date": request.GET['date'], "movie_title": movie_title,
+                                             "time": request.GET['time'], 'seat_list': request.GET['seat_list'],
+                                             "num_of_tickets": num_of_tickets, "tickets_price": tickets_price,
+                                             "discount": discount_amount, "promotion_code": promotion_code,
+                                             "taxes": taxes, "total_price": total_price, "payment_amount": payment_amount})
+
 
 def seats(request):
     print(request.GET, "qqqqqqqqqq")

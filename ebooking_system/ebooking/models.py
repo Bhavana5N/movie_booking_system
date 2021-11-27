@@ -57,7 +57,7 @@ class Order(models.Model):
     tickets = models.IntegerField(blank=True, null=True)
     seats = models.TextField(blank=True, null=True)
     show_time = models.TextField(blank=True, null=True)
-    price = models.TextField(blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)
     movie = models.TextField(blank=True, null=True)
 
     class Meta:
