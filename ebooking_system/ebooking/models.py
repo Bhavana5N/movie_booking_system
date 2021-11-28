@@ -18,10 +18,12 @@ class customuser(AbstractUser):
     rememberme = models.TextField(default='off')
 
 class EncryptKey():
+
     is_instance = None
+
     def __init__(self):
         from cryptography.fernet import Fernet
-        key = Fernet.generate_key()  # this is your "password"
+        key = b'ETjEQiNW_TlaEqAVWGHkikn8g1LBd758knStznq3vpw='#Fernet.generate_key()  # this is your "password"
         self.cipher_suite = Fernet(key)
 
     @staticmethod

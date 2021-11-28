@@ -296,13 +296,15 @@ def checkout(request):
     print(request.GET["show_room"])
     cards = []
 
-    if request.method == "POST" and 'proceed_checkout' in request.POST and request.POST["proceed_checkout"] == 'save':
-
+    if request.method == "POST" and ('proceed_checkout' in request.POST and request.POST["proceed_checkout"] == 'save') or \
+        ("Proceed Payment" in request.POST and request.POST["Proceed Payment"] == 'payment'):
+        target_datetime = datetime.strptime(request.GET["date"]+request.GET["time"], '%Y-%m-%d%H:%M')
+        print(target_datetime, type(datetime))
         new_order = Order(user_id = "bn32157@uga.edu", showroom=request.GET["show_room"],
                 movie = movie_title,
                 tickets = num_of_tickets,#request.GET["movie_title"]
                 seats = seat_list,
-                show_time = request.GET["show_room"],
+                show_time = target_datetime,
                 price = 35)#request.GET["price"],)
         new_order.save()
     user_id = customuser.objects.filter(username="bn32157@uga.edu")[0].id
