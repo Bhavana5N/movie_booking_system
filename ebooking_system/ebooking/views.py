@@ -295,8 +295,9 @@ def checkout(request):
     movie_title = request.GET['movie_title']
     print(request.GET["show_room"])
     cards = []
+    user_id = customuser.objects.filter(username="bn32157@uga.edu")[0].id
 
-    if request.method == "POST" and ('proceed_checkout' in request.POST and request.POST["proceed_checkout"] == 'save') or \
+    if request.method == "POST" and \
         ("Proceed Payment" in request.POST and request.POST["Proceed Payment"] == 'payment'):
         target_datetime = datetime.strptime(request.GET["date"]+request.GET["time"], '%Y-%m-%d%H:%M')
         print(target_datetime, type(datetime))
@@ -307,7 +308,23 @@ def checkout(request):
                 show_time = target_datetime,
                 price = 35)#request.GET["price"],)
         new_order.save()
-    user_id = customuser.objects.filter(username="bn32157@uga.edu")[0].id
+        cvv_list = []
+        cards = EbookingCard.objects.filter(uid=user_id)
+        for i in cards:
+            cvv_list.append('cvv' + str(i.id))
+        print(cvv_list)
+        is_cvv_added = False
+        for i in cvv_list:
+            print(request.POST, i, i in request.POST)
+            if i in request.POST:
+                if request.POST[i]:
+                    is_cvv_added = True
+                    messages.info(request, "Payment is Done")
+                    return render(request, 'orderconfirmation.html', {"order": new_order})
+
+        if not is_cvv_added:
+            messages.info(request, "Enter CVV for Card")
+
     cards = EbookingCard.objects.filter(uid=user_id)
 
     if "rememberme" in request.POST and request.POST["rememberme"] == 'on':
@@ -318,30 +335,13 @@ def checkout(request):
                                 name=request.POST['cname'], expireyear=request.POST['expireyear'],
                                 expiredate=request.POST['expiredate'], uid=user_id)
             card.save()
-    cvv_list = []
-    cards = EbookingCard.objects.filter(uid=user_id)
-    for i in cards:
-        cvv_list.append('cvv'+str(i.id))
-    print(cvv_list)
-    for i in cvv_list:
-        print(request.POST, i, i in request.POST)
-        if i in request.POST:
-
-            if request.POST[i]:
-                messages.info(request, "Payment is Done")
-
-
-
-
 
     b = EbookingMovie.objects.filter(movie_title=movie_title)
-
     tickets_price = num_of_tickets * b[0].price
     taxes = tickets_price * 2/100
     total_price = tickets_price + taxes
     discount_amount = 0
     promotion_code = ''
-
 
     if "promotion_code" in request.POST:
         promotion_list = Promotions.objects.filter(promotion_code=request.POST["promotion_code"])
@@ -354,7 +354,7 @@ def checkout(request):
             if current_time > stored_time:
                 messages.info(request, "Promotion code is expired")
             else:
-                discount_amount = i.discount
+                discount_amount = i.discount * total_price/100
     payment_amount = total_price - discount_amount
 
     return render(request, 'checkout.html', {"show_room": request.GET['show_room'], 'cards': cards,
@@ -366,8 +366,6 @@ def checkout(request):
 
 
 def seats(request):
-    print(request.GET, "qqqqqqqqqq")
-    print(request.POST, "eeeeeeeeeeeee")
     movie_title = request.GET['movie_title']
     date=request.GET['date']
     tm= request.GET['time']
