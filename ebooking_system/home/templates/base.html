@@ -63,22 +63,13 @@
                         </li>-->
 
                         {% if user.is_authenticated %}
-                        <li class="nav-item active"><a class="nav-link" href="logout">Logout</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="edit_profile">Profile</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="/edit_profile">Profile</a></li>
                         {% else %}
                         <li class="nav-item active"><a class="nav-link" href="/login">Login</a></li>
                         <li class="nav-item active"><a class="nav-link" href="/registration">Registration</a></li>
                         {% endif %}
                     </ul>
-                    <form class="d-flex" method="POST" action="orderSummary">
-                        <a href="orderSummary">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                            </a>
-                    </form>
                 </div>
             </div>
         </nav>

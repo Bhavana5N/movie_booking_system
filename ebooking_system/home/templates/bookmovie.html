@@ -40,6 +40,7 @@
 	              <h4>Price: ${{i.price}}</h4>
 
 	              </div>
+                {% if is_user %}
         <div class="container h-100"></div>
 
                       {% if time_list %}
@@ -50,9 +51,9 @@
                     {% for j in time %}
                         {% for k, show_room in j.items %}
                 <div class="col ml-auto text-center">
-                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date={{date}}&time={{k}}&show_room={{show_room}}'>{{k}}</a>
+                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date={{date}}&time={{k}}&show_room={{show_room.showroom}}&slot={{show_room.id}}'>{{k}}</a>
                                 </div> {% endfor %} {% endfor %}
-                    </div></br>{% endfor %}{% endif%}{% endfor %}
+                    </div></br>{% endfor %}{% endif%}{% endif%}{% endfor %}
             </div></br></br>
         </form></div></div></div></div></div></div></section>
 {% endblock %}

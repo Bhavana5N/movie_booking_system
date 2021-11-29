@@ -111,7 +111,7 @@
                         <label class="form-label" for=id_year{{i.id}}>Year</label>
                       </div>
                       <div class="col ml-auto">
-                          <input type="text" id="cvv{{i.id}}" name="cvv{{i.id}}" class="form-control form-control-lg" placeholder={{i.cvv}}>
+                          <input type="text" minlength="3" maxlength="3" id="cvv{{i.id}}" name="cvv{{i.id}}" class="form-control form-control-lg" placeholder={{i.cvv}}>
                         <label class="form-label" for=cvv{{i.id}}>CVV</label>
                       </div>
                       </div></blockquote></div>
@@ -124,7 +124,7 @@
                             <label class="form-label" for="card_number">Card Number</label>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" name="card_number" id="card_number" class="form-control form-control-lg" placeholder="Card Number *"/>
+                            <input type="text" minlength="16" maxlength="16"  name="card_number" id="card_number" class="form-control form-control-lg" placeholder="Card Number *"/>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
@@ -133,7 +133,7 @@
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto"><label class="form-label" for="cvv">CVV</label></div>
-                        <div class="col ml-auto"><input type="text" name="cvv" id="cvv"  class="form-control form-control-lg" placeholder="CVV *"/> </div>
+                        <div class="col ml-auto"><input type="text" minlength="3" maxlength="3"  name="cvv" id="cvv"  class="form-control form-control-lg" placeholder="CVV *"/> </div>
                         <div class="col ml-auto"><label class="form-label" for="expireMM">Exp. Date</label></div>
                         <div class="col ml-auto"><select name='expiredate' id='expireMM'>
                                     <option value=''>Month</option>
