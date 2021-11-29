@@ -324,7 +324,6 @@ def checkout(request):
 
         if not is_cvv_added:
             messages.info(request, "Enter CVV for Card")
-
     cards = EbookingCard.objects.filter(uid=user_id)
 
     if "rememberme" in request.POST and request.POST["rememberme"] == 'on':
@@ -399,6 +398,10 @@ def orderSummary(request):
 def orderHistory(request):
     return render(request, 'orderHistory.html')
 def orderconfirmation(request):
+    #send email
+    #list out order details
+    #display tickets
+
     return render(request, 'orderconfirmation.html')
 def summary(request):
     return render(request, 'summary.html')
