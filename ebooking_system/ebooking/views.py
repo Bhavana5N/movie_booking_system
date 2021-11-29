@@ -270,6 +270,7 @@ def moviedetails(request):
     return render(request, "moviedetails.html", {'movie_list': movie})
 
 def book_movie(request):
+    ticket_category = TicketCategory.objects.all()
     user_list = customuser.objects.filter(username=request.user)
     is_user = True
     if user_list:
@@ -297,7 +298,8 @@ def book_movie(request):
 
         print(total_time_list)
     print(is_user)
-    return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list, "is_user":is_user})
+    return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list,
+                                              "is_user":is_user, "ticket_category": ticket_category})
 
 
 def checkout(request):

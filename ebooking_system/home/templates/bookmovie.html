@@ -37,7 +37,10 @@
                 <p  class="text-uppercase text-center"> {{i.actors}} </p>
 	              </div>
                 <div  class="text-uppercase text-center mb-5">
-	              <h4>Price: ${{i.price}}</h4>
+	              <h4>Price</h4>
+                   {% for tt in ticket_category %}
+                    <p  class="text-uppercase text-center"> {{tt.ticket_type}}: {{tt.price}}$ </p>
+                    {% endfor %}
 
 	              </div>
                 {% if is_user %}
