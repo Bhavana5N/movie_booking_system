@@ -41,7 +41,7 @@ urlpatterns = [
     path('orderSummary', views.orderSummary, name="orderSummary"),
     path('addpromotion', views.addpromotion, name='addpromotion'),
     path('addmovie', views.addmovie, name='addmovie'),
-    path('checkout', views.checkout, name='checkout'),
+    path('checkout/', views.checkout, name='checkout'),
     path('moviedetails', views.moviedetails, name='moviedetails'),
     path('seats/', views.seats, name='seats'),
     path('fullcalendar', views.fullcalendar, name='fullcalendar'),
@@ -52,6 +52,7 @@ urlpatterns = [
     path('schedule', views.schedule, name='schedule'),
     #path('schedulemovie', views.schedulemovie, name='schedulemovie'),
     path('bookmovie/', views.book_movie, name='bookmovie'),
-    path('base', views.base, name='base')
+    path('base', views.base, name='base'),
+    path('manage', views.manage, name='manage'),
 ]
 

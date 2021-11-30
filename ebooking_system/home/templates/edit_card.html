@@ -29,7 +29,7 @@
                         </div>
                         <div class="col ml-auto">
                             <input type="text" id="cardnumber" class="form-control form-control-lg"
-                                   placeholder={{i.card_number}}>
+                                   placeholder={{i.retreive_card}}>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto py-4">
@@ -64,15 +64,15 @@
                        <blockquote class="card-blockquote">
                       <div class="row ml-auto">
                       <div class="col ml-auto">
-                            <label class="form-label" for="form3Example1cg">Card Number</label>
+                            <label class="form-label" for="card_new">Card Number</label>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" name= "card_number" placeholder="Card Number *" required/>
+                            <input type="text" minlength="16" maxlength="16" id="card_new" name="card_number" id="card_number" class="form-control form-control-lg" placeholder="Card Number *" required>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto py-4">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
-                        <div class="col ml-auto"><input type="text"  name= "cname" class="form-control form-control-lg" placeholder="Card Holder Name *" required/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="new_name">Card Holder Name</label></div>
+                        <div class="col ml-auto"><input type="text" id="new_name" name= "cname" class="form-control form-control-lg" placeholder="Card Holder Name *" required/> </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>

@@ -1,4 +1,4 @@
-{% extends 'logout.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
       <div class="container h-75">
@@ -9,16 +9,19 @@
                 <h3 class="text-uppercase text-center mb-5">Order Summary</h3>
                   <div class="col ml-auto">
                       <div class="row ml-auto">
-                          <div class="col ml-auto"><p>Theatre:</p></div>
-                          <div class="col ml-auto"><p>AMB Movies</p></div>
-                          <div class="col ml-auto"><p>Movie:</p></div>
-                          <div class="col ml-auto"><p>Hawk</p></div>
+                          <div class="col ml-auto"><p>Show Room</p></div>
+                          <div class="col ml-auto"><input type="text" name="show_room"
+                                                          id="show room" class="form-control form-control-lg" placeholder={{show_room}} readonly> </div>
+
+                          <div class="col ml-auto"><p>Movie</p></div>
+                          <div class="col ml-auto"><input type="text" name="movie" id="movie" class="form-control form-control-lg" placeholder={{movie_title}} readonly> </div>
                     </div>
+                      <br></br>
                       <div class="row ml-auto">
                         <div class="col ml-auto"><p>Show Time:</p></div>
-                        <div class="col ml-auto"><p>10/02/2021 7:30 PM</p></div>
+                          <div class="col ml-auto"><input type="text" name="show_time" id="show_time" class="form-control form-control-lg" placeholder={{date}}-{{time}} readonly> </div>
                         <div class="col ml-auto"><p>Seats:</p></div>
-                        <div class="col ml-auto"><p>A1,A2,A3</p></div>
+                        <div class="col ml-auto"><input type="text" name="seats" id="seats" class="form-control form-control-lg" placeholder={{seat_list}} readonly> </div>
                     </div>
                 </div>
               </div>
@@ -34,34 +37,38 @@
 
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>No.of Tickets</p></div>
-                        <div class="col ml-auto"><p>3</p></div>
+                        <div class="col ml-auto"><input type="text" name="no_of_tickets" id="no_of_tickets" class="form-control form-control-lg" placeholder={{num_of_tickets}} readonly> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Tickets Price</p></div>
-                        <div class="col ml-auto"><p>$50</p></div>
+                        <div class="col ml-auto"><input type="text" name="tickets_price" id="tickets_price" class="form-control form-control-lg" placeholder={{tickets_price}} readonly/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Taxes</p></div>
-                        <div class="col ml-auto"><p>$7.50</p></div>
+                        <div class="col ml-auto"><input type="text" name="taxes" id="taxes" class="form-control form-control-lg" placeholder={{taxes}} readonly/> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Total</p></div>
-                        <div class="col ml-auto"><p>$57.50</p></div>
+                        <div class="col ml-auto"><input type="text" name="total_price" id="total" class="form-control form-control-lg" placeholder={{total_price}} readonly> </div>
                     </div>
+                  <form method="post">
+                      {% csrf_token %}
                     <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Promotion Code</label></div>
-                        <div class="col ml-auto"><input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Promo Code"/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="promotion_code">Promotion Code</label></div>
+                        <div class="col ml-auto"><input type="text" name="promotion_code" id="promotion_code" class="form-control form-control-lg" placeholder={{promotion_code}} > </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Discount</p></div>
-                        <div class="col ml-auto"><p>$6.00</p></div>
+                        <div class="col ml-auto"><input type="text" name="discount" id="discount" class="form-control form-control-lg" placeholder={{discount}} readonly> </div>
                     </div>
                     <div class="row ml-auto">
                         <div class="col ml-auto"><p>Payment Amount</p></div>
-                        <div class="col ml-auto"><p>$51.50</p></div>
+                        <div class="col ml-auto">
+                        <input type="text" id="amount" class="form-control form-control-lg" placeholder={{payment_amount}} readonly>
+                        </div>
                     </div>
 
-                    <button class="btn btn-outline-success" type="submit">Cancel Checkout</button>
+                     <button class="btn btn-outline-success" name="proceed_checkout" value="save" type="submit">Apply Promotion</button>
 
               </div>
             </div>
@@ -69,24 +76,66 @@
             <div class="col ml-auto">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
+                  {% for i in cards %}
+
+
+                      </br></br>
+                      <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px">
+                          <span class="button">
+                          <button type="submit" style="margin:20px"
+                                  value={{i.id}} name="delete"{{i.id}} class="btn btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
+                      </span>
+                   <div class="card-body p-2">
+                       <blockquote class="card-blockquote">
+                      <div class="row ml-auto">
+                      <div class="col ml-auto">
+                            <h5 class="card-title">Card Number</h5>
+                        </div>
+                        <div class="col ml-auto">
+                            <input type="text" id="cardnumber" class="form-control form-control-lg"
+                                   placeholder={{i.retreive_card}}>
+                        </div>
+                  </div>
+                  <div class="form-outline mb-4 row ml-auto py-4">
+                        <div class="col ml-auto"><h5 class="card-title">Card Holder Name</h5></div>
+                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder={{i.name}}> </div>
+                  </div>
+                  <div class="form-outline mb-4 row ml-auto">
+                      <div class="col ml-auto"><h5 class="card-title">Exp. Date</h5></div>
+                      <div class="col ml-auto">
+                          <input type="text" id="id_month{{i.id}}" class="form-control form-control-lg"  placeholder={{i.expiredate}}>
+                        <label class="form-label" for=id_month{{i.id}}>Month</label>
+                      </div>
+                      <div class="col ml-auto">
+                          <input type="text" id="id_year{{i.id}}" class="form-control form-control-lg" placeholder={{i.expireyear}}>
+                        <label class="form-label" for=id_year{{i.id}}>Year</label>
+                      </div>
+                      <div class="col ml-auto">
+                          <input type="text" minlength="3" maxlength="3" id="cvv{{i.id}}" name="cvv{{i.id}}" class="form-control form-control-lg" placeholder={{i.cvv}}>
+                        <label class="form-label" for=cvv{{i.id}}>CVV</label>
+                      </div>
+                      </div></blockquote></div>
+                  </div>
+                      {% endfor %}
+
                 <h3 class="text-uppercase text-center mb-5">Payment</h3>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto">
-                            <label class="form-label" for="form3Example1cg">Card Number</label>
+                            <label class="form-label" for="card_number">Card Number</label>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Card Number *"/>
+                            <input type="text" minlength="16" maxlength="16"  name="card_number" id="card_number" class="form-control form-control-lg" placeholder="Card Number *"/>
                         </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Card Holder Name</label></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="card_name">Card Holder Name</label></div>
+                        <div class="col ml-auto"><input type="text"  name="cname" id="card_name" class="form-control form-control-lg" placeholder="Card Holder Name *"/> </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">CVV</label></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder="CVV *"/> </div>
-                        <div class="col ml-auto"><label class="form-label" for="form3Example1cg">Exp. Date</label></div>
-                        <div class="col ml-auto"><select name='expireMM' id='expireMM'>
+                        <div class="col ml-auto"><label class="form-label" for="cvv">CVV</label></div>
+                        <div class="col ml-auto"><input type="text" minlength="3" maxlength="3"  name="cvv" id="cvv"  class="form-control form-control-lg" placeholder="CVV *"/> </div>
+                        <div class="col ml-auto"><label class="form-label" for="expireMM">Exp. Date</label></div>
+                        <div class="col ml-auto"><select name='expiredate' id='expireMM'>
                                     <option value=''>Month</option>
                                     <option value='01'>01</option>
                                     <option value='02'>02</option>
@@ -101,7 +150,7 @@
                                     <option value='11'>11</option>
                                     <option value='12'>12</option>
                                 </select></div><div class = "col ml-auto">
-                                <select name='expireYY' id='expireYY'>
+                                <select name='expireyear' id='expireYY'>
                                     <option value=''>Year</option>
                                     <option value='20'>2020</option>
                                     <option value='21'>2021</option>
@@ -110,15 +159,23 @@
                                     <option value='24'>2024</option>
                                 </select>
                     <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </div>
+                  <div class="col ml-auto">
+
+                          <input type="checkbox" id="rememberme" name="rememberme" >
+                            <label for="rememberme" class="text-center text-muted mt-5 mb-0"> Remember Me</label><br>
+                  </div>
                   </div>
 
-                    <button class="btn btn-outline-success" type="submit">Proceed Payment</button>
-                    <button class="btn btn-outline-success" type="submit">Cancel</button>
-
+                    <button class="btn btn-outline-success" name="Proceed Payment" value="payment" type="submit">Proceed Payment</button>
+                    <button class="btn btn-outline-success" name="Cancel" type="submit">Cancel</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
+           {% for message in messages %}
+          <h3 class="text-red">{{message}}</h3>
+        {% endfor %}
       </div>
 
 

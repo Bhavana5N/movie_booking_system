@@ -63,9 +63,13 @@
                     </div>
 	              </div>
                 <div  class="text-uppercase text-center mb-5">
-	              <h4>Price: ${{i.price}}</h4>
+	              <h4>Price</h4>
+                   {% for tt in ticket_category %}
+                    <p  class="text-uppercase text-center"> {{tt.ticket_type}}: {{tt.price}}$ </p>
+                    {% endfor %}
 
 	              </div>
+                {% if is_user %}
         <div class="container h-100"></div>
 
                       {% if time_list %}
@@ -73,11 +77,12 @@
                 {% for date, time in time_list.items %}
                     <div class="text-center mb-2">{{date}}</div>
                     <div class="row ml-auto">
-                    {% for j  in time %}
+                    {% for j in time %}
+                        {% for k, show_room in j.items %}
                 <div class="col ml-auto text-center">
-                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date_time={{date}}_{{j}}'>{{j}}</a>
-                                </div> {% endfor %}
-                    </div></br>{% endfor %}{% endif%}{% endfor %}
+                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\seats\?movie_title={{i.movie_title}}&date={{date}}&time={{k}}&show_room={{show_room.showroom}}&slot={{show_room.id}}'>{{k}}</a>
+                                </div> {% endfor %} {% endfor %}
+                    </div></br>{% endfor %}{% endif%}{% endif%}{% endfor %}
             </div></br></br>
         </form></div></div></div></div></div></div></section>
 {% endblock %}
