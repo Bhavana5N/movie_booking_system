@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <head><link rel="stylesheet" href="{% static 'home/css/registration.css' %}"></head>
-<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg'); height: 1550px;">
+<section class="vh-100 bg-image" style="background-image: url('https://s3.envato.com/files/138478059/eps2014112023166080793.jpg'); height: 1750px;">
       <div class="container h-100">
           <div class="mt-3">
             <div class="card" style="border-radius: 15px;">
@@ -11,27 +11,53 @@
         {% csrf_token %}
             <div class="card-body p-10">
                 {% for i in movie %}
-	               <div class="mt-3"><iframe width="1000" height="600" src={{i.trailer_link}} title="YouTube video player"
+	               <div class="mt-3 justify-content-center align-items-center"><iframe width="1025" height="600" src={{i.trailer_link}} title="YouTube video player"
                             frameborder="0" allow="accelerometer; autoplay;
                             clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                    </iframe></div>
-                <div class="mt-3">
-		              <div class="d-flex justify-content-center small text-warning mb-2">
-                                        {% for ratings in i.ratings%}
-                                            <div class="bi-star-fill"></div>
-                                        {% endfor %}
-                                    </div>
 
-		            <h5  class="text-uppercase text-center mb-1" style="font-weight:bold;"> {{i.movie_title}} : {{i.age_category}}</h5>
-		            <p  class="text-uppercase text-center mb-4" style="font-size: 14px;"> {{i.category}} </p>
-		            <p  class="text-center mb-5"> {{i.synopsis}} </p>
-		            <h5  class="text-uppercase text-center" style="font-weight:bold;"> Movie Director </h5>
-                <p  class="text-uppercase text-center"> {{i.director}} </p>
-		            <h5  class="text-uppercase text-center" style="font-weight:bold;"> Movie Producers </h5>
-                <p  class="text-uppercase text-center"> {{i.producer}} </p>
-		            <h5  class="text-uppercase text-center mb-3" style="font-weight:bold;"> Movie Cast </h5>
-                <p  class="text-uppercase text-center"> {{i.actors}} </p>
+
+                <div class="mt-3">
+                    <div
+                    class="bg-image"
+                    style="
+                      background-color: darkgray;
+                      height: 200px;
+                    "
+                  >
+                <div class="mask" style="background-color: rgba(0, 0, 0, 0);">
+                    <div class="row ml-auto p-3" style="text-color:white">
+                        <div class="col-8">
+		              <div class="d-flex  small text-warning mb-2">
+                          {% for ratings in i.ratings%}
+                          <div class="bi-star-fill"></div>
+                          {% endfor %}
+                      </div>
+                        <h5  class="h1 text-uppercase  mb-1" style="font-weight:bold;color:white"> {{i.movie_title}} : {{i.age_category}}</h5>
+                        <p  class="fs-6 text-uppercase  mb-4" style="color:white"> {{i.category}} </p>
+                            </div>
+                        <div class="col-4 p-4">
+                            <h4 class="h4 text-uppercase text-center mb-1" style="color:white">{{i.release_date}}</h4>
+                            <h4 class="h4 text-uppercase text-center mb-1" style="color:white">{{i.age_category}}</h4>
+                            </div>
+                    </div>
+                    </div>
+                  </div>
+                    <h1 class="text-center pt-4">Synopsis</h1>
+		            <p  class="text-start mb-5"> {{i.synopsis}} </p>
+                    <div class="row ml-auto p-3">
+                        <div class="col ml-auto">
+                            <h5  class="text-uppercase text-center" style="font-weight:bold;"> Movie Director </h5>
+                            <p  class="text-uppercase text-center"> {{i.director}} </p>
+                            <h5  class="text-uppercase text-center" style="font-weight:bold;"> Movie Producers </h5>
+                            <p  class="text-uppercase text-center"> {{i.producer}} </p>
+                        </div>
+                        <div class="col ml-auto">
+		                    <h5  class="text-uppercase text-center mb-3" style="font-weight:bold;"> Movie Cast </h5>
+                            <p  class="text-uppercase text-center"> {{i.actors}} </p>
+                        </div>
+                    </div>
 	              </div>
                 <div  class="text-uppercase text-center mb-5">
 	              <h4>Price</h4>
