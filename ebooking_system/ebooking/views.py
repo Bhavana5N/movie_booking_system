@@ -18,16 +18,20 @@ import base64
 
 
 def login_user(request):
-
+    print(request.GET, request.POST)
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
+        if "next" in request.POST and request.POST["next"]:
+            url_direct = request.POST["next"]
+        else:
+            url_direct = "/"
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             if request.user.is_staff:
                 return redirect("admin")
-            return redirect("/")
+            return redirect(url_direct)
         else:
             messages.info(request, "Username or Password is not matched")
             return render(request, 'login.html')
@@ -98,6 +102,7 @@ def forgot_password_validation(request):
             return redirect("login")
 
 def edit_card(request):
+    print(request.GET, request.POST)
     custom_user = request.user
     b=EbookingCard.objects.filter(uid=str(custom_user.id))
     if b:
@@ -181,7 +186,7 @@ def registration(request):
                 # 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
                 render_to_string('activate.html', {
                     'user': user,
-                    'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'],
+                    'domain': '127.0.0.1:' + request.META['SERVER_PORT'],
                     'uid': urlsafe_base64_encode(force_bytes(user.email)),
                     'token': generate_token.make_token(user)
                 }),
@@ -265,6 +270,13 @@ def moviedetails(request):
     return render(request, "moviedetails.html", {'movie_list': movie})
 
 def book_movie(request):
+    ticket_category = TicketCategory.objects.all()
+    user_list = customuser.objects.filter(username=request.user)
+    is_user = True
+    if user_list:
+        user_id = user_list[0]
+        if user_id.is_staff:
+            is_user = False
 
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
     print(movie[0].movie_title)
@@ -280,64 +292,36 @@ def book_movie(request):
             my_date = datetime.strftime(i.date_time, "%Y-%m-%d")
             my_time = datetime.strftime(i.date_time, "%H:%M")
             if my_date in total_time_list:
-                 total_time_list[my_date].append({my_time: showroom})
+                 total_time_list[my_date].append({my_time: i})
             else:
-                 total_time_list[my_date] = [{my_time: showroom}]
+                 total_time_list[my_date] = [{my_time: i}]
 
         print(total_time_list)
-    #return render(request, "moviedetails.html", {'movie_list': movie})
-    return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list})
+    print(is_user)
+    return render(request, 'bookmovie.html', {"movie": movie, "time_list": total_time_list,
+                                              "is_user":is_user, "ticket_category": ticket_category})
+
 
 def checkout(request):
+
+    user_list = customuser.objects.filter(username=request.user)
+    if user_list:
+        user_id= user_list[0].id
+    else:
+        return render(request, 'login.html', {'next': request.build_absolute_uri})
+
     print(request.GET, request.POST, "qqqqqqqqqqqqqqqqq")
     seat_list = request.GET['seat_list']
-    num_of_tickets = len(seat_list.split(","))
+    tickets_list = seat_list.split(",")
+    num_of_tickets = len(tickets_list)
     movie_title = request.GET['movie_title']
     print(request.GET["show_room"])
     cards = []
-    user_id = customuser.objects.filter(username="bn32157@uga.edu")[0].id
-
-    if request.method == "POST" and \
-        ("Proceed Payment" in request.POST and request.POST["Proceed Payment"] == 'payment'):
-        target_datetime = datetime.strptime(request.GET["date"]+request.GET["time"], '%Y-%m-%d%H:%M')
-        print(target_datetime, type(datetime))
-        new_order = Order(user_id = "bn32157@uga.edu", showroom=request.GET["show_room"],
-                movie = movie_title,
-                tickets = num_of_tickets,#request.GET["movie_title"]
-                seats = seat_list,
-                show_time = target_datetime,
-                price = 35)#request.GET["price"],)
-        new_order.save()
-        cvv_list = []
-        cards = EbookingCard.objects.filter(uid=user_id)
-        for i in cards:
-            cvv_list.append('cvv' + str(i.id))
-        print(cvv_list)
-        is_cvv_added = False
-        for i in cvv_list:
-            print(request.POST, i, i in request.POST)
-            if i in request.POST:
-                if request.POST[i]:
-                    is_cvv_added = True
-                    messages.info(request, "Payment is Done")
-                    return render(request, 'orderconfirmation.html', {"order": new_order})
-
-        if not is_cvv_added:
-            messages.info(request, "Enter CVV for Card")
     cards = EbookingCard.objects.filter(uid=user_id)
+    cvv = None
 
-    if "rememberme" in request.POST and request.POST["rememberme"] == 'on':
-        if len(cards) >= 3:
-            messages.info(request, "only three cards are allowed")
-        else:
-            card = EbookingCard(card_number=EbookingCard().e_instance.cipher_suite.encrypt(bytes(request.POST['card_number'],'UTF-8')),
-                                name=request.POST['cname'], expireyear=request.POST['expireyear'],
-                                expiredate=request.POST['expiredate'], uid=user_id)
-            card.save()
-
-    b = EbookingMovie.objects.filter(movie_title=movie_title)
-    tickets_price = num_of_tickets * b[0].price
-    taxes = tickets_price * 2/100
+    tickets_price = int(request.GET["tp"])
+    taxes = tickets_price * 2 / 100
     total_price = tickets_price + taxes
     discount_amount = 0
     promotion_code = ''
@@ -345,7 +329,7 @@ def checkout(request):
     if "promotion_code" in request.POST:
         promotion_list = Promotions.objects.filter(promotion_code=request.POST["promotion_code"])
         current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
-        if request.POST["promotion_code"]  and request.POST["promotion_code"] not in promotion_list:
+        if not promotion_list:
             messages.info(request, "Promotion code is not valid")
         for i in promotion_list:
             promotion_code = i.promotion_code
@@ -353,15 +337,77 @@ def checkout(request):
             if current_time > stored_time:
                 messages.info(request, "Promotion code is expired")
             else:
-                discount_amount = i.discount * total_price/100
+                discount_amount = i.discount * total_price / 100
     payment_amount = total_price - discount_amount
+    print(discount_amount)
+    if discount_amount == 0:
+        if "discount" in request.POST and request.POST["discount"]:
+            discount_amount = request.POST["discount"]
+    if request.method == "POST" and \
+        ("Proceed Payment" in request.POST and request.POST["Proceed Payment"] == 'payment'):
+        target_datetime = datetime.strptime(request.GET["date"]+request.GET["time"], '%Y-%m-%d%H:%M')
+        if 'card_number' in request.POST:
+            card = EbookingCard(
+                card_number=EbookingCard().e_instance.cipher_suite.encrypt(bytes(request.POST['card_number'], 'UTF-8')),
+                name=request.POST['cname'], expireyear=request.POST['expireyear'],
+                expiredate=request.POST['expiredate'], uid=user_id)
+            card.validate_card()
+            cvv = request.POST['cvv']
+            if "rememberme" in request.POST and request.POST["rememberme"] == 'on':
+                if len(cards) >= 3:
+                    messages.info(request, "only three cards are allowed")
+                else:
+                    card.save()
+        cvv_list = []
+        cards = EbookingCard.objects.filter(uid=user_id)
+        is_cvv_added = False
+        for i in cards:
+            cvv_list.append('cvv' + str(i.id))
+            cmps = 'cvv' + str(i.id)
+            if cmps in request.POST:
+                if request.POST[cmps]:
+                    is_cvv_added = True
+                    new_order = Order(user_id=request.user, showroom=request.GET["show_room"],
+                                      movie=movie_title,
+                                      tickets=num_of_tickets,  # request.GET["movie_title"]
+                                      seats=seat_list,
+                                      show_time=target_datetime,
+                                      payment_amount=payment_amount,
+                                      card_id=i.card_number,
+                                      price=tickets_price, schedule_id=request.GET["slot"])
+                    new_order.save()
+                    for i in tickets_list:
+                        ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+                        ticket.save()
+                    return render(request, 'orderconfirmation.html', {"order": new_order})
+
+        if not is_cvv_added:
+            messages.info(request, "Enter CVV for Card")
+
+        if cvv and card:
+            new_order = Order(user_id=request.user, showroom=request.GET["show_room"],
+                              movie=movie_title,
+                              tickets=num_of_tickets,  # request.GET["movie_title"]
+                              seats=seat_list,
+                              show_time=target_datetime,
+                              payment_amount=payment_amount, card_id = card.card_number,
+                              price = tickets_price, schedule_id = request.GET["slot"])
+            new_order.save()
+            for i in tickets_list:
+                ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+                ticket.save()
+            return render(request, 'orderconfirmation.html', {"order": new_order})
+
+    # b = EbookingMovie.objects.filter(movie_title=movie_title)
+    # tickets_price = num_of_tickets * b[0].price
 
     return render(request, 'checkout.html', {"show_room": request.GET['show_room'], 'cards': cards,
                                               "date": request.GET['date'], "movie_title": movie_title,
                                              "time": request.GET['time'], 'seat_list': request.GET['seat_list'],
                                              "num_of_tickets": num_of_tickets, "tickets_price": tickets_price,
                                              "discount": discount_amount, "promotion_code": promotion_code,
-                                             "taxes": taxes, "total_price": total_price, "payment_amount": payment_amount})
+                                             "taxes": taxes, "total_price": total_price, "payment_amount": payment_amount,
+                                             'next': request.build_absolute_uri})
 
 
 def seats(request):
@@ -369,27 +415,60 @@ def seats(request):
     date=request.GET['date']
     tm= request.GET['time']
     sm = request.GET['show_room']
+    slot=request.GET['slot']
+    print(sm, slot)
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
     show_time = Showroom.objects.filter(showroom=sm)[0]
     row_count = show_time.row_seats
     column_count = show_time.col_seats
+    seats_booked = Tickets.objects.filter(schedule_id=slot)
+    ticket_category = TicketCategory.objects.all()
+    ticket_cat_list = {i.ticket_type: 0 for i in ticket_category}
+    seats_list = []
+    if seats_booked:
+        for i in seats_booked:
+            seats_list.append(i.seats_booked)
+    tickets_list = [{str(i)+str(j): 'red'} if int(str(i)+str(j)) in seats_list else {(str(i)+str(j)): 'blue'} for i in range(1, row_count+1) for j in range(1, column_count+1) ]
+    print(tickets_list)
+    ticket_price = 0
+    count = 0
+    num_of_tickets = 0
+    adult = 0
+    student = 0
+    senior = 0
+    for i in ticket_category:
+        if i.ticket_type in request.POST and request.POST[i.ticket_type]:
+            count_cat = int(request.POST[i.ticket_type])
+            ticket_cat_list[i.ticket_type] = count_cat
+            ticket_price =  count_cat * i.price
 
     if request.method == "POST":
         post_details= request.POST
-        seat_list = []
+        seats_l = []
 
         for key, value in post_details.items():
             print(value)
             if value == 'on':
-                seat_list.append(key)
-        seat_list = ','.join(seat_list)
-        return render(request, 'seats.html', {"row_count": range(row_count), "column_count": range(column_count),
-                                              "show_room": show_time.showroom, "movie": movie,
-                                              "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list})
-
-    return render(request, 'seats.html', {"row_count": range(row_count), "column_count": range(column_count),
-                                              "show_room": show_time.showroom, "movie": movie,
-                                              "date": date, "title": movie_title, "time": tm})
+                seats_l.append(key)
+        seat_list = ','.join(seats_l)
+        if sum(ticket_cat_list.values()):
+            ticket_price = len(seats_l) * ticket_category[0].price
+            ticket_cat_list[ticket_category[0].ticket_type] = len(seats_l)
+        if len(seats_l) != sum(ticket_cat_list.values()):
+            messages.info(request, "Selected seats and Number of Tickets Did not match")
+        print(seats_list)
+        print(ticket_cat_list)
+        return render(request, 'seats.html', {"row_count": row_count, "column_count": column_count, 'column_count_range': range(1,column_count+1),
+                                              "show_room": show_time.showroom, "movie": movie, "slot": slot,
+                                              "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list,'count': range(len(ticket_cat_list)),
+                                              'next': request.build_absolute_uri, "seats_list": tickets_list ,  "ticket_price": ticket_price,
+                                               "ticket_cat_list": ticket_cat_list})
+    print(ticket_cat_list)
+    return render(request, 'seats.html', {"row_count": row_count, "column_count": column_count, 'column_count_range': range(1,column_count+1),
+                                              "show_room": show_time.showroom, "movie": movie, "slot": slot, "ticket_price": ticket_price,
+                                              "ticket_cat_list": ticket_cat_list, 'count': range(len(ticket_cat_list)),
+                                              "date": date, "title": movie_title, "time": tm,
+                                          'next': request.build_absolute_uri, "seats_list": tickets_list})
 
 def fullcalendar(request):
     return render(request, 'fullcalendar.html')
@@ -426,7 +505,7 @@ def addpromotion(request):
                 message="A New promotion code is added '{}'".format(p_details["code"]),
                 from_email=EMAIL_HOST_USER,
                 recipient_list=list(set(email_list)))
-    return render(request, "addpromotion.html")
+    return render(request, "addpromotion.html", {'next': request.build_absolute_uri})
 
 
 def addmovie(request):
@@ -446,7 +525,9 @@ def addmovie(request):
                           director=movie_details["director"], synopsis=movie_details["synopsis"],
                           category=movie_details["category"], ratings=movie_details["rating"],
                           age_category=movie_details["age_category"], runtime=movie_details["runtime"],
-                                         price=movie_details["price"], image_link=movie_details["image_link"])
+                                         image_link=movie_details["image_link"])
+                                         #price=movie_details["price"],
+
             b = EbookingMovie.objects.filter(movie_title=movie_details["title"])
             print(b)
             if b:

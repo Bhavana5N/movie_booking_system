@@ -40,42 +40,60 @@
               <div class="card-body p-5" style="display: block;
     margin-left: auto;
     margin-right: auto;">
-				 <form method="post" action="/seats/?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}">
+				 <form method="post" action="/seats/?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}&slot={{slot}}">
 					 {% csrf_token %}
                   <div>
                       <h1 style="text-align:center">Select Seats</h1>
                   </div>
-				<div>
-					<table style="display:inline">
-						{% for i in row_count %}
-						<tr>
-							{% for j in column_count %}
-                            </td>
-                            <td style="width:60px">
-							</td>
 
-                            <td>
-								<input type="checkbox" class="btn-check" id={{i}}{{j}} name={{i}}{{j}} autocomplete="off"/>
-								<label class="btn btn-primary" for={{i}}{{j}} style="500px">Seat</label>
-							</td>
+					<div class="container px-4 px-lg-5 mt-5">
+                        <div class="row row-cols-{{column_count}} justify-content-center">
+                            {% for i in column_count_range %}
+                            <div class="col">
+                                <input type="checkbox" class="btn-check" id={{i}}  name={{i}} autocomplete="off" disabled/>
+								<label class="btn btn-primary" for={{i}} style="500px; background:{{orange}};">Column {{i}}</label>
+                        </div>{% endfor %}</div>
+                <div class="row row-cols-{{column_count}} justify-content-center">
+
+                        {% for t in seats_list %}
+                        {% for ticket, color in t.items %}
+
+						 <div class="col mb-2">
+                            {% if color == 'red' %}
+								<input type="checkbox" class="btn-check" id={{ticket}} name={{ticket}} autocomplete="off" disabled/>
+								<label class="btn btn-primary" for={{ticket}} style="500px; background:{{color}};">&emsp;{{ticket}}&emsp;</label>
+                             {% else %}
+                             <input type="checkbox" class="btn-check btn-check-after background:orange" id={{ticket}} name={{ticket}} autocomplete="off"/>
+								<label class="btn btn-primary" for={{ticket}} style="500px;">&emsp;{{ticket}}&emsp;</label>
+                             {% endif %}
+                        </div>
 							{% endfor %}
-						</tr>
-						{% endfor %}
-					</table>
-				</div>
+
+                    {% endfor %}</div>
+					</div>
+                     {% for ik, price in ticket_cat_list.items %}
+                     <div class="form-outline mb-4 row ml-auto">
+
+                        <div class="col ml-auto"><label class="form-label" for={{ik}} >Num of Tickets for {{ik}}</label></div>
+                        <div class="col ml-auto"><input type="text" name={{ik}} id={{ik}} class="form-control form-control-lg" placeholder={{price}} > </div>
+                    </div>
+                    {% endfor %}
 				 <input type="submit" value="Reserve"
                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></form>
 				  <form method="POST" action="checkout">
 				 <div class="col ml-auto text-center">
-                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}&seat_list={{seat_list}}'>checkout</a>
+                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}&seat_list={{seat_list}}&slot={{slot}}&tp={{ticket_price}}'>checkout</a>
                                 </div>
-                    </div>
+
 				  </form>
 
 						<!--div class="col ml-auto text-center">
                     <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}'>Reserve</a>
                                 </div>-->
 						</div>
+                {% for message in messages %}
+          <h3 class="text-red">{{message}}</h3>
+        {% endfor %}
 				</div>
 			</div>
 		</div>

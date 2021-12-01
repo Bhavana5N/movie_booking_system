@@ -49,6 +49,12 @@ class EbookingCard(models.Model):
 
     e_instance = EncryptKey.get_instance()
 
+    def validate_card(self):
+        if len(self.retreive_card) != 16:
+            return False
+
+        return True
+
 
 
     @property
@@ -87,7 +93,9 @@ class Order(models.Model):
     show_time = models.TextField(blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     movie = models.TextField(blank=True, null=True)
-
+    schedule_id = models.IntegerField()
+    payment_amount = models.IntegerField(default=0)
+    card_id = models.TextField(default=0)
     class Meta:
         managed = False
         db_table = 'order'
@@ -158,3 +166,25 @@ class Category(models.Model):
     class Meta:
         managed = False
         db_table = 'category'
+
+
+class Tickets(models.Model):
+    seats_booked = models.IntegerField(blank=True, null=True)
+    showroom = models.TextField(blank=True, null=True)
+    date = models.IntegerField(blank=True, null=True)
+    time = models.IntegerField(blank=True, null=True)
+    schedule_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'tickets'
+
+
+class TicketCategory(models.Model):
+    ticket_type = models.IntegerField(unique=True)
+    price = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ticket_category'
+
