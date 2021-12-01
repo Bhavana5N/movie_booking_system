@@ -186,7 +186,7 @@ def registration(request):
                 # 'http://127.0.0.1:'+request.META['SERVER_PORT']+'/login/',
                 render_to_string('activate.html', {
                     'user': user,
-                    'domain': 'http://127.0.0.1:' + request.META['SERVER_PORT'],
+                    'domain': '127.0.0.1:' + request.META['SERVER_PORT'],
                     'uid': urlsafe_base64_encode(force_bytes(user.email)),
                     'token': generate_token.make_token(user)
                 }),
