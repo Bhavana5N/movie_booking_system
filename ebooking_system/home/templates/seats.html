@@ -3,6 +3,8 @@
 {% block content %}
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'home/css/seats.css' %}">
+    <link rel="stylesheet" href="../static/home/css/seats.css">
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap icons-->
@@ -10,7 +12,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-	    <link rel="stylesheet" href="{% static 'home/css/seats.css' %}">
+
 </head>
 <body>
   <header>
@@ -44,56 +46,63 @@
 					 {% csrf_token %}
                   <div>
                       <h1 style="text-align:center">Select Seats</h1>
+                      {% for message in messages %}
+                         <h3 class="text-red" style="text-align:center">{{message}}</h3>
+                         {% endfor %}
                   </div>
 
 					<div class="container px-4 px-lg-5 mt-5">
-                        <div class="row row-cols-{{column_count}} justify-content-center">
-                            {% for i in column_count_range %}
-                            <div class="col">
-                                <input type="checkbox" class="btn-check" id={{i}}  name={{i}} autocomplete="off" disabled/>
-								<label class="btn btn-primary" for={{i}} style="500px; background:{{orange}};">Column {{i}}</label>
-                        </div>{% endfor %}</div>
+
                 <div class="row row-cols-{{column_count}} justify-content-center">
 
                         {% for t in seats_list %}
                         {% for ticket, color in t.items %}
 
-						 <div class="col mb-2">
+						 <div class="col mb-1" style="width:90px">
                             {% if color == 'red' %}
 								<input type="checkbox" class="btn-check" id={{ticket}} name={{ticket}} autocomplete="off" disabled/>
-								<label class="btn btn-primary" for={{ticket}} style="500px; background:{{color}};">&emsp;{{ticket}}&emsp;</label>
+								<label class="btn btn-primary" for={{ticket}} style="500px;background:{{color}};border-top-left-radius:20px;border-top-right-radius:20px">&emsp;{{ticket}}&emsp;</label>
                              {% else %}
                              <input type="checkbox" class="btn-check btn-check-after background:orange" id={{ticket}} name={{ticket}} autocomplete="off"/>
-								<label class="btn btn-primary" for={{ticket}} style="500px;">&emsp;{{ticket}}&emsp;</label>
+								<label class="btn btn-primary" for={{ticket}} style="500px;background:{{color}};border-top-left-radius:20px;border-top-right-radius:20px">&emsp;{{ticket}}&emsp;</label>
                              {% endif %}
                         </div>
 							{% endfor %}
 
-                    {% endfor %}</div>
+                    {% endfor %}
+
+                </div>
+                    <div class="row row-cols-{{column_count}} justify-content-center mt-5">
+                    <div class="col mb-1" style="width:800px">
+                                <div class="rectangle" style="height: 50px;
+                                             width: 800px;
+                                            background-color: #555;text-align:center;color:white;
+                                            background-color:rgb(80,80,80);font-size:30px;
+                                            border-bottom-left-radius:30px;border-bottom-right-radius:30px">Screen</div>
+                    </div>
+                        </div>
 					</div>
                      {% for ik, price in ticket_cat_list.items %}
-                     <div class="form-outline mb-4 row ml-auto">
+                     <div class="form-outline mb-4 row ml-auto mt-3">
 
-                        <div class="col ml-auto"><label class="form-label" for={{ik}} >Num of Tickets for {{ik}}</label></div>
+                        <div class="col ml-auto "><label class="form-label" for={{ik}} >Num of Tickets for {{ik}}</label></div>
                         <div class="col ml-auto"><input type="text" name={{ik}} id={{ik}} class="form-control form-control-lg" placeholder={{price}} > </div>
                     </div>
                     {% endfor %}
+                    <div class="form-outline mb-4 row ml-auto mt-3 justify-content-center">
 				 <input type="submit" value="Reserve"
-                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" /></form>
-				  <form method="POST" action="checkout">
-				 <div class="col ml-auto text-center">
-                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}&seat_list={{seat_list}}&slot={{slot}}&tp={{ticket_price}}'>checkout</a>
+                       class="btn btn-success btn-block gradient-custom-4 text-body" style="width:100px"/></form>
+				  <form method="POST" action="checkout" style="width:100px">
+                    <a class="btn btn-success btn-block gradient-custom-4 text-body" style="width:100px"href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}&seat_list={{seat_list}}&slot={{slot}}&tp={{ticket_price}}'>Checkout</a>
                                 </div>
-
 				  </form>
+                </div>
 
 						<!--div class="col ml-auto text-center">
                     <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href='\checkout\?movie_title={{title}}&date={{date}}&time={{time}}&show_room={{show_room}}'>Reserve</a>
                                 </div>-->
 						</div>
-                {% for message in messages %}
-          <h3 class="text-red">{{message}}</h3>
-        {% endfor %}
+
 				</div>
 			</div>
 		</div>
@@ -102,7 +111,7 @@
   </main>
   <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; E-Cinema Booking System 2021</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
