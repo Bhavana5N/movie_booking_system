@@ -64,7 +64,7 @@
 								<label class="btn btn-primary" for={{ticket}} style="500px;background:{{color}};border-top-left-radius:20px;border-top-right-radius:20px">&emsp;{{ticket}}&emsp;</label>
                              {% else %}
                              <input type="checkbox" class="btn-check btn-check-after background:orange" id={{ticket}} name={{ticket}} autocomplete="off"/>
-								<label class="btn btn-primary" for={{ticket}} style="500px;background:{{color}};border-top-left-radius:20px;border-top-right-radius:20px">&emsp;{{ticket}}&emsp;</label>
+								<label class="btn btn-primary" for={{ticket}} style="500px;border-top-left-radius:20px;border-top-right-radius:20px" onclick="setColor('button', '#101010')">&emsp;{{ticket}}&emsp;</label>
                              {% endif %}
                         </div>
 							{% endfor %}

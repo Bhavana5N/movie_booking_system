@@ -40,6 +40,11 @@ def login_user(request):
 
 
 def admin(request):
+    user_list = customuser.objects.filter(username=request.user, is_staff=1)
+    if user_list:
+        user_id = user_list[0].id
+    else:
+        return redirect('/')
     return render(request, 'admin.html')
 
 
@@ -147,6 +152,11 @@ def edit_card(request):
     return render(request, "edit_card.html", {'cards': b})
 
 def edit_profile(request):
+    user_list = customuser.objects.filter(username=request.user, is_staff=0)
+    if user_list:
+        user_id = user_list[0].id
+    else:
+        return redirect('/')
     current_user = request.user
     edit_values = {}
     for field in customuser._meta.fields:
@@ -326,6 +336,8 @@ def checkout(request):
     discount_amount = 0
     promotion_code = ''
 
+    if "Cancel" in request.POST:
+        return redirect("/")
     if "promotion_code" in request.POST:
         promotion_list = Promotions.objects.filter(promotion_code=request.POST["promotion_code"])
         current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
@@ -480,7 +492,19 @@ def orderconfirmation(request):
     #send email
     #list out order details
     #display tickets
+    if request.method == 'GET':
+        extra_message = ''
+        tickets_list = seat_list.split(",")
 
+        for i in request.GET['order'].tickets:
+            extra_message += "Ticket #" + i +": Seat # - " + ticket_list[i] + \
+            '  Showroom - ' + EbookingSchedule.objects.get(id=request.GET['order'].schedule_id)
+        send_mail(
+            subject='EBooking Movie Tickets Successfully Reserved!',
+            message=  "Your order has been placed!\n\nHere is a list of the tickets you purchased:\nDate - " + \
+                      EbookingSchedule.objects.get(id=request.GET['order'].schedule_id).date_time + extra_message,
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[user.email])
     return render(request, 'orderconfirmation.html')
 def summary(request):
     return render(request, 'summary.html')

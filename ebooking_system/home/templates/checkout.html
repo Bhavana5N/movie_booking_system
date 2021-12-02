@@ -172,14 +172,14 @@
 
                     <button class="btn btn-outline-success" name="Proceed Payment" value="payment" type="submit">Proceed Payment</button>
                     <button class="btn btn-outline-success" name="Cancel" type="submit">Cancel</button>
+                  {% for message in messages %}
+                  <h3 class="text-red">{{message}}</h3>
+                  {% endfor %}
                 </form>
               </div>
             </div>
           </div>
         </div>
-           {% for message in messages %}
-          <h3 class="text-red">{{message}}</h3>
-        {% endfor %}
       </div>
 
 
