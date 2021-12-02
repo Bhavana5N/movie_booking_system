@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-      <div class="container h-75">
+<section class="vh-100 bg-image" style="background-image: url('https://media.istockphoto.com/vectors/clapperboard-over-yellow-seamless-pattern-vector-illustration-vector-id882353200?b=1&k=20&m=882353200&s=170667a&w=0&h=O0UcXXNqovd-qItaF3D9IJRxG-9ytSArSB43a29R2vE='); max-height: 2550px;">
+      <div class="container h-75" style="max-width:1500px">
         <div class="row ml-auto">
             <div class="col ml-auto">
             <div class="card">
@@ -28,8 +29,8 @@
             </div>
           </div></div>
           <br><br>
-          <div class = "row ml-auto">
-            <div class="col ml-auto">
+          <div class = "row">
+            <div class="col-4" style="width:200px">
 
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
@@ -73,52 +74,55 @@
               </div>
             </div>
           </div>
-            <div class="col ml-auto">
-            <div class="card" style="border-radius: 15px;">
+            <div class="col-8">
+            <div class="card " style="border-radius: 15px;">
               <div class="card-body p-5">
+                  <div class="row">
                   {% for i in cards %}
 
 
                       </br></br>
-                      <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px">
+                  <div class="col ml-auto">
+                      <div class="card border border-dark text-white bg-info mb-3" style="border-radius:25px;width:350px;height:200px;">
                           <span class="button">
-                          <button type="submit" style="margin:20px"
+                          <button type="submit" style="margin:5px"
                                   value={{i.id}} name="delete"{{i.id}} class="btn btn-danger btn-rounded" data-mdb-ripple-color="#ffffff"><i class="fas fa-trash"></i></button>
                       </span>
                    <div class="card-body p-2">
                        <blockquote class="card-blockquote">
                       <div class="row ml-auto">
                       <div class="col ml-auto">
-                            <h5 class="card-title">Card Number</h5>
+                            <h5 class="card-title" style="font-size:15px">Card Number</h5>
                         </div>
                         <div class="col ml-auto">
-                            <input type="text" id="cardnumber" class="form-control form-control-lg"
+                            <input type="text" id="cardnumber" class="form-control form-control-sm"
                                    placeholder={{i.retreive_card}}>
                         </div>
                   </div>
-                  <div class="form-outline mb-4 row ml-auto py-4">
-                        <div class="col ml-auto"><h5 class="card-title">Card Holder Name</h5></div>
-                        <div class="col ml-auto"><input type="text"  class="form-control form-control-lg" placeholder={{i.name}}> </div>
+                  <div class="form-outline mb-4 row ml-auto py-2">
+                        <div class="col ml-auto"><h5 class="card-title" style="font-size:15px">Card Holder Name</h5></div>
+                        <div class="col ml-auto"><input type="text"  class="form-control form-control-sm" placeholder={{i.name}}> </div>
                   </div>
                   <div class="form-outline mb-4 row ml-auto">
-                      <div class="col ml-auto"><h5 class="card-title">Exp. Date</h5></div>
+                      <div class="col ml-auto"><h5 class="card-title" style="font-size:15px">Exp. Date</h5></div>
                       <div class="col ml-auto">
-                          <input type="text" id="id_month{{i.id}}" class="form-control form-control-lg"  placeholder={{i.expiredate}}>
+                          <input type="text" id="id_month{{i.id}}" class="form-control form-control-sm"  placeholder={{i.expiredate}}>
                         <label class="form-label" for=id_month{{i.id}}>Month</label>
                       </div>
                       <div class="col ml-auto">
-                          <input type="text" id="id_year{{i.id}}" class="form-control form-control-lg" placeholder={{i.expireyear}}>
+                          <input type="text" id="id_year{{i.id}}" class="form-control form-control-sm" placeholder={{i.expireyear}}>
                         <label class="form-label" for=id_year{{i.id}}>Year</label>
                       </div>
                       <div class="col ml-auto">
-                          <input type="text" minlength="3" maxlength="3" id="cvv{{i.id}}" name="cvv{{i.id}}" class="form-control form-control-lg" placeholder={{i.cvv}}>
+                          <input type="text" minlength="3" maxlength="3" id="cvv{{i.id}}" name="cvv{{i.id}}" class="form-control form-control-sm" placeholder={{i.cvv}}>
                         <label class="form-label" for=cvv{{i.id}}>CVV</label>
                       </div>
                       </div></blockquote></div>
                   </div>
+                      </div>
                       {% endfor %}
-
-                <h3 class="text-uppercase text-center mb-5">Payment</h3>
+                    </div>
+                <h3 class="text-uppercase text-center mb-5">Enter Payment</h3>
                   <div class="form-outline mb-4 row ml-auto">
                         <div class="col ml-auto">
                             <label class="form-label" for="card_number">Card Number</label>
@@ -179,6 +183,5 @@
       </div>
 
 
-  </body>
-</html>
+    </section>
         {% endblock %}
