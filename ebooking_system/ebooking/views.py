@@ -326,7 +326,7 @@ def checkout(request):
     num_of_tickets = len(tickets_list)
     movie_title = request.GET['movie_title']
     print(request.GET["show_room"])
-    cards = []
+    card = None
     cards = EbookingCard.objects.filter(uid=user_id)
     cvv = None
 
@@ -341,7 +341,7 @@ def checkout(request):
     if "promotion_code" in request.POST:
         promotion_list = Promotions.objects.filter(promotion_code=request.POST["promotion_code"])
         current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
-        if not promotion_list:
+        if not promotion_list and request.POST["promotion_code"]:
             messages.info(request, "Promotion code is not valid")
         for i in promotion_list:
             promotion_code = i.promotion_code
@@ -359,17 +359,26 @@ def checkout(request):
         ("Proceed Payment" in request.POST and request.POST["Proceed Payment"] == 'payment'):
         target_datetime = datetime.strptime(request.GET["date"]+request.GET["time"], '%Y-%m-%d%H:%M')
         if 'card_number' in request.POST:
-            card = EbookingCard(
-                card_number=EbookingCard().e_instance.cipher_suite.encrypt(bytes(request.POST['card_number'], 'UTF-8')),
-                name=request.POST['cname'], expireyear=request.POST['expireyear'],
-                expiredate=request.POST['expiredate'], uid=user_id)
-            card.validate_card()
             cvv = request.POST['cvv']
-            if "rememberme" in request.POST and request.POST["rememberme"] == 'on':
-                if len(cards) >= 3:
-                    messages.info(request, "only three cards are allowed")
-                else:
-                    card.save()
+            card_number = request.POST['card_number']
+            name = request.POST['cname']
+            exp_date = request.POST['expireyear']
+            exp_yr = request.POST['expiredate']
+            print(exp_date, exp_yr, "wwwwwwwwwwwwwwwwwwwwww", type(exp_yr) is int)
+            if not (card_number and name and exp_date and exp_yr and type(exp_date) is int and type(exp_yr) is int):
+                messages.info(request, "Enter Valid Card Details")
+            else:
+                card = EbookingCard(
+                    card_number=EbookingCard().e_instance.cipher_suite.encrypt(
+                        bytes(request.POST['card_number'], 'UTF-8')),
+                    name=request.POST['cname'], expireyear=request.POST['expireyear'],
+                    expiredate=request.POST['expiredate'], uid=user_id)
+                card.validate_card()
+                if "rememberme" in request.POST and request.POST["rememberme"] == 'on' and card:
+                    if len(cards) >= 3:
+                        messages.info(request, "only three cards are allowed")
+                    else:
+                        card.save()
         cvv_list = []
         cards = EbookingCard.objects.filter(uid=user_id)
         is_cvv_added = False
