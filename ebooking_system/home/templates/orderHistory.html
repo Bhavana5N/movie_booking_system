@@ -8,9 +8,8 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Your Orders</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">4 orders</p>
+                    <p class="lead fw-normal text-white-50 mb-0">{{ length }} orders</p>
                     <br>
-                    <button class="btn btn-primary btn-lg" type="submit" style="">Update Orders</button>
                 </div>
             </div>
         </header>
@@ -20,105 +19,31 @@
 
         
         <hr class="py-2">
+
+        {% for i in range %}
         <div class="container px-lg-2 mt-5 border">
             <div class="row mx-lg-n2">
                 <div class="col py-3 px-lg-2 ">
-                    <h1> Date: 09/20/2021</h1>
-                    <img class="card-img-top" src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2395517414.webp" alt="..." style="width:200px">
+                    <img class="card-img-top" src="{{posters.i}}" alt="Missing Poster" style="width:200px">
                 </div>
                 <div class="col ml-auto">
                     <br>
-                    <h4>Movie name:  La La Land</h4>
+                    <h4>Movie name: {{ orders.i.movie }} </h4>
                     <br>
-                    <h4>Price Total:   20$</h4>
+                    <h4>Price Total:   ${{ orders.i.price }} </h4>
                     <br>
-                    <h4>Start Time:  12.23pm</h4>
+                    <h4>Date and Start Time:  {{ orders.i.show_time }} </h4>
                     <br>
-                    <h4>Location:  233 memorial hall </h4>
+                    <h4>Location:  {{ order.i.showroom }} </h4>
                     <br>
-                    <h4>Status:  waiting for Checkout</h4>
+                    <!-- <h4>Status:  </h4>
                     <br>
-                   
+                    -->
                     <button class="btn btn-outline-success" type="submit">Cancel Order</button>
-                    <button class="btn btn-outline-success" type="submit">Review Order</button>
-                    <button class="btn btn-outline-success" type="submit">Confirm & Proceed to Checkout</button>
                 </div>
             </div>
         </div>
-
-        <div class="container px-lg-2 mt-5 border">
-            <div class="row mx-lg-n2">
-                <div class="col py-3 px-lg-2 ">
-                    <h1> Date: 9/19/2021</h1>
-                    <img class="card-img-top" src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2324554917.webp" alt="..." style="width:200px">
-                </div>
-                <div class="col ml-auto">
-                    <br>
-                    <h4>Movie name:  Batman: Bad Blood</h4>
-                    <br>
-                    <h4>Price Total:   5$</h4>
-                    <br>
-                    <h4>Start Time:  9.00am</h4>
-                    <br>
-                    <h4>Location:  233 memorial hall </h4>
-                    <br>
-                    <h4>Status:  waiting for watching</h4>
-                    <br>
-                   
-                    <button class="btn btn-outline-success" type="submit">Cancel Order</button>
-                    <button class="btn btn-outline-success" type="submit">Review Order</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container px-lg-2 mt-5 border">
-            <div class="row mx-lg-n2">
-                <div class="col py-3 px-lg-2 ">
-                    <h1> Date: 08/15/2021</h1>
-                    <img class="card-img-top" src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p898634801.webp" alt="..." style="width:200px">
-                </div>
-                <div class="col ml-auto">
-                    <br>
-                    <h4>Movie name:  Fast and Furious 5</h4>
-                    <br>
-                    <h4>Price Total:   13$</h4>
-                    <br>
-                    <h4>Start Time:  11.59pm</h4>
-                    <br>
-                    <h4>Location:  Tate </h4>
-                    <br>
-                    <h4>Status:  completed</h4>
-                    <br>
-                   
-                    <button class="btn btn-outline-success" type="submit">Review Order</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container px-lg-2 mt-5 border">
-            <div class="row mx-lg-n2">
-                <div class="col py-3 px-lg-2 ">
-                    <h1> Date: 4/20/2021</h1>
-                    <img class="card-img-top" src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2614949805.webp" alt="..." style="width:200px">
-                </div>
-                <div class="col ml-auto">
-                    <br>
-                    <h4>Movie name:  Harry Potter and the Sorcerer's Stone</h4>
-                    <br>
-                    <h4>Price Total:   50$</h4>
-                    <br>
-                    <h4>Start Time:  3.30pm</h4>
-                    <br>
-                    <h4>Location:  Joe frank </h4>
-                    <br>
-                    <h4>Status:  canceled</h4>
-                    <br>
-                   
-                    <button class="btn btn-outline-success" type="submit">Review Order</button>
-                </div>
-            </div>
-        </div>
-
+        {% endfor %}
         <br>
         <br>
         

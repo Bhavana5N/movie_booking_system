@@ -39,6 +39,7 @@ urlpatterns = [
             template_name='change_password.html',success_url="login"),
         name='changepassword'),
     path('orderSummary', views.orderSummary, name="orderSummary"),
+    path('orderHistory', views.orderHistory, name="orderHistory"),
     path('addpromotion', views.addpromotion, name='addpromotion'),
     path('addmovie', views.addmovie, name='addmovie'),
     path('checkout/', views.checkout, name='checkout'),

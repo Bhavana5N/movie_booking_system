@@ -496,11 +496,27 @@ def fullcalendar(request):
 def orderSummary(request):
     return render(request, 'orderSummary.html')
 def orderHistory(request):
-    return render(request, 'orderHistory.html')
+    current_user = customuser.objects.get(username=request.user)
+    if current_user:
+        user_id = current_user.username
+    else:
+        return redirect('/')
+    order_list = Order.objects.filter(user_id=user_id)
+    print(order_list)
+    #messages.info(request, "Selected seats and Number of Tickets Did not match")
+    if order_list:
+        poster_list = ['']
+        poster_list.remove('')
+        range_list = [len(order_list)]
+        for i in order_list:
+            poster_list.append(EbookingMovie.objects.get(movie_title=i.movie).image_link)
+            print(poster_list)
+    return render(request, 'orderHistory.html', {"orders": order_list, "length": len(order_list), "posters": poster_list, "range": range_list})
 def orderconfirmation(request):
     #send email
     #list out order details
     #display tickets
+    print ("got to orderconfirmation\n\n")
     if request.method == 'GET':
         extra_message = ''
         tickets_list = seat_list.split(",")
@@ -514,7 +530,15 @@ def orderconfirmation(request):
                       EbookingSchedule.objects.get(id=request.GET['order'].schedule_id).date_time + extra_message,
             from_email=EMAIL_HOST_USER,
             recipient_list=[user.email])
-    return render(request, 'orderconfirmation.html')
+    if request.method == 'POST':
+        print('sending email again')
+        send_mail(
+            subject='EBooking Movie Tickets Successfully Reserved!',
+            message="Your order has been placed!\n\nHere is a list of the tickets you purchased:\nDate - " + \
+                    EbookingSchedule.objects.get(id=request.GET['order'].schedule_id).date_time + extra_message,
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[user.email])
+    return render(request, 'orderconfirmation.html', {order: request.GET['order']})
 def summary(request):
     return render(request, 'summary.html')
 def searchResults(request):

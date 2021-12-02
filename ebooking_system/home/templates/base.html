@@ -63,6 +63,7 @@
                         </li>-->
 
                         {% if user.is_authenticated %}
+                        <li class="nav-item active"><a class="nav-link" href="/orderHistory">Orders</a></li>
                         <li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
                         {% if user.is_staff == 0 %}
                         <li class="nav-item active"><a class="nav-link" href="/edit_profile">Profile</a></li>
