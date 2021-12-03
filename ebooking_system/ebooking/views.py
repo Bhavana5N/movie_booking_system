@@ -397,10 +397,8 @@ def checkout(request):
                                       card_id=i.card_number,
                                       price=tickets_price, schedule_id=request.GET["slot"])
                     new_order.save()
-                    for i in tickets_list:
-                        ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
-                        ticket.save()
-                    return redirect('orderconfirmation', order = new_order.id)
+
+                    return render(request, 'orderconfirmation.html', {"order": new_order})
 
         if not is_cvv_added:
             messages.info(request, "Enter CVV for Card")
@@ -417,10 +415,13 @@ def checkout(request):
             for i in tickets_list:
                 ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
                 ticket.save()
-            return redirect('orderconfirmation', order = new_order.id)
+            return render(request, 'orderconfirmation.html', {"order": new_order})
 
     # b = EbookingMovie.objects.filter(movie_title=movie_title)
     # tickets_price = num_of_tickets * b[0].price
+    for i in tickets_list:
+        Tickets.objects.filter(seats_booked=int(i), schedule_id=request.GET["slot"]).delete()
+
 
     return render(request, 'checkout.html', {"show_room": request.GET['show_room'], 'cards': cards,
                                               "date": request.GET['date'], "movie_title": movie_title,
@@ -479,6 +480,9 @@ def seats(request):
             messages.info(request, "Selected seats and Number of Tickets Did not match")
         print(seats_list)
         print(ticket_cat_list)
+        for i in seats_l:
+            ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+            ticket.save()
         return render(request, 'seats.html', {"row_count": row_count, "column_count": column_count, 'column_count_range': range(1,column_count+1),
                                               "show_room": show_time.showroom, "movie": movie, "slot": slot,
                                               "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list,'count': range(len(ticket_cat_list)),
