@@ -55,8 +55,6 @@ class EbookingCard(models.Model):
 
         return True
 
-
-
     @property
     def retreive_card(cls):
         print(cls.card_number, type(cls.card_number))

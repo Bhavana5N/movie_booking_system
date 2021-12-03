@@ -249,7 +249,6 @@ def regisconfirmation(request, uidb64, token):
 def index(request):
     new_movies = EbookingMovie.objects.filter(status="coming_soon")
     present_movies = EbookingMovie.objects.filter(status="airing")
-    #print(movie[0].trailer_link)
     return render(request, "index.html", {'new_movies': new_movies, 'present_movies': present_movies})
 
 def base(request):
@@ -288,7 +287,6 @@ def book_movie(request):
             is_user = False
 
     movie = EbookingMovie.objects.filter(movie_title=request.GET['movie_title'])
-    print(movie[0].movie_title)
     schedule_movie = EbookingSchedule.objects.filter(movie_title=request.GET['movie_title']).order_by('date_time')
     current_time = datetime.now().strftime('%Y-%m-%dT%H:%M')
     total_time_list = {}
@@ -319,12 +317,10 @@ def checkout(request):
     else:
         return render(request, 'login.html', {'next': request.build_absolute_uri})
 
-    print(request.GET, request.POST, "qqqqqqqqqqqqqqqqq")
     seat_list = request.GET['seat_list']
     tickets_list = seat_list.split(",")
     num_of_tickets = len(tickets_list)
     movie_title = request.GET['movie_title']
-    print(request.GET["show_room"])
     card = None
     cards = EbookingCard.objects.filter(uid=user_id)
     cvv = None
@@ -350,7 +346,6 @@ def checkout(request):
             else:
                 discount_amount = i.discount * total_price / 100
     payment_amount = total_price - discount_amount
-    print(discount_amount)
     if discount_amount == 0:
         if "discount" in request.POST and request.POST["discount"]:
             discount_amount = request.POST["discount"]
@@ -363,8 +358,8 @@ def checkout(request):
             name = request.POST['cname']
             exp_date = request.POST['expireyear']
             exp_yr = request.POST['expiredate']
-            print(exp_date, exp_yr, "wwwwwwwwwwwwwwwwwwwwww", type(exp_yr) is int)
-            if not (card_number and name and exp_date and exp_yr and type(exp_date) is int and type(exp_yr) is int):
+            print(card_number, name, type(exp_date), type(exp_yr))
+            if not (card_number and name and exp_date and exp_yr):
                 messages.info(request, "Enter Valid Card Details")
             else:
                 card = EbookingCard(
@@ -396,7 +391,8 @@ def checkout(request):
                                       card_id=i.card_number,
                                       price=tickets_price, schedule_id=request.GET["slot"])
                     new_order.save()
-                    for i in seat_list:
+                    print(i)
+                    for i in tickets_list:
                         ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
                         ticket.save()
                     
@@ -404,7 +400,7 @@ def checkout(request):
 
         if not is_cvv_added:
             messages.info(request, "Enter CVV for Card")
-
+        print(cvv, card)
         if cvv and card:
             new_order = Order(user_id=request.user, showroom=request.GET["show_room"],
                               movie=movie_title,
@@ -414,7 +410,7 @@ def checkout(request):
                               payment_amount=payment_amount, card_id = card.card_number,
                               price = tickets_price, schedule_id = request.GET["slot"])
             new_order.save()
-            for i in seat_list:
+            for i in tickets_list:
                 ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
                 ticket.save()
             
