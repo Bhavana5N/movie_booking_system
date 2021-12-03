@@ -396,9 +396,7 @@ def checkout(request):
                                       card_id=i.card_number,
                                       price=tickets_price, schedule_id=request.GET["slot"])
                     new_order.save()
-                    for i in tickets_list:
-                        ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
-                        ticket.save()
+                    
                     return redirect('orderconfirmation', order = new_order.id)
 
         if not is_cvv_added:
@@ -413,9 +411,7 @@ def checkout(request):
                               payment_amount=payment_amount, card_id = card.card_number,
                               price = tickets_price, schedule_id = request.GET["slot"])
             new_order.save()
-            for i in tickets_list:
-                ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
-                ticket.save()
+            
             return redirect('orderconfirmation', order = new_order.id)
 
     # b = EbookingMovie.objects.filter(movie_title=movie_title)
@@ -471,13 +467,15 @@ def seats(request):
             if value == 'on':
                 seats_l.append(key)
         seat_list = ','.join(seats_l)
-        if sum(ticket_cat_list.values()):
+        if not sum(ticket_cat_list.values()):
             ticket_price = len(seats_l) * ticket_category[0].price
             ticket_cat_list[ticket_category[0].ticket_type] = len(seats_l)
         if len(seats_l) != sum(ticket_cat_list.values()):
             messages.info(request, "Selected seats and Number of Tickets Did not match")
-        print(seats_list)
-        print(ticket_cat_list)
+        else:
+            for i in seats_l:
+                ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+                ticket.save()
         return render(request, 'seats.html', {"row_count": row_count, "column_count": column_count, 'column_count_range': range(1,column_count+1),
                                               "show_room": show_time.showroom, "movie": movie, "slot": slot,
                                               "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list,'count': range(len(ticket_cat_list)),
@@ -515,6 +513,7 @@ def orderconfirmation(request, order):
     #list out order details
     #display tickets
     print ("\ngot to orderconfirmation")
+
     if request.method == 'GET':
         this_order = Order.objects.get(id = int(order))
         print(this_order.seats)
