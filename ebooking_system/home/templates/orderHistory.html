@@ -22,7 +22,7 @@
 
         {% for i, poster_link in posters.items %}
         <div class="container px-lg-2 mt-5 border">
-            <div class="row mx-lg-n2">
+            <div class="row mx-lg-n2 rounded p-2" style="background-color: white;">
                 <div class="col py-3 px-lg-2 ">
                     <img class="card-img-top" src='{{ poster_link }}'
                          alt="Missing Poster" style="width:200px">
@@ -40,7 +40,6 @@
                     <!-- <h4>Status:  </h4>
                     <br>
                     -->
-                    <button class="btn btn-outline-success" type="submit">Cancel Order</button>
                 </div>
             </div>
         </div>

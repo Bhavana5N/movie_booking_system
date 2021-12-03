@@ -244,8 +244,7 @@ def regisconfirmation(request, uidb64, token):
         return redirect('login')
     else:
         print("did not change is_active")
-    return render(request, 'login.html')
-    # return render(request, 'regisconfirmation.html')
+    return redirect('login')
 
 def index(request):
     new_movies = EbookingMovie.objects.filter(status="coming_soon")
@@ -504,13 +503,14 @@ def orderHistory(request):
     order_list = Order.objects.filter(user_id=user_id)
     print(order_list)
     #messages.info(request, "Selected seats and Number of Tickets Did not match")
+    poster_list = {}
     if order_list:
-        poster_list = {}
+
         for i in order_list:
             poster_list[i] = EbookingMovie.objects.get(movie_title=i.movie).image_link
             print(poster_list)
-
     return render(request, 'orderHistory.html', {"orders": order_list, "length": len(order_list), "posters": poster_list})
+
 def orderconfirmation(request, order):
     #list out order details
     #display tickets
@@ -521,27 +521,36 @@ def orderconfirmation(request, order):
         extra_message = ''
         ticket_list = this_order.seats.split(",")
 
+        count = 0
         for i in ticket_list:
             print('inside for loop')
-            extra_message += "Ticket #" + i +": Seat # - " + i + \
+            count += 1
+            extra_message += "\nTicket #" + str(count) +": Seat # - " + i + \
             '  Showroom - ' + EbookingSchedule.objects.get(id=this_order.schedule_id).showroom
         send_mail(
             subject='EBooking Movie Tickets Successfully Reserved!',
-            message=  "Your order has been placed!\n\nHere is a list of the tickets you purchased:\nDate - " + \
-                      EbookingSchedule.objects.get(id=this_order.schedule_id).date_time.strftime('%Y-%m-%dT%H:%M') + extra_message,
+            message=  "Your order has been placed!\n\nHere is a list of the tickets you purchased:\nMovie - " + \
+            EbookingSchedule.objects.get(id=this_order.schedule_id).movie_title + "\nDate - " + \
+            EbookingSchedule.objects.get(id=this_order.schedule_id).date_time.strftime('%Y-%m-%dT%H:%M') + extra_message,
             from_email=EMAIL_HOST_USER,
             recipient_list=[request.user.email])
+        print(request.user.email)
         print('should have sent mail by now')
+        return render(request, 'orderconfirmation.html')
     if request.method == 'POST':
         print('sending email again')
         send_mail(
             subject='EBooking Movie Tickets Successfully Reserved!',
-            message="Your order has been placed!\n\nHere is a list of the tickets you purchased:\nDate - " + \
-                    EbookingSchedule.objects.get(id=this_order.schedule_id).date_time + extra_message,
+            message="Your order has been placed!\n\nHere is a list of the tickets you purchased:\nMovie - " + \
+                    EbookingSchedule.objects.get(id=this_order.schedule_id).movie_title + "nDate - " + \
+                    EbookingSchedule.objects.get(id=this_order.schedule_id).date_time.strftime(
+                        '%Y-%m-%dT%H:%M') + extra_message,
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email])
+            recipient_list=[request.user.email])
         print('should have resent mail by now')
-    return redirect('orderconfirmation', order = this_order.id)
+    return render(request, 'orderconfirmation.html')
+    #return redirect('orderconfirmation', order = this_order.id)
+    #return render(request, 'orderconfirmation')
 def summary(request):
     return render(request, 'summary.html')
 def searchResults(request):
