@@ -55,5 +55,7 @@ urlpatterns = [
     path('bookmovie/', views.book_movie, name='bookmovie'),
     path('base', views.base, name='base'),
     path('manage', views.manage, name='manage'),
+    path('managemovie', views.managemovie, name='managemovie')
+
 ]
 

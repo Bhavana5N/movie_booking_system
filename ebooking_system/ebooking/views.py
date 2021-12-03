@@ -650,4 +650,5 @@ def manage(request):
     return render(request, 'manage.html')
 
 
-
+def managemovie(request):
+    return render(request, 'managemovie.html', {'movies': EbookingMovie.objects.all(), 'category_list': Category.objects.all()})
