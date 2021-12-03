@@ -159,6 +159,7 @@ def edit_profile(request):
         return redirect('/')
     current_user = request.user
     edit_values = {}
+
     for field in customuser._meta.fields:
         if field.name!='id' and field.name in request.POST and request.POST[field.name]:
             edit_values[field.name] = request.POST[field.name]
@@ -172,7 +173,8 @@ def edit_profile(request):
                 recipient_list=[current_user.username])
         except:
             pass
-    return render(request, "edit_profile.html")
+    user_obj = customuser.objects.filter(username=current_user)[0]
+    return render(request, "edit_profile.html", {'customuser': user_obj})
 
 def registration(request):
     if request.user.is_authenticated:
