@@ -396,6 +396,9 @@ def checkout(request):
                                       card_id=i.card_number,
                                       price=tickets_price, schedule_id=request.GET["slot"])
                     new_order.save()
+                    for i in seat_list:
+                        ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+                        ticket.save()
                     
                     return redirect('orderconfirmation', order = new_order.id)
 
@@ -411,6 +414,9 @@ def checkout(request):
                               payment_amount=payment_amount, card_id = card.card_number,
                               price = tickets_price, schedule_id = request.GET["slot"])
             new_order.save()
+            for i in seat_list:
+                ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+                ticket.save()
             
             return redirect('orderconfirmation', order = new_order.id)
 
@@ -473,9 +479,8 @@ def seats(request):
         if len(seats_l) != sum(ticket_cat_list.values()):
             messages.info(request, "Selected seats and Number of Tickets Did not match")
         else:
-            for i in seats_l:
-                ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
-                ticket.save()
+            pass
+
         return render(request, 'seats.html', {"row_count": row_count, "column_count": column_count, 'column_count_range': range(1,column_count+1),
                                               "show_room": show_time.showroom, "movie": movie, "slot": slot,
                                               "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list,'count': range(len(ticket_cat_list)),
