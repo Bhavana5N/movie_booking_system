@@ -5,13 +5,21 @@
 {% block content %}
 
 <header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
+    <div class="container px-4 px-lg-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Manage Page</h1>
         </div>
     </div>
 </header>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+   <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
 <form id="addmovie-form" method="post"
       action="addmovie">
     {% csrf_token %}
@@ -25,14 +33,13 @@
             <option value={{ i.movie_title }}>{{ i.movie_title }}</option>
             {% endfor %}
     </div>
-    <div class="d-flex justify-content-center flex-row-mb-2">
+    <div>
         <select name="category" id="category_select">
-            {% for i in category_list %}
-            <option value={{i.c_type}}>{{i.c_type}}</option>
-            {% endfor %}
-            </ul>
-            <br></br>
-        </select>
+                        {% for i in category_list %}
+                        <option value={{i.c_type}}>{{i.c_type}}</option>{% endfor %}
+
+                    <br></br>
+                    </select>
         <select name="age_category" id="age_select">
             <option value="">MPAA-US Rating</option>
             <option value="PG">PG</option>
@@ -108,6 +115,12 @@
     <p class="text-center text-muted mt-5 mb-0">E-Cinema Booking System<a href="#" class="fw-bold text-body"></a></p>
 
 </form>
+                  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% if messages %}
 {% for message in messages %}
 <h3>{{message}}</h3>
