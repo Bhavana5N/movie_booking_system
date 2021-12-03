@@ -400,7 +400,7 @@ def checkout(request):
                     for i in tickets_list:
                         ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
                         ticket.save()
-                    return render(request, 'orderconfirmation.html', {"order": new_order})
+                    return redirect('orderconfirmation', order = new_order.id)
 
         if not is_cvv_added:
             messages.info(request, "Enter CVV for Card")
@@ -417,7 +417,7 @@ def checkout(request):
             for i in tickets_list:
                 ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
                 ticket.save()
-            return render(request, 'orderconfirmation.html', {"order": new_order})
+            return redirect('orderconfirmation', order = new_order.id)
 
     # b = EbookingMovie.objects.filter(movie_title=movie_title)
     # tickets_price = num_of_tickets * b[0].price
@@ -505,40 +505,43 @@ def orderHistory(request):
     print(order_list)
     #messages.info(request, "Selected seats and Number of Tickets Did not match")
     if order_list:
-        poster_list = ['']
-        poster_list.remove('')
-        range_list = [len(order_list)]
+        poster_list = {}
         for i in order_list:
-            poster_list.append(EbookingMovie.objects.get(movie_title=i.movie).image_link)
+            poster_list[i] = EbookingMovie.objects.get(movie_title=i.movie).image_link
             print(poster_list)
-    return render(request, 'orderHistory.html', {"orders": order_list, "length": len(order_list), "posters": poster_list, "range": range_list})
-def orderconfirmation(request):
-    #send email
+
+    return render(request, 'orderHistory.html', {"orders": order_list, "length": len(order_list), "posters": poster_list})
+def orderconfirmation(request, order):
     #list out order details
     #display tickets
-    print ("got to orderconfirmation\n\n")
+    print ("\ngot to orderconfirmation")
     if request.method == 'GET':
+        this_order = Order.objects.get(id = int(order))
+        print(this_order.seats)
         extra_message = ''
-        tickets_list = seat_list.split(",")
+        ticket_list = this_order.seats.split(",")
 
-        for i in request.GET['order'].tickets:
-            extra_message += "Ticket #" + i +": Seat # - " + ticket_list[i] + \
-            '  Showroom - ' + EbookingSchedule.objects.get(id=request.GET['order'].schedule_id)
+        for i in ticket_list:
+            print('inside for loop')
+            extra_message += "Ticket #" + i +": Seat # - " + i + \
+            '  Showroom - ' + EbookingSchedule.objects.get(id=this_order.schedule_id).showroom
         send_mail(
             subject='EBooking Movie Tickets Successfully Reserved!',
             message=  "Your order has been placed!\n\nHere is a list of the tickets you purchased:\nDate - " + \
-                      EbookingSchedule.objects.get(id=request.GET['order'].schedule_id).date_time + extra_message,
+                      EbookingSchedule.objects.get(id=this_order.schedule_id).date_time.strftime('%Y-%m-%dT%H:%M') + extra_message,
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email])
+            recipient_list=[request.user.email])
+        print('should have sent mail by now')
     if request.method == 'POST':
         print('sending email again')
         send_mail(
             subject='EBooking Movie Tickets Successfully Reserved!',
             message="Your order has been placed!\n\nHere is a list of the tickets you purchased:\nDate - " + \
-                    EbookingSchedule.objects.get(id=request.GET['order'].schedule_id).date_time + extra_message,
+                    EbookingSchedule.objects.get(id=this_order.schedule_id).date_time + extra_message,
             from_email=EMAIL_HOST_USER,
             recipient_list=[user.email])
-    return render(request, 'orderconfirmation.html', {order: request.GET['order']})
+        print('should have resent mail by now')
+    return redirect('orderconfirmation', order = this_order.id)
 def summary(request):
     return render(request, 'summary.html')
 def searchResults(request):
