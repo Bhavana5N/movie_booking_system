@@ -472,7 +472,10 @@ def seats(request):
             ticket_cat_list[ticket_category[0].ticket_type] = len(seats_l)
         if len(seats_l) != sum(ticket_cat_list.values()):
             messages.info(request, "Selected seats and Number of Tickets Did not match")
-        
+        else:
+            for i in seats_l:
+                ticket = Tickets(seats_booked=int(i), schedule_id=request.GET["slot"])
+                ticket.save()
         return render(request, 'seats.html', {"row_count": row_count, "column_count": column_count, 'column_count_range': range(1,column_count+1),
                                               "show_room": show_time.showroom, "movie": movie, "slot": slot,
                                               "date": date, "title": movie_title, "time": tm, 'seat_list': seat_list,'count': range(len(ticket_cat_list)),
