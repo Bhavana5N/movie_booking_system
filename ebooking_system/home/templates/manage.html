@@ -5,12 +5,113 @@
 {% block content %}
 
 <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Manage Page</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Coming Soon</p>
-                </div>
-            </div>
-        </header>
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Manage Page</h1>
+        </div>
+    </div>
+</header>
+
+<form id="addmovie-form" method="post"
+      action="addmovie">
+    {% csrf_token %}
+    Title *
+    <div class="form-outline mb-4">
+        <!--<input type="text" name="title" class="form-control form-control-lg" required
+               placeholder="Example Movie Title"/>-->
+        <!--<label class="form-label" for="form3Example1cg">Example Movie Title</label>-->
+        <select name="title" id="category_select">
+            {% for i in movies %}
+            <option value={{ i.movie_title }}>{{ i.movie_title }}</option>
+            {% endfor %}
+    </div>
+    <div class="d-flex justify-content-center flex-row-mb-2">
+        <select name="category" id="category_select">
+            {% for i in category_list %}
+            <option value={{i.c_type}}>{{i.c_type}}</option>
+            {% endfor %}
+            </ul>
+            <br></br>
+        </select>
+        <select name="age_category" id="age_select">
+            <option value="">MPAA-US Rating</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+            <option value="NR">NR</option>
+            <br></br>
+        </select>
+        <select name="rating" id="rating_select">
+            <option value="*">*</option>
+            <option value="**">**</option>
+            <option value="***">***</option>
+            <option value="****">****</option>
+            <option value="*****">*****</option>
+            </ul>
+        </select>
+    </div>
+    Director
+    <div class="form-outline mb-4">
+        <input type="text" name="director" required class="form-control form-control-lg" placeholder="Example Name"/>
+        <!--<label class="form-label" for="form3Example1cg">Example Name</label>-->
+    </div>
+    Producer
+    <div class="form-outline mb-4">
+        <input type="text" name="producer" required class="form-control form-control-lg" placeholder="Example Name"/>
+        <!--<label class="form-label" for="form3Example1cg">Example Name</label>-->
+    </div>
+    Cast
+    <div class="form-outline">
+        <textarea class="form-control" required name="actors" rows="4" placeholder="Cast Members"></textarea>
+        <!--<label class="form-label" for="textAreaExample">Cast Members</label>-->
+    </div>
+    Synopsis
+    <div class="form-outline">
+        <textarea class="form-control" required rows="4" name="synopsis" placeholder="Example Synopsis"></textarea>
+        <!--<label class="form-label" for="textAreaExample">Example </label>-->
+    </div>
+    Trailer
+    <div class="form-outline">
+        <input type="tel" name="trailerURL" required class="form-control" placeholder="URL"/>
+        <!--<label class="form-label" for="trailerURL">URL</label>-->
+    </div>
+    Poster Link
+    <div class="form-outline">
+        <input type="tel" name="image_link" required class="form-control" placeholder="Image URL"/>
+        <!--<label class="form-label" for="trailerURL">URL</label>-->
+    </div>
+    Movie Duration
+    <div class="form-outline">
+        <input type="tel" name="runtime" required class="form-control" placeholder="Runtime"/>
+        <!--<label class="form-label" for="trailerURL">URL</label>-->
+    </div>
+    <!--Price Range
+    <div class="form-outline">
+      <input type="tel" name="price" required class="form-control" placeholder="price"/>
+      <label class="form-label" for="trailerURL">URL</label>
+    </div>-->
+    <div class="form-outline">
+        <label class="form-label" for="rdate">Release Date</label>
+        <input type="datetime-local" name="releasedate" required
+               name="meeting-time" value="2021-06-12T19:30"
+               min="2021-06-07T00:00" max="2030-06-14T00:00" id="rdate">
+
+        <br>
+
+    </div>
+
+    <div class="form-outline mb-4" style="padding-top:30px">
+    </div>
+    <input type="submit" value="Update Movie"
+           class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"/>
+
+    <p class="text-center text-muted mt-5 mb-0">E-Cinema Booking System<a href="#" class="fw-bold text-body"></a></p>
+
+</form>
+{% if messages %}
+{% for message in messages %}
+<h3>{{message}}</h3>
+{% endfor %}
+{% endif %}
 
 {% endblock content %}

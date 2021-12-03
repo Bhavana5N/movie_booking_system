@@ -652,7 +652,7 @@ def schedule(request):
 
 
 def manage(request):
-    return render(request, 'manage.html')
+    return render(request, 'manage.html', {'movies': EbookingMovie.objects.all(), 'category_list': Category.objects.all()})
 
 
 
