@@ -20,21 +20,21 @@
         
         <hr class="py-2">
 
-        {% for i in range %}
+        {% for i in orders %}
         <div class="container px-lg-2 mt-5 border">
             <div class="row mx-lg-n2">
                 <div class="col py-3 px-lg-2 ">
-                    <img class="card-img-top" src="{{posters.i}}" alt="Missing Poster" style="width:200px">
+                    <img class="card-img-top" src='https://m.media-amazon.com/images/M/MV5BYzE5MjY1ZDgtMTkyNC00MTMyLThhMjAtZGI5OTE1NzFlZGJjXkEyXkFqcGdeQXVyNjU0OTQ0OTY@.jpg' alt="Missing Poster" style="width:200px">
                 </div>
                 <div class="col ml-auto">
                     <br>
-                    <h4>Movie name: {{ orders.i.movie }} </h4>
+                    <h4>Movie name: {{ i.movie }} </h4>
                     <br>
-                    <h4>Price Total:   ${{ orders.i.price }} </h4>
+                    <h4>Price Total:   ${{ i.price }} </h4>
                     <br>
-                    <h4>Date and Start Time:  {{ orders.i.show_time }} </h4>
+                    <h4>Date and Start Time:  {{ i.show_time }} </h4>
                     <br>
-                    <h4>Location:  {{ order.i.showroom }} </h4>
+                    <h4>Location:  {{ i.showroom }} </h4>
                     <br>
                     <!-- <h4>Status:  </h4>
                     <br>
